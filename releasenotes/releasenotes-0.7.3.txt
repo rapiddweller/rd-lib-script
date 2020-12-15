@@ -1,0 +1,6 @@
+release notes DatabeneScript 0.7.3
+----------------------------------
+
+Summary
+-------
+First release after spin-off from Benerator project
