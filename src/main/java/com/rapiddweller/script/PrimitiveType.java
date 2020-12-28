@@ -32,8 +32,8 @@ import java.util.Map;
  */
 public class PrimitiveType {
     
-    private static final Map<String, PrimitiveType> instancesByName = new HashMap<String, PrimitiveType>();
-    private static final Map<Class<?>, PrimitiveType> instancesByJavaType = new HashMap<Class<?>, PrimitiveType>();
+    private static final Map<String, PrimitiveType> instancesByName = new HashMap<>();
+    private static final Map<Class<?>, PrimitiveType> instancesByJavaType = new HashMap<>();
     
     public static final PrimitiveType BYTE_P      = new PrimitiveType("byte", byte.class);
     public static final PrimitiveType BYTE        = new PrimitiveType("byte", Byte.class);
@@ -59,8 +59,8 @@ public class PrimitiveType {
     public static final PrimitiveType BINARY      = new PrimitiveType("binary", byte[].class);
     public static final PrimitiveType ARRAY       = new PrimitiveType("array", Object[].class);
     
-    private String   name;
-    private Class<?> javaType;
+    private final String   name;
+    private final Class<?> javaType;
     
     public PrimitiveType(String name, Class<?> javaType) {
         if (name == null)

@@ -27,8 +27,8 @@ import com.rapiddweller.script.Expression;
 public abstract class BinaryExpression<E> implements WrapperExpression<E> {
 
 	protected String symbol;
-	protected Expression<?> term1;
-	protected Expression<?> term2;
+	protected final Expression<?> term1;
+	protected final Expression<?> term2;
 
 	public BinaryExpression(Expression<?> term1, Expression<?> term2) {
 		this(null, term1, term2);

@@ -23,8 +23,8 @@ package com.rapiddweller.script;
 
 public class Assignment {
 	
-	private String name;
-	private Expression<?> expression;
+	private final String name;
+	private final Expression<?> expression;
 
 	public Assignment(String name, Expression<?> expression) {
 	    this.name = name;

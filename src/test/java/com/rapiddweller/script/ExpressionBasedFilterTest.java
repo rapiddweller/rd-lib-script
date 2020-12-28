@@ -32,7 +32,7 @@ public class ExpressionBasedFilterTest {
 	public void test() {
 		Context context = new DefaultContext();
 		Expression<Boolean> expression = new IsThreeExpression();
-		ExpressionBasedFilter<Integer> filter = new ExpressionBasedFilter<Integer>(expression , context);
+		ExpressionBasedFilter<Integer> filter = new ExpressionBasedFilter<>(expression, context);
 		assertFalse(filter.accept(null));
 		assertFalse(filter.accept(2));
 		assertTrue(filter.accept(3));

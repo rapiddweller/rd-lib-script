@@ -26,8 +26,8 @@ import com.rapiddweller.commons.NullSafeComparator;
 
 public class Transition {
 
-	private Object from;
-	private Object to;
+	private final Object from;
+	private final Object to;
 	
 	public Transition(Object from, Object to) {
 	    this.from = from;

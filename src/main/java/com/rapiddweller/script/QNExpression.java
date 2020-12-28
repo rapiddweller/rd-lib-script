@@ -38,7 +38,7 @@ public class QNExpression extends DynamicExpression<Object> {
 
 	private static final Logger LOGGER = LogManager.getLogger(DatabeneScriptParser.class);
 	
-	private String[] qnParts;
+	private final String[] qnParts;
 	
 	public QNExpression(String[] qnParts) {
 	    this.qnParts = qnParts;

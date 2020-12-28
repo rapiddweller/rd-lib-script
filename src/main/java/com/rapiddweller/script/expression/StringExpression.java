@@ -27,7 +27,7 @@ import com.rapiddweller.script.Expression;
  */
 public class StringExpression extends UnaryExpression<String> {
 	
-	private ToStringConverter converter;
+	private final ToStringConverter converter;
 
 	public StringExpression(Expression<?> term) {
 	    super("(string) ", term);

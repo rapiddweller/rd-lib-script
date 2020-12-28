@@ -27,7 +27,7 @@ import com.rapiddweller.script.Expression;
  */
 public class ConvertingExpression<S, T> extends ExpressionAdapter<S, T> {
 
-	protected Converter<S, T> converter;
+	protected final Converter<S, T> converter;
 	
 	public ConvertingExpression(Expression<S> source, Converter<S, T> converter) {
 	    super(source);

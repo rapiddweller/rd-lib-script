@@ -14,7 +14,6 @@
  */
 package com.rapiddweller.script;
 
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -29,10 +28,10 @@ import com.rapiddweller.commons.comparator.ReverseComparator;
 public class WeightUtil {
 
 	public static <T> void sortByWeight(List<WeightedSample<T>> list, boolean ascending) {
-		Comparator<WeightedSample<T>> comparator = new WeightedSampleComparator<T>();
+		Comparator<WeightedSample<T>> comparator = new WeightedSampleComparator<>();
 		if (!ascending)
-			comparator = new ReverseComparator<WeightedSample<T>>(comparator);
-		Collections.sort(list, comparator);
+			comparator = new ReverseComparator<>(comparator);
+		list.sort(comparator);
 	}
 	
 }

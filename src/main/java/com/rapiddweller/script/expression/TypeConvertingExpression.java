@@ -28,12 +28,12 @@ import com.rapiddweller.script.Expression;
 
 public class TypeConvertingExpression<E> extends UnaryExpression<E> {
 	
-	private AnyConverter<E> converter;
+	private final AnyConverter<E> converter;
 
     @SuppressWarnings("rawtypes")
     public TypeConvertingExpression(Expression source, Class<E> resultType) {
     	super("", source);
-	    this.converter = new AnyConverter<E>(resultType);
+	    this.converter = new AnyConverter<>(resultType);
     }
 
 	@Override

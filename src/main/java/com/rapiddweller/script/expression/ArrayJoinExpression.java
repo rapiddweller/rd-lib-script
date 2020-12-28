@@ -29,6 +29,7 @@ public class ArrayJoinExpression<E> extends CompositeExpression<E[], E[]> {
 	
 	private Class<E> componentType;
 
+    @SafeVarargs
     public ArrayJoinExpression(Class<E> componentType, Expression<E[]>... terms) {
 	    super(terms);
 	    this.componentType = componentType;
@@ -42,8 +43,7 @@ public class ArrayJoinExpression<E> extends CompositeExpression<E[], E[]> {
     	E[] result = ArrayUtil.newInstance(componentType(arrays), totalLength);
     	int resultIndex = 0;
     	for (E[] array : arrays)
-    		for (int localIndex = 0; localIndex < array.length; localIndex++)
-    			result[resultIndex] = array[localIndex];
+			for (E e : array) result[resultIndex] = e;
     	return result;
     }
 

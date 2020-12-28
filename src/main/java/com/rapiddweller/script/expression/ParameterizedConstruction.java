@@ -29,7 +29,7 @@ import com.rapiddweller.script.Expression;
 
 public class ParameterizedConstruction<E> extends Construction<E> {
 	
-	private Expression<?>[] argumentExpressions;
+	private final Expression<?>[] argumentExpressions;
 
     public ParameterizedConstruction(String className, Expression<?>[] argumentExpressions) {
 	    super(className);

@@ -27,7 +27,7 @@ import com.rapiddweller.commons.accessor.FeatureAccessor;
 
 public class FeatureAccessExpression<E> extends DynamicExpression<E> {
 
-	private String featureName;
+	private final String featureName;
 	
 	public FeatureAccessExpression(String featureName) {
 		this.featureName = featureName;

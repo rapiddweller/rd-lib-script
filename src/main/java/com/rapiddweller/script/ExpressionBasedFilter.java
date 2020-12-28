@@ -26,7 +26,7 @@ import com.rapiddweller.commons.context.ContextHolder;
  */
 public class ExpressionBasedFilter<E> extends ContextHolder implements Filter<E> {
 
-	protected Expression<Boolean> expression;
+	protected final Expression<Boolean> expression;
 	
 	public ExpressionBasedFilter(Expression<Boolean> expression, Context context) {
 		super(context);

@@ -38,7 +38,7 @@ public class TimestampArithmeticTest {
 	private static final Timestamp TS_SUM2    = TimeUtil.timestamp(2009, 9, 14, 1, 2, 4, 123456788);
 	private static final long ONE_OUR_MILLIS = 3600L * 1000;
 	
-	TimestampArithmetic arithmetic = new TimestampArithmetic();
+	final TimestampArithmetic arithmetic = new TimestampArithmetic();
 	
 	@Test
 	public void testGetBaseType() {

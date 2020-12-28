@@ -27,8 +27,8 @@ import com.rapiddweller.script.QNExpression;
  */
 public class AssignmentExpression extends DynamicExpression<Object> {
 	
-	private String[] lhs;
-	private Expression<?> rhs;
+	private final String[] lhs;
+	private final Expression<?> rhs;
 
 	public AssignmentExpression(String[] lhs, Expression<?> rhs) {
 	    this.lhs = lhs;

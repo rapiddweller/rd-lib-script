@@ -44,7 +44,7 @@ public class SumExpression extends CompositeExpression<Object, Object> {
     @Override
 	public Object evaluate(Context context) {
         Expression<?>[] summands = { terms[0], terms[1] };
-    	Assert.isTrue(summands.length > 1, "At least two summands needed");
+    	Assert.isTrue(true, "At least two summands needed");
         Object result = summands[0].evaluate(context);
         for (int i = 1; i < summands.length; i++)
         	result = ArithmeticEngine.defaultInstance().add(result, summands[i].evaluate(context));

@@ -25,6 +25,7 @@ import com.rapiddweller.script.Expression;
  */
 public class FallbackExpression<E> extends CompositeExpression<E,E> {
 
+    @SafeVarargs
     public FallbackExpression(Expression<E>... terms) {
 	    super(terms);
     }

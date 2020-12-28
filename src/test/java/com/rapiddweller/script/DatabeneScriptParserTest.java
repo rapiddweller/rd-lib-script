@@ -431,24 +431,27 @@ public class DatabeneScriptParserTest {
 	}
 	
 	@Test
-	public void testObjectSpecList() throws Exception {
+	public void testObjectSpecList() {
 		Expression<?>[] expressions = DatabeneScriptParser.parseBeanSpecList("java.lang.String," + getClass().getName());
+		assert expressions != null;
 		Object[] values = ExpressionUtil.evaluateAll(expressions, new DefaultContext());
 		assertEquals(2, values.length);
 		assertEquals("", values[0]);
-		assertTrue(values[1].getClass() == this.getClass());
+		assertSame(values[1].getClass(), this.getClass());
 	}
 	
 	@Test
-	public void testTransitionListOfLength1() throws Exception {
+	public void testTransitionListOfLength1() {
 		WeightedTransition[] ts = DatabeneScriptParser.parseTransitionList("'A'->'B'");
+		assert ts != null;
 		assertEquals(1, ts.length);
 		checkAB1Transition(ts[0]);
 	}
 
 	@Test
-	public void testTransitionList() throws Exception {
+	public void testTransitionList() {
 		WeightedTransition[] ts = DatabeneScriptParser.parseTransitionList("'A'->'B',1->2^0.5");
+		assert ts != null;
 		assertEquals(2, ts.length);
 		checkAB1Transition(ts[0]);
 	    assertEquals(1, ts[1].getFrom());
@@ -457,8 +460,9 @@ public class DatabeneScriptParserTest {
 	}
 
 	@Test
-	public void testWeightedLiteralList() throws Exception {
+	public void testWeightedLiteralList() {
 		WeightedSample<?>[] ts = DatabeneScriptParser.parseWeightedLiteralList("'A',1^0.5");
+		assert ts != null;
 		assertEquals(2, ts.length);
 	    assertEquals("A", ts[0].getValue());
 	    assertEquals(1., ts[0].getWeight());
@@ -489,33 +493,37 @@ public class DatabeneScriptParserTest {
 	}
 
 	@Test
-	public void testVariableDefinition() throws Exception {
+	public void testVariableDefinition() {
 	    Expression<?> expression = DatabeneScriptParser.parseExpression("x = 3");
-	    assertEquals(3, expression.evaluate(context));
+		assert expression != null;
+		assertEquals(3, expression.evaluate(context));
 	    assertEquals(3, context.get("x"));
 	}
 	
 	@Test
-	public void testVariableAssignment() throws Exception {
+	public void testVariableAssignment() {
 	    context.set("x", 3);
 		Expression<?> expression = DatabeneScriptParser.parseExpression("x = x + 2");
-	    assertEquals(5, expression.evaluate(context));
+		assert expression != null;
+		assertEquals(5, expression.evaluate(context));
 	    assertEquals(5, context.get("x"));
 	}
 	
 	@SuppressWarnings("unchecked")
     @Test
-	public void testMemberAssignment() throws Exception {
+	public void testMemberAssignment() {
 	    context.set("x", CollectionUtil.buildMap("y", 3));
 		Expression<?> expression = DatabeneScriptParser.parseExpression("x.y = x.y + 2");
-	    assertEquals(5, expression.evaluate(context));
+		assert expression != null;
+		assertEquals(5, expression.evaluate(context));
 	    assertEquals(5, (int) ((Map<String, Integer>) context.get("x")).get("y"));
 	}
 	
 	@Test(expected = ObjectNotFoundException.class)
-	public void testUndefinedVariableReference() throws Exception {
+	public void testUndefinedVariableReference() {
 		Expression<?> expression = DatabeneScriptParser.parseExpression("x = x + 3");
-	    expression.evaluate(context);
+		assert expression != null;
+		expression.evaluate(context);
 	}
 	
 	
@@ -523,45 +531,52 @@ public class DatabeneScriptParserTest {
 	// syntax error tests ----------------------------------------------------------------------------------------------
 	
 	@Test
-	public void testTrailingWhiteSpace() throws Exception {
+	public void testTrailingWhiteSpace() {
 		Expression<?> expression = DatabeneScriptParser.parseExpression("   3   ");
-	    expression.evaluate(context);
+		assert expression != null;
+		expression.evaluate(context);
 	}
 
 	@Test(expected = SyntaxError.class)
-	public void testMissingRHS() throws Exception {
+	public void testMissingRHS() {
 		Expression<?> expression = DatabeneScriptParser.parseExpression("3 + ");
-	    expression.evaluate(context);
+		assert expression != null;
+		expression.evaluate(context);
 	}
 
 	@Test(expected = SyntaxError.class)
-	public void testMissingLHS() throws Exception {
+	public void testMissingLHS() {
 		Expression<?> expression = DatabeneScriptParser.parseExpression("/ 2");
-	    expression.evaluate(context);
+		assert expression != null;
+		expression.evaluate(context);
 	}
 
 	@Test(expected = SyntaxError.class)
-	public void testMissingOperator() throws Exception {
+	public void testMissingOperator() {
 		Expression<?> expression = DatabeneScriptParser.parseExpression("'A' 'B'");
-	    expression.evaluate(context);
+		assert expression != null;
+		expression.evaluate(context);
 	}
 
 	@Test(expected = SyntaxError.class)
-	public void testInvalidChoiceCondition() throws Exception {
+	public void testInvalidChoiceCondition() {
 		Expression<?> expression = DatabeneScriptParser.parseExpression("1 = 3 ? 'A' : 'B'");
-	    expression.evaluate(context);
+		assert expression != null;
+		expression.evaluate(context);
 	}
 
 	@Test(expected = SyntaxError.class)
-	public void testChoiceWithMissingFalseAlternative() throws Exception {
+	public void testChoiceWithMissingFalseAlternative() {
 		Expression<?> expression = DatabeneScriptParser.parseExpression("1 == 3 ? 'A'");
-	    expression.evaluate(context);
+		assert expression != null;
+		expression.evaluate(context);
 	}
 
 	@Test(expected = SyntaxError.class)
-	public void testChoiceWithMissingTrueAlternative() throws Exception {
+	public void testChoiceWithMissingTrueAlternative() {
 		Expression<?> expression = DatabeneScriptParser.parseExpression("1 == 1 ? : 'B'");
-	    expression.evaluate(context);
+		assert expression != null;
+		expression.evaluate(context);
 	}
 
 	
@@ -599,8 +614,9 @@ public class DatabeneScriptParserTest {
     	checkExpression(expected, script, context);
     }
     
-    private static void checkExpression(Object expected, String script, Context context) throws Exception {
+    private static void checkExpression(Object expected, String script, Context context) {
 	    Expression<?> expression = DatabeneScriptParser.parseExpression(script);
+		assert expression != null;
 		Object actual = expression.evaluate(context);
 		assertEqual(expected, actual, script);
     }
@@ -609,8 +625,9 @@ public class DatabeneScriptParserTest {
     	checkBeanSpec(expected, script, new DefaultContext());
     }
     
-    private static void checkBeanSpec(Object expected, String script, Context context) throws Exception {
+    private static void checkBeanSpec(Object expected, String script, Context context) {
 	    Expression<?> expression = DatabeneScriptParser.parseBeanSpec(script);
+		assert expression != null;
 		Object actual = expression.evaluate(context);
 		assertEqual(expected, actual, script);
     }

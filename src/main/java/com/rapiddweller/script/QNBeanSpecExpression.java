@@ -39,7 +39,7 @@ import com.rapiddweller.script.expression.DynamicExpression;
 
 public class QNBeanSpecExpression extends DynamicExpression<Object> {
 	
-	String[] qn;
+	final String[] qn;
 
     public QNBeanSpecExpression(String[] qn) {
     	this.qn = qn;
@@ -55,8 +55,7 @@ public class QNBeanSpecExpression extends DynamicExpression<Object> {
     	try {
     		if (context.contains(objectOrClassName))
     			return BeanSpec.createReference(context.get(objectOrClassName));
-    		String className = objectOrClassName;
-    		Class<?> type = DefaultClassProvider.resolveByObjectOrDefaultInstance(className, context);
+			Class<?> type = DefaultClassProvider.resolveByObjectOrDefaultInstance(objectOrClassName, context);
     		return BeanSpec.createConstruction(BeanUtil.newInstance(type));
     	} catch (ConfigurationError e) {
     		if (ExceptionUtil.getRootCause(e) instanceof ClassNotFoundException)

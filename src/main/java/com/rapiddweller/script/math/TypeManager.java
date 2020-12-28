@@ -32,7 +32,7 @@ import com.rapiddweller.commons.comparator.TypeComparator;
 
 public class TypeManager {
 
-	private static TypeComparator comparator = new TypeComparator(
+	private static final TypeComparator comparator = new TypeComparator(
 			boolean.class, Boolean.class, 
 			char.class, Character.class,
 			byte.class, Byte.class,

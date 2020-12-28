@@ -25,7 +25,7 @@ import com.rapiddweller.commons.context.DefaultContext;
  */
 public class DefaultScriptContext extends DefaultContext implements ScriptContext {
 
-	private ClassCache classCache;
+	private final ClassCache classCache;
 
 	public DefaultScriptContext() {
 		this.classCache = new ClassCache();

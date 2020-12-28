@@ -26,7 +26,7 @@ import com.rapiddweller.script.Expression;
  */
 public class ForNameExpression implements Expression<Class<?>>{
 	
-	protected Expression<String> className;
+	protected final Expression<String> className;
 
 	public ForNameExpression(Expression<String> className) {
 	    this.className = className;

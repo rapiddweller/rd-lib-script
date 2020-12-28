@@ -32,11 +32,11 @@ import com.rapiddweller.script.Expression;
 
 public class BeanConstruction<E> extends DynamicExpression<E> {
 	
-	private Expression<E> instantiation;
-	private Assignment[] assignments;
+	private final Expression<E> instantiation;
+	private final Assignment[] assignments;
 
     public BeanConstruction(String beanClassName, Assignment[] assignments) {
-	    this(new DefaultConstruction<E>(beanClassName), assignments);
+	    this(new DefaultConstruction<>(beanClassName), assignments);
     }
 
     public BeanConstruction(Expression<E> instantiation, Assignment[] assignments) {

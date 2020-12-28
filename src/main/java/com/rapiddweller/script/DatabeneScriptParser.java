@@ -18,6 +18,7 @@ package com.rapiddweller.script;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.List;
+import java.util.Objects;
 
 import org.antlr.runtime.ANTLRReaderStream;
 import org.antlr.runtime.CommonToken;
@@ -66,6 +67,7 @@ import com.rapiddweller.script.expression.UnaryMinusExpression;
 import com.rapiddweller.script.expression.UnsignedRightShiftExpression;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
+import org.apache.poi.ss.formula.functions.T;
 
 /**
  * Parses Benerator Script statements and converts expressions and statements to Java objects.<br/>
@@ -163,7 +165,7 @@ public class DatabeneScriptParser {
         if (StringUtil.isEmpty(text))
             return null;
         CommonTree tree = parseBeanSpecListAsTree(text);
-        return convertBeanSpecList(tree);
+        return convertBeanSpecList(Objects.requireNonNull(tree));
     }
 	
     public static CommonTree parseBeanSpecListAsTree(String text) throws SyntaxError {
@@ -196,7 +198,7 @@ public class DatabeneScriptParser {
         if (StringUtil.isEmpty(text))
             return null;
         CommonTree tree = parseBeanSpecListAsTree(text);
-        return resolveBeanSpecList(tree, context);
+        return resolveBeanSpecList(Objects.requireNonNull(tree), context);
 	}
 
 	public static Expression<?> parseBeanSpec(String text) throws SyntaxError {
@@ -292,11 +294,11 @@ public class DatabeneScriptParser {
     private static WeightedSample<?> convertWeightedLiteral(CommonTree node) throws SyntaxError {
 		if (node.getType() == DatabeneScriptLexer.CARET) {
 			Expression<?> value = convertNode(childAt(0, node));
-			Expression<Double> weight = null;
+			Expression<Double> weight;
 			if (node.getChildCount() > 1)
-				weight = new TypeConvertingExpression<Double>(convertNode(childAt(1, node)), Double.class);
+				weight = new TypeConvertingExpression<>(convertNode(childAt(1, node)), Double.class);
 			else
-				weight = new ConstantExpression<Double>(1.);
+				weight = new ConstantExpression<>(1.);
 			return new WeightedSample<Object>(value.evaluate(null), weight.evaluate(null));
 		} else
 			return new WeightedSample<Object>(convertNode(node).evaluate(null), 1.); 
@@ -322,9 +324,9 @@ public class DatabeneScriptParser {
 		Expression<?> to = convertNode(childAt(1, node));
 		Expression<Double> weight;
 		if (node.getChildCount() > 2)
-			weight = new TypeConvertingExpression<Double>(convertNode(childAt(2, node)), Double.class);
+			weight = new TypeConvertingExpression<>(convertNode(childAt(2, node)), Double.class);
 		else
-			weight = new ConstantExpression<Double>(1.);
+			weight = new ConstantExpression<>(1.);
 		return new WeightedTransition(from.evaluate(null), to.evaluate(null), weight.evaluate(null));
 	}
 
@@ -384,7 +386,7 @@ public class DatabeneScriptParser {
 
 	private static Expression<?> convertNode(CommonTree node) throws SyntaxError {
     	switch (node.getType()) {
-			case DatabeneScriptLexer.NULL: return new ConstantExpression<Object>(null);
+			case DatabeneScriptLexer.NULL: return new ConstantExpression<>(null);
 			case DatabeneScriptLexer.BOOLEANLITERAL: return convertBooleanLiteral(node);
 			case DatabeneScriptLexer.INTLITERAL: return convertIntLiteral(node);
 			case DatabeneScriptLexer.DECIMALLITERAL: return convertDecimalLiteral(node);
@@ -429,18 +431,18 @@ public class DatabeneScriptParser {
     }
 
 	private static Expression<Boolean> convertBooleanLiteral(CommonTree node) {
-		return new ConstantExpression<Boolean>(ParseUtil.parseBoolean(node.getText()));
+		return new ConstantExpression<>(ParseUtil.parseBoolean(node.getText()));
     }
 
     private static Expression<String> convertStringLiteral(CommonTree node) {
 		String rawString = node.getText();
 		String text = rawString.substring(1, rawString.length() - 1);
 		text = StringUtil.unescape(text);
-		return new ConstantExpression<String>(text);
+		return new ConstantExpression<>(text);
     }
 
     private static Expression<String> convertIdentifier(CommonTree node) {
-		return new ConstantExpression<String>(node.getText());
+		return new ConstantExpression<>(node.getText());
     }
 
     private static Expression<?> convertQualifiedName(CommonTree node) {
@@ -461,14 +463,14 @@ public class DatabeneScriptParser {
     	final String className = ArrayFormat.format(".", classNameParts);
 		PrimitiveType primitiveType = PrimitiveType.getInstance(className);
 		if (primitiveType != null)
-			return new ConstantExpression<Class<?>>(primitiveType.getJavaType());
+			return new ConstantExpression<>(primitiveType.getJavaType());
 		else
-			return new ForNameExpression(new ConstantExpression<String>(className));
+			return new ForNameExpression(new ConstantExpression<>(className));
     }
 
     private static Expression<? extends Number> convertIntLiteral(CommonTree node) {
 		String text = node.getText();
-		Number number = null;
+		Number number;
 		if (text.length() > 10)
 			number = Long.parseLong(text);
 		else if (text.length() == 10) {
@@ -479,25 +481,25 @@ public class DatabeneScriptParser {
 				number = l;
 		} else
 			number = Integer.parseInt(text);
-		return new ConstantExpression<Number>(number);
+		return new ConstantExpression<>(number);
     }
 
     private static Expression<Double> convertDecimalLiteral(CommonTree node) {
-		return new ConstantExpression<Double>(Double.parseDouble(node.getText()));
+		return new ConstantExpression<>(Double.parseDouble(node.getText()));
     }
 
     private static Expression<?> convertCreator(CommonTree node) throws SyntaxError {
 		List<CommonTree> childNodes = getChildNodes(node);
     	String className = parseQualifiedNameOfClass(childNodes.get(0));
     	Expression<?>[] params = parseArguments(childNodes.get(1));
-    	return new ParameterizedConstruction<Object>(className, params);
+    	return new ParameterizedConstruction<>(className, params);
     }
 
     private static Expression<?> convertBean(CommonTree node) throws SyntaxError {
 		List<CommonTree> childNodes = getChildNodes(node);
     	String className = parseQualifiedNameOfClass(childNodes.get(0));
     	Assignment[] props = parseFieldAssignments(childNodes, 1);
-    	return new BeanConstruction<Object>(className, props);
+    	return new BeanConstruction<>(className, props);
     }
 
     private static Assignment[] parseFieldAssignments(List<CommonTree> nodes, int firstIndex) throws SyntaxError {
@@ -556,7 +558,7 @@ public class DatabeneScriptParser {
 
 	private static String parseQualifiedNameOfClass(CommonTree node) {
 		List<CommonTree> childNodes = getChildNodes(node);
-		StringBuffer className = new StringBuffer();
+		StringBuilder className = new StringBuilder();
 		for (CommonTree childNode : childNodes) {
 			if (className.length() > 0)
 				className.append('.');

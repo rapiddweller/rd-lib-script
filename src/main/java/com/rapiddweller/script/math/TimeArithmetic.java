@@ -41,7 +41,8 @@ public class TimeArithmetic extends TypeArithmetic<Time> {
     	if (summand1 instanceof Time)
     		return addImpl((Time) summand1, summand2);
     	else if (summand2 instanceof Number)
-    		return addImpl((Time) summand2, summand1);
+			//noinspection ConstantConditions
+			return addImpl((Time) summand2, summand1);
     	else
     		throw new IllegalArgumentException("No argument is of type " + baseType + ": " + 
     				summand1 + ", " + summand2);

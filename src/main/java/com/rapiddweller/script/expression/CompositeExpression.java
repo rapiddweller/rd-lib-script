@@ -26,13 +26,15 @@ import com.rapiddweller.script.Expression;
  */
 public abstract class CompositeExpression<S, R> implements WrapperExpression<R> {
 
-	protected String symbol;
+	protected final String symbol;
     protected Expression<S>[] terms;
 
+    @SafeVarargs
     protected CompositeExpression(Expression<S>... terms) {
     	this(null, terms);
     }
 
+    @SafeVarargs
     protected CompositeExpression(String symbol, Expression<S>... terms) {
     	this.symbol = symbol;
         this.terms = terms;

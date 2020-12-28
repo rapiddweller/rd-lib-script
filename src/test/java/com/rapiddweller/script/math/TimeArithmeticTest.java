@@ -36,7 +36,7 @@ public class TimeArithmeticTest {
 	private static final Time TIME_SUM    = TimeUtil.time(7, 7, 7, 777);
 	private static final long ONE_OUR_MILLIS = 3600L * 1000;
 	
-	TimeArithmetic arithmetic = new TimeArithmetic();
+	final TimeArithmetic arithmetic = new TimeArithmetic();
 	
 	@Test
 	public void testGetBaseType() {

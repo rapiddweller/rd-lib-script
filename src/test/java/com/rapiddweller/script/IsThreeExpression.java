@@ -27,7 +27,7 @@ class IsThreeExpression implements Expression<Boolean> {
 	@Override
 	public Boolean evaluate(Context context) {
 		Integer candidateValue = (Integer) context.get("_candidate");
-		return (candidateValue != null && candidateValue.intValue() == 3);
+		return (candidateValue != null && candidateValue == 3);
 	}
 
 	@Override

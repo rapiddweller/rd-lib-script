@@ -40,8 +40,8 @@ public class QNInvocationExpression extends DynamicExpression<Object> {
 	
 	private static final Logger LOGGER = LogManager.getLogger(QNInvocationExpression.class);
 
-	private String[] qn;
-	private Expression<?>[] argExpressions;
+	private final String[] qn;
+	private final Expression<?>[] argExpressions;
 	
     public QNInvocationExpression(String[] qn, Expression<?>[] argExpressions) {
     	this.qn = qn;

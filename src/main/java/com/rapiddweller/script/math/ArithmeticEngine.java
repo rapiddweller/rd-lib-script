@@ -34,10 +34,10 @@ public class ArithmeticEngine {
 	
     // initialization --------------------------------------------------------------------------------------------------
     
-	private static Map<Class<?>, TypeArithmetic<?>> typeArithmetics;
+	private static final Map<Class<?>, TypeArithmetic<?>> typeArithmetics;
 	
 	static {
-		typeArithmetics = new HashMap<Class<?>, TypeArithmetic<?>>();
+		typeArithmetics = new HashMap<>();
 		addTypeArithmetics(
 			new DateArithmetic(), 
 			new TimeArithmetic(), 
@@ -51,7 +51,7 @@ public class ArithmeticEngine {
 
     // singleton stuff -------------------------------------------------------------------------------------------------
 
-	private static ArithmeticEngine defaultInstance = new ArithmeticEngine();
+	private static final ArithmeticEngine defaultInstance = new ArithmeticEngine();
 	
 	public static ArithmeticEngine defaultInstance() {
 		return defaultInstance;
@@ -221,7 +221,8 @@ public class ArithmeticEngine {
 	    else if (resultType == BigInteger.class)
 	    	return ((BigInteger) s1).divide((BigInteger) s2);
 	    else if (resultType == BigDecimal.class)
-	    	return ((BigDecimal) s1).divide((BigDecimal) s2);
+			//noinspection BigDecimalMethodWithoutRoundingCalled
+			return ((BigDecimal) s1).divide((BigDecimal) s2);
 	    else
 	    	throw new UnsupportedOperationException(
 	    			"Multiplication of type " + 
@@ -291,7 +292,7 @@ public class ArithmeticEngine {
     public Object bitwiseAnd(Object o1, Object o2) {
         Class<?> resultType = TypeManager.combinedType(o1.getClass(), o2.getClass());
 		if (resultType == Boolean.class)
-			return ((Boolean) o1).booleanValue() & ((Boolean) o2).booleanValue();
+			return (Boolean) o1 & (Boolean) o2;
 		if (!(o1 instanceof Number))
 			throw new IllegalArgumentException("Not a number or boolean: " + o1);
 		if (!(o2 instanceof Number))
@@ -304,16 +305,13 @@ public class ArithmeticEngine {
 			return n1.longValue() & n2.longValue();
 		else if (resultType == Short.class)
 			return n1.shortValue() & n2.shortValue();
-		else if (resultType == Long.class)
-			return n1.byteValue() & n2.byteValue();
-		else
-			throw new IllegalStateException("Illegal state for " + resultType.getName());
+		else throw new IllegalStateException("Illegal state for " + resultType.getName());
     }
 
     public Object bitwiseOr(Object o1, Object o2) {
         Class<?> resultType = TypeManager.combinedType(o1.getClass(), o2.getClass());
 		if (resultType == Boolean.class)
-			return ((Boolean) o1).booleanValue() | ((Boolean) o2).booleanValue();
+			return (Boolean) o1 | (Boolean) o2;
 		if (!(o1 instanceof Number))
 			throw new IllegalArgumentException("Not a number or boolean: " + o1);
 		if (!(o2 instanceof Number))
@@ -326,16 +324,13 @@ public class ArithmeticEngine {
 			return n1.longValue() | n2.longValue();
 		else if (resultType == Short.class)
 			return n1.shortValue() | n2.shortValue();
-		else if (resultType == Long.class)
-			return n1.byteValue() | n2.byteValue();
-		else
-			throw new IllegalStateException("Illegal state for " + resultType.getName());
+		else throw new IllegalStateException("Illegal state for " + resultType.getName());
     }
 
     public Object bitwiseExclusiveOr(Object o1, Object o2) {
         Class<?> resultType = TypeManager.combinedType(o1.getClass(), o2.getClass());
 		if (resultType == Boolean.class)
-			return ((Boolean) o1).booleanValue() ^ ((Boolean) o2).booleanValue();
+			return (Boolean) o1 ^ (Boolean) o2;
 		if (!(o1 instanceof Number))
 			throw new IllegalArgumentException("Not a number or boolean: " + o1);
 		if (!(o2 instanceof Number))
@@ -348,10 +343,7 @@ public class ArithmeticEngine {
 			return n1.longValue() ^ n2.longValue();
 		else if (resultType == Short.class)
 			return n1.shortValue() ^ n2.shortValue();
-		else if (resultType == Long.class)
-			return n1.byteValue() ^ n2.byteValue();
-		else
-			throw new IllegalStateException("Illegal state for " + resultType.getName());
+		else throw new IllegalStateException("Illegal state for " + resultType.getName());
     }
 
     public Object shiftLeft(Object o1, Object o2) {
@@ -435,7 +427,7 @@ public class ArithmeticEngine {
     public Object logicalComplement(Object value) {
 		if (!(value instanceof Boolean))
 			throw new IllegalArgumentException("Not a boolean: " + value);
-		return !((Boolean) value).booleanValue();
+		return !(Boolean) value;
     }
 
     public Object bitwiseComplement(Object value) {

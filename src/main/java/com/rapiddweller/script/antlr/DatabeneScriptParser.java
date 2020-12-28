@@ -14,17 +14,14 @@
  */
 // $ANTLR 3.3 Nov 30, 2010 12:45:30 src/main/g/Benerator.g 2011-07-22 08:59:44
 
-	package com.rapiddweller.script.antlr;
+package com.rapiddweller.script.antlr;
 
 
 import org.antlr.runtime.*;
-import java.util.Stack;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Map;
+
 import java.util.HashMap;
 
-import javax.annotation.Generated;
+import javax.annotation.processing.Generated;
 
 import org.antlr.runtime.tree.*;
 

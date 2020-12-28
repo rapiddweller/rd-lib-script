@@ -26,8 +26,8 @@ import com.rapiddweller.script.Expression;
 
 public abstract class UnaryExpression<E> implements WrapperExpression<E> {
 
-	protected String symbol;
-	protected Expression<?> term;
+	protected final String symbol;
+	protected final Expression<?> term;
 
 	public UnaryExpression(String symbol, Expression<?> term) {
 		this.symbol = symbol;

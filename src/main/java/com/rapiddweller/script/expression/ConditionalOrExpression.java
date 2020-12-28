@@ -28,17 +28,18 @@ import com.rapiddweller.script.Expression;
  */
 public class ConditionalOrExpression extends CompositeExpression<Object,Boolean> {
 	
-	private String symbol;
+	private final String symbol;
 	
-	public ConditionalOrExpression(String symbol, Expression<Object>... terms) {
+	@SafeVarargs
+    public ConditionalOrExpression(String symbol, Expression<Object>... terms) {
 		super(terms);
 		this.symbol = symbol;
 	}
 
 	@Override
 	public Boolean evaluate(Context context) {
-		for (int i = 0; i < terms.length; i++)
-			if (AnyConverter.convert(terms[i].evaluate(context), Boolean.class))
+		for (Expression<Object> term : terms)
+			if (AnyConverter.convert(term.evaluate(context), Boolean.class))
 				return true;
 		return false;
 	}

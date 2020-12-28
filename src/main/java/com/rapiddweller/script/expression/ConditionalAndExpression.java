@@ -27,14 +27,15 @@ import com.rapiddweller.script.Expression;
  */
 public class ConditionalAndExpression extends CompositeExpression<Object, Boolean> {
 
-	public ConditionalAndExpression(String symbol, Expression<Object>... terms) {
+	@SafeVarargs
+    public ConditionalAndExpression(String symbol, Expression<Object>... terms) {
         super(symbol, terms);
     }
 
 	@Override
 	public Boolean evaluate(Context context) {
-		for (int i = 0; i < terms.length; i++)
-			if (!AnyConverter.convert(terms[i].evaluate(context), Boolean.class))
+		for (Expression<Object> term : terms)
+			if (!AnyConverter.convert(term.evaluate(context), Boolean.class))
 				return false;
 		return true;
 	}

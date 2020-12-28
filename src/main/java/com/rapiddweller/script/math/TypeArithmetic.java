@@ -24,7 +24,7 @@ package com.rapiddweller.script.math;
 
 public abstract class TypeArithmetic<E> {
 	
-	protected Class<E> baseType;
+	protected final Class<E> baseType;
 	
     public TypeArithmetic(Class<E> baseType) {
 	    this.baseType = baseType;

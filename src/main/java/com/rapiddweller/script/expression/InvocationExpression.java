@@ -28,9 +28,9 @@ import com.rapiddweller.script.Expression;
 
 public class InvocationExpression extends DynamicExpression<Object> {
 	
-	private Expression<?> target;
-	private String methodName;
-	private Expression<?>[] argExpressions;
+	private final Expression<?> target;
+	private final String methodName;
+	private final Expression<?>[] argExpressions;
 
     public InvocationExpression(Expression<?> target, String methodMame, Expression<?>[] argExpressions) {
     	this.target = target;

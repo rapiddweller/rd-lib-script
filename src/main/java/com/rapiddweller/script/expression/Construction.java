@@ -25,7 +25,7 @@ import com.rapiddweller.commons.bean.DefaultClassProvider;
  */
 public abstract class Construction<E> extends DynamicExpression<E> {
 
-	protected String className;
+	protected final String className;
 
 	public Construction(String className) {
 		this.className = className;

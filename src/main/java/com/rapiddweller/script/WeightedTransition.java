@@ -22,7 +22,7 @@ package com.rapiddweller.script;
  */
 public class WeightedTransition extends Transition {
 
-	private double weight;
+	private final double weight;
 	
 	public WeightedTransition(Object from, Object to, double weight) {
 	    super(from, to);

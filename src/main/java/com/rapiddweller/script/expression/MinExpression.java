@@ -31,14 +31,15 @@ import com.rapiddweller.script.Expression;
 
 public class MinExpression<E> extends CompositeExpression<E,E> {
 
-	private Comparator<E> comparator;
+	private final Comparator<E> comparator;
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
     public MinExpression(Expression<E>... terms) {
 	    this(new ComparableComparator(), terms);
     }
 
-	public MinExpression(Comparator<E> comparator, Expression<E>... terms) {
+	@SafeVarargs
+    public MinExpression(Comparator<E> comparator, Expression<E>... terms) {
 	    super("", terms);
 	    this.comparator = comparator;
     }

@@ -28,8 +28,8 @@ import com.rapiddweller.script.Expression;
 
 public class FieldExpression extends DynamicExpression<Object> {
 	
-	private Expression<?> targetEx;
-	private String featureName;
+	private final Expression<?> targetEx;
+	private final String featureName;
 
     public FieldExpression(Expression<?> targetEx, String featureName) {
     	this.targetEx = targetEx;

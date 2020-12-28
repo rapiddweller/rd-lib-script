@@ -37,7 +37,7 @@ public class DateArithmeticTest {
 	private static final Date DATETIME = TimeUtil.date(2009, 9, 13, 17, 36, 37, 389);
 	private static final long ONE_DAY_MILLIS = 24L * 3600 * 1000;
 	
-	DateArithmetic arithmetic = new DateArithmetic();
+	final DateArithmetic arithmetic = new DateArithmetic();
 	
 	@Test
 	public void testGetBaseType() {

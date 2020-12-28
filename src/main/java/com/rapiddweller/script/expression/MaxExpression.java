@@ -30,14 +30,15 @@ import com.rapiddweller.script.Expression;
  */
 public class MaxExpression<E> extends CompositeExpression<E,E> {
 
-	private Comparator<E> comparator;
+	private final Comparator<E> comparator;
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
     public MaxExpression(Expression<E>... terms) {
 	    this(new ComparableComparator(), terms);
     }
 
-	public MaxExpression(Comparator<E> comparator, Expression<E>... terms) {
+	@SafeVarargs
+    public MaxExpression(Comparator<E> comparator, Expression<E>... terms) {
 	    super("", terms);
 	    this.comparator = comparator;
     }

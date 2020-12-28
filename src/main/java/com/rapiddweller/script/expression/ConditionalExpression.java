@@ -30,9 +30,9 @@ import com.rapiddweller.script.Expression;
 
 public class ConditionalExpression<E> extends DynamicExpression<E> {
 	
-	private Expression<Boolean> condition;
-	private Expression<? extends E> alt1;
-	private Expression<? extends E> alt2;
+	private final Expression<Boolean> condition;
+	private final Expression<? extends E> alt1;
+	private final Expression<? extends E> alt2;
 	
     public ConditionalExpression(Expression<Boolean> condition, 
     		Expression<? extends E> alt1, Expression<? extends E> alt2) {

@@ -44,7 +44,7 @@ public class ExpressionUtil {
     }
 
 	public static List<Object> evaluateAll(List<Expression<?>> expressions, Context context) {
-	    List<Object> result = new ArrayList<Object>(expressions.size());
+	    List<Object> result = new ArrayList<>(expressions.size());
 		for (Expression<?> expression : expressions)
 			result.add(expression.evaluate(context));
 	    return result;
@@ -55,7 +55,7 @@ public class ExpressionUtil {
     }
 
 	public static <T> Expression<T> constant(T value) {
-	    return new ConstantExpression<T>(value);
+	    return new ConstantExpression<>(value);
     }
 	
 	public Expression<String> unescape(Expression<String> source) {
@@ -64,7 +64,7 @@ public class ExpressionUtil {
 	
 	public static <T> Expression<T> simplify(Expression<T> expression, Context context) {
 		if (expression.isConstant() && !(expression instanceof ConstantExpression)) 
-			return new ConstantExpression<T>(evaluate(expression, context));
+			return new ConstantExpression<>(evaluate(expression, context));
 		else
 			return expression;
 	}

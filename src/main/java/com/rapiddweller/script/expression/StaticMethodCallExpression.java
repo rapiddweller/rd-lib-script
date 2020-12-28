@@ -28,9 +28,9 @@ import com.rapiddweller.script.Expression;
 
 public class StaticMethodCallExpression extends DynamicExpression<Object> {
 	
-	private Class<?> targetClass;
-	private String methodName;
-	private Expression<?>[] argExpressions;
+	private final Class<?> targetClass;
+	private final String methodName;
+	private final Expression<?>[] argExpressions;
 	
 	public StaticMethodCallExpression(Class<?> targetClass, String methodName, Expression<?> ... argExpressions) {
 	    this.targetClass = targetClass;

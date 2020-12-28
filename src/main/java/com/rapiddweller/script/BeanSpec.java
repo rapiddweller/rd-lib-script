@@ -23,8 +23,8 @@ package com.rapiddweller.script;
  */
 public class BeanSpec {
 	
-	private Object bean;
-	private boolean reference;
+	private final Object bean;
+	private final boolean reference;
 
 	public BeanSpec(Object bean, boolean reference) {
 		this.bean = bean;
