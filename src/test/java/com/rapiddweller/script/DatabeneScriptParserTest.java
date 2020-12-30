@@ -16,14 +16,14 @@ package com.rapiddweller.script;
 
 import java.util.Map;
 
-import com.rapiddweller.commons.BeanUtil;
-import com.rapiddweller.commons.CollectionUtil;
-import com.rapiddweller.commons.Context;
-import com.rapiddweller.commons.ObjectNotFoundException;
-import com.rapiddweller.commons.SyntaxError;
-import com.rapiddweller.commons.TimeUtil;
-import com.rapiddweller.commons.context.DefaultContext;
-import com.rapiddweller.commons.converter.ConverterManager;
+import com.rapiddweller.common.BeanUtil;
+import com.rapiddweller.common.CollectionUtil;
+import com.rapiddweller.common.Context;
+import com.rapiddweller.common.ObjectNotFoundException;
+import com.rapiddweller.common.SyntaxError;
+import com.rapiddweller.common.TimeUtil;
+import com.rapiddweller.common.context.DefaultContext;
+import com.rapiddweller.common.converter.ConverterManager;
 import com.rapiddweller.script.expression.ExpressionUtil;
 
 import org.junit.Before;

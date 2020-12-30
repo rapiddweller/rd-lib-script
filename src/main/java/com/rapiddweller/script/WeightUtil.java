@@ -17,7 +17,7 @@ package com.rapiddweller.script;
 import java.util.Comparator;
 import java.util.List;
 
-import com.rapiddweller.commons.comparator.ReverseComparator;
+import com.rapiddweller.common.comparator.ReverseComparator;
 
 /**
  * Provides utility methods for handling weighted data.<br/><br/>

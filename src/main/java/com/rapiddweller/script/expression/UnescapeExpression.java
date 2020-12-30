@@ -14,8 +14,8 @@
  */
 package com.rapiddweller.script.expression;
 
-import com.rapiddweller.commons.Context;
-import com.rapiddweller.commons.StringUtil;
+import com.rapiddweller.common.Context;
+import com.rapiddweller.common.StringUtil;
 import com.rapiddweller.script.Expression;
 
 /**

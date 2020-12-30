@@ -21,7 +21,7 @@ import java.sql.Time;
 import java.util.Calendar;
 import java.util.Date;
 
-import com.rapiddweller.commons.TimeUtil;
+import com.rapiddweller.common.TimeUtil;
 import org.junit.Test;
 
 /**

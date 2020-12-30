@@ -14,8 +14,8 @@
  */
 package com.rapiddweller.script.expression;
 
-import com.rapiddweller.commons.ArrayFormat;
-import com.rapiddweller.commons.ArrayUtil;
+import com.rapiddweller.common.ArrayFormat;
+import com.rapiddweller.common.ArrayUtil;
 import com.rapiddweller.script.Expression;
 
 /**

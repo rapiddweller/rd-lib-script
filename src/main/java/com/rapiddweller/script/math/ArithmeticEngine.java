@@ -19,8 +19,8 @@ import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.rapiddweller.commons.BeanUtil;
-import com.rapiddweller.commons.converter.AnyConverter;
+import com.rapiddweller.common.BeanUtil;
+import com.rapiddweller.common.converter.AnyConverter;
 
 /**
  * Provides arithmetic operations.<br/>

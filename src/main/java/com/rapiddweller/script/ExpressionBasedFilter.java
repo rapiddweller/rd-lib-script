@@ -14,9 +14,9 @@
  */
 package com.rapiddweller.script;
 
-import com.rapiddweller.commons.Context;
-import com.rapiddweller.commons.Filter;
-import com.rapiddweller.commons.context.ContextHolder;
+import com.rapiddweller.common.Context;
+import com.rapiddweller.common.Filter;
+import com.rapiddweller.common.context.ContextHolder;
 
 /**
  * {@link Filter} implementation based on a boolean filter {@link Expression}.<br/><br/>

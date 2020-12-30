@@ -16,8 +16,8 @@ package com.rapiddweller.script.math;
 
 import java.util.Date;
 
-import com.rapiddweller.commons.BeanUtil;
-import com.rapiddweller.commons.TimeUtil;
+import com.rapiddweller.common.BeanUtil;
+import com.rapiddweller.common.TimeUtil;
 
 /**
  * {@link TypeArithmetic} implementation for the {@link Date} class.<br/>

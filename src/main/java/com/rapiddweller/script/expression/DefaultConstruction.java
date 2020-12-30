@@ -14,8 +14,8 @@
  */
 package com.rapiddweller.script.expression;
 
-import com.rapiddweller.commons.BeanUtil;
-import com.rapiddweller.commons.Context;
+import com.rapiddweller.common.BeanUtil;
+import com.rapiddweller.common.Context;
 
 /**
  * Instantiates a class by default constructor.<br/><br/>

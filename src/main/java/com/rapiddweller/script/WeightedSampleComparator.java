@@ -16,7 +16,7 @@ package com.rapiddweller.script;
 
 import java.util.Comparator;
 
-import com.rapiddweller.commons.comparator.DoubleComparator;
+import com.rapiddweller.common.comparator.DoubleComparator;
 
 /**
  * {@link Comparator} which compares {@link WeightedSample} objects by their 'weight' property value.<br/><br/>

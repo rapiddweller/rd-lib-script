@@ -14,12 +14,12 @@
  */
 package com.rapiddweller.script;
 
-import com.rapiddweller.commons.ArrayFormat;
-import com.rapiddweller.commons.BeanUtil;
-import com.rapiddweller.commons.ConfigurationError;
-import com.rapiddweller.commons.Context;
-import com.rapiddweller.commons.ExceptionUtil;
-import com.rapiddweller.commons.bean.DefaultClassProvider;
+import com.rapiddweller.common.ArrayFormat;
+import com.rapiddweller.common.BeanUtil;
+import com.rapiddweller.common.ConfigurationError;
+import com.rapiddweller.common.Context;
+import com.rapiddweller.common.ExceptionUtil;
+import com.rapiddweller.common.bean.DefaultClassProvider;
 import com.rapiddweller.script.expression.DynamicExpression;
 
 /**

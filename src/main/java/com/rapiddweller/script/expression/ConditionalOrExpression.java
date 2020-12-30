@@ -14,9 +14,9 @@
  */
 package com.rapiddweller.script.expression;
 
-import com.rapiddweller.commons.ArrayFormat;
-import com.rapiddweller.commons.Context;
-import com.rapiddweller.commons.converter.AnyConverter;
+import com.rapiddweller.common.ArrayFormat;
+import com.rapiddweller.common.Context;
+import com.rapiddweller.common.converter.AnyConverter;
 import com.rapiddweller.script.Expression;
 
 /**

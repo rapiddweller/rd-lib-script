@@ -14,7 +14,7 @@
  */
 package com.rapiddweller.script;
 
-import com.rapiddweller.commons.Weighted;
+import com.rapiddweller.common.Weighted;
 
 /**
  * Represents a single sample value for a generator.

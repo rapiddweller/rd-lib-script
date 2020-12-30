@@ -14,10 +14,10 @@
  */
 package com.rapiddweller.script.expression;
 
-import com.rapiddweller.commons.BeanUtil;
-import com.rapiddweller.commons.Context;
-import com.rapiddweller.commons.context.ContextAware;
-import com.rapiddweller.commons.mutator.AnyMutator;
+import com.rapiddweller.common.BeanUtil;
+import com.rapiddweller.common.Context;
+import com.rapiddweller.common.context.ContextAware;
+import com.rapiddweller.common.mutator.AnyMutator;
 import com.rapiddweller.script.Assignment;
 import com.rapiddweller.script.Expression;
 

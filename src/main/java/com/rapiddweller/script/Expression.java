@@ -14,7 +14,7 @@
  */
 package com.rapiddweller.script;
 
-import com.rapiddweller.commons.Context;
+import com.rapiddweller.common.Context;
 
 /**
  * Represents an Expression that evaluates some internal state and returns the result.<br/><br/>

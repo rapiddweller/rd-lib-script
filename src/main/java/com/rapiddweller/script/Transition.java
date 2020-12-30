@@ -14,7 +14,7 @@
  */
 package com.rapiddweller.script;
 
-import com.rapiddweller.commons.NullSafeComparator;
+import com.rapiddweller.common.NullSafeComparator;
 
 /**
  * Represents the transition of one state to another.<br/>

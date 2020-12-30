@@ -20,7 +20,7 @@ import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.Date;
 
-import com.rapiddweller.commons.comparator.TypeComparator;
+import com.rapiddweller.common.comparator.TypeComparator;
 
 /**
  * Provides information how types can be combined in arithmetic operations.<br/>

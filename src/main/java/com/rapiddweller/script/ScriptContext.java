@@ -16,8 +16,8 @@ package com.rapiddweller.script;
 
 import java.io.Closeable;
 
-import com.rapiddweller.commons.Context;
-import com.rapiddweller.commons.bean.ClassProvider;
+import com.rapiddweller.common.Context;
+import com.rapiddweller.common.bean.ClassProvider;
 
 /**
  * Base interface for Databene Script actors to interoperate with their environment.<br/><br/>

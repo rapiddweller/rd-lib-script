@@ -17,9 +17,9 @@ package com.rapiddweller.script.expression;
 import java.util.List;
 import java.util.Map;
 
-import com.rapiddweller.commons.BeanUtil;
-import com.rapiddweller.commons.Context;
-import com.rapiddweller.commons.converter.AnyConverter;
+import com.rapiddweller.common.BeanUtil;
+import com.rapiddweller.common.Context;
+import com.rapiddweller.common.converter.AnyConverter;
 import com.rapiddweller.script.Expression;
 
 /**

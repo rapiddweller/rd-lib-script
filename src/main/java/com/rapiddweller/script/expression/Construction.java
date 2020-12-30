@@ -14,8 +14,8 @@
  */
 package com.rapiddweller.script.expression;
 
-import com.rapiddweller.commons.Context;
-import com.rapiddweller.commons.bean.DefaultClassProvider;
+import com.rapiddweller.common.Context;
+import com.rapiddweller.common.bean.DefaultClassProvider;
 
 /**
  * Common parent class for Expressions that instantiate a Java object.<br/><br/>

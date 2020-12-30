@@ -16,7 +16,7 @@ package com.rapiddweller.script.expression;
 
 import static org.junit.Assert.*;
 
-import com.rapiddweller.commons.context.DefaultContext;
+import com.rapiddweller.common.context.DefaultContext;
 import org.junit.Test;
 
 /**

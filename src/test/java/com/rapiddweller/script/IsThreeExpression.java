@@ -14,7 +14,7 @@
  */
 package com.rapiddweller.script;
 
-import com.rapiddweller.commons.Context;
+import com.rapiddweller.common.Context;
 
 /**
  * Helper class for testing.<br/><br/>

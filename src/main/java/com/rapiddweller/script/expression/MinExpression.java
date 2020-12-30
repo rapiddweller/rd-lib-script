@@ -16,9 +16,9 @@ package com.rapiddweller.script.expression;
 
 import java.util.Comparator;
 
-import com.rapiddweller.commons.ArrayFormat;
-import com.rapiddweller.commons.ComparableComparator;
-import com.rapiddweller.commons.Context;
+import com.rapiddweller.common.ArrayFormat;
+import com.rapiddweller.common.ComparableComparator;
+import com.rapiddweller.common.Context;
 import com.rapiddweller.script.Expression;
 
 /**

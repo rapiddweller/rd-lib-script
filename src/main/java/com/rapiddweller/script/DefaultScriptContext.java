@@ -14,8 +14,8 @@
  */
 package com.rapiddweller.script;
 
-import com.rapiddweller.commons.bean.ClassCache;
-import com.rapiddweller.commons.context.DefaultContext;
+import com.rapiddweller.common.bean.ClassCache;
+import com.rapiddweller.common.context.DefaultContext;
 
 /**
  * Default implementation of the {@link ScriptContext} interface.<br/><br/>
