@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.rapiddweller</groupId>
     <artifactId>rd-lib-script</artifactId>
-    <version>1.1.0+jdk-11-SNAPSHOT</version>
+    <version>1.1.0-jdk-11-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>rapiddweller Script</name>
     <description>'rapiddweller Script' is an open source software library for resolving Java-like script expressions,
@@ -14,7 +14,7 @@
     <inceptionYear>2011</inceptionYear>
 
     <properties>
-        <_rd_common_version>1.1.0+jdk-11-SNAPSHOT</_rd_common_version>
+        <_rd_common_version>1.1.0-jdk-11-SNAPSHOT</_rd_common_version>
         <buildnumber-maven-plugin.version>1.0</buildnumber-maven-plugin.version>
         <dependency_antlr-runtime.version>3.3</dependency_antlr-runtime.version>
         <dependency_junit.version>4.13.1</dependency_junit.version>
@@ -470,25 +470,27 @@
 
     <repositories>
         <repository>
-            <id>gitlab-maven</id>
-            <url>${env.CI_SERVER_URL}/api/v4/groups/${CI_PROJECT_GROUP_ID}/-/packages/maven</url>
+            <id>rdd-nexus</id>
+            <url>https://nexus.dwellerlab.com/repository/maven-rdd</url>
         </repository>
     </repositories>
 
     <distributionManagement>
         <repository>
-            <id>gitlab-maven</id>
-            <url>${env.CI_SERVER_URL}/api/v4/projects/${env.CI_PROJECT_ID}/packages/maven/</url>
+            <id>rdd-nexus</id>
+            <name>Releases</name>
+            <url>https://nexus.dwellerlab.com/repository/releases</url>
         </repository>
         <snapshotRepository>
-            <id>gitlab-maven</id>
-            <url>${env.CI_SERVER_URL}/api/v4/projects/${env.CI_PROJECT_ID}/packages/maven/</url>
+            <id>rdd-nexus</id>
+            <name>Snapshot</name>
+            <url>https://nexus.dwellerlab.com/repository/snapshots</url>
         </snapshotRepository>
     </distributionManagement>
 
     <scm>
-        <url>${env.CI_PROJECT_URL}</url>
-        <connection>scm:git:${env.CI_REPOSITORY_URL}</connection>
-        <developerConnection>scm:git:${env.CI_REPOSITORY_URL}</developerConnection>
+        <url>https://github.com/rapiddweller/rd-lib-script</url>
+        <connection>scm:git:github.com/rapiddweller/rd-lib-script</connection>
+        <developerConnection>scm:git:github.com/rapiddweller/rd-lib-script</developerConnection>
     </scm>
 </project>
