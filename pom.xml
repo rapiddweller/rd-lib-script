@@ -20,7 +20,7 @@
         <dependency_junit.version>4.13.1</dependency_junit.version>
         <dependency_log4j-api.version>2.14.0</dependency_log4j-api.version>
         <dependency_log4j-core.version>2.14.0</dependency_log4j-core.version>
-        <dependency_poi.version>3.9</dependency_poi.version>
+        <dependency_poi.version>5.0.0</dependency_poi.version>
         <java_source_version>11</java_source_version>
         <java_target_version>11</java_target_version>
         <plugin_jacoco-maven-plugin.version>0.8.6</plugin_jacoco-maven-plugin.version>
@@ -95,24 +95,28 @@
     </developers>
 
     <dependencies>
-        <!-- compile dependencies -->
+        <!-- rapiddweller dependencies -->
         <dependency>
             <groupId>com.rapiddweller</groupId>
             <artifactId>rd-lib-common</artifactId>
             <version>${_rd_common_version}</version>
         </dependency>
+        <!--  ANTLR (ANother Tool for Language Recognition) is a powerful parser generator for reading, processing,
+         executing, or translating structured text or binary files. It's widely used to build languages, tools, and
+          frameworks. From a grammar, ANTLR generates a parser that can build and walk parse trees. -->
+        <dependency>
+            <groupId>org.antlr</groupId>
+            <artifactId>antlr</artifactId>
+            <version>${dependency_antlr-runtime.version}</version>
+        </dependency>
+        <!-- Test dependencies -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>${dependency_junit.version}</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.antlr</groupId>
-            <artifactId>antlr-runtime</artifactId>
-            <version>${dependency_antlr-runtime.version}</version>
-        </dependency>
-        <!-- Test dependencies -->
+        <!-- logging -->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-api</artifactId>
@@ -123,11 +127,16 @@
             <artifactId>log4j-core</artifactId>
             <version>${dependency_log4j-core.version}</version>
         </dependency>
+        <!-- Excel -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>${dependency_poi.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi</artifactId>
             <version>${dependency_poi.version}</version>
-            <scope>compile</scope>
         </dependency>
     </dependencies>
 
