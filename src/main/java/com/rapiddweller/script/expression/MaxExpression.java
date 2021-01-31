@@ -14,12 +14,12 @@
  */
 package com.rapiddweller.script.expression;
 
-import java.util.Comparator;
-
 import com.rapiddweller.common.ArrayFormat;
 import com.rapiddweller.common.ComparableComparator;
 import com.rapiddweller.common.Context;
 import com.rapiddweller.script.Expression;
+
+import java.util.Comparator;
 
 /**
  * Calculates the maximum value of several arguments. 

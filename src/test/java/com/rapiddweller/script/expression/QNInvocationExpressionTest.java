@@ -14,14 +14,14 @@
  */
 package com.rapiddweller.script.expression;
 
-import static org.junit.Assert.*;
-
 import com.rapiddweller.script.DefaultScriptContext;
 import com.rapiddweller.script.Expression;
 import com.rapiddweller.script.QNInvocationExpression;
 import com.rapiddweller.script.ScriptContext;
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Tests the {@link QNInvocationExpression}.<br/><br/>

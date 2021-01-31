@@ -14,11 +14,11 @@
  */
 package com.rapiddweller.script;
 
+import com.rapiddweller.common.NullSafeComparator;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import com.rapiddweller.common.NullSafeComparator;
 
 /**
  * Simple JavaBean for testing.<br/><br/>

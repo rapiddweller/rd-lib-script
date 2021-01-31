@@ -14,13 +14,13 @@
  */
 package com.rapiddweller.script.math;
 
+import com.rapiddweller.common.comparator.TypeComparator;
+
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.Date;
-
-import com.rapiddweller.common.comparator.TypeComparator;
 
 /**
  * Provides information how types can be combined in arithmetic operations.<br/>

@@ -14,13 +14,13 @@
  */
 package com.rapiddweller.script.expression;
 
-import java.util.List;
-import java.util.Map;
-
 import com.rapiddweller.common.BeanUtil;
 import com.rapiddweller.common.Context;
 import com.rapiddweller.common.converter.AnyConverter;
 import com.rapiddweller.script.Expression;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * {@link Expression} that evaluates an index argument.<br/><br/>

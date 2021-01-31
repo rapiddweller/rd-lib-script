@@ -14,11 +14,12 @@
  */
 package com.rapiddweller.script;
 
-import static org.junit.Assert.*;
-
 import com.rapiddweller.common.Context;
 import com.rapiddweller.common.context.DefaultContext;
 import org.junit.Test;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Tests the {@link ExpressionBasedFilter}.<br/><br/>

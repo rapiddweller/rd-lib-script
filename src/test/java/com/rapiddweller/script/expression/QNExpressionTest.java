@@ -14,14 +14,14 @@
  */
 package com.rapiddweller.script.expression;
 
-import static org.junit.Assert.*;
-
 import com.rapiddweller.script.DefaultScriptContext;
 import com.rapiddweller.script.QNExpression;
 import com.rapiddweller.script.ScriptContext;
 import com.rapiddweller.script.ScriptTestUtil;
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Tests the {@link QNExpression}.<br/><br/>

@@ -14,13 +14,13 @@
  */
 package com.rapiddweller.script.math;
 
+import com.rapiddweller.common.BeanUtil;
+import com.rapiddweller.common.converter.AnyConverter;
+
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.Map;
-
-import com.rapiddweller.common.BeanUtil;
-import com.rapiddweller.common.converter.AnyConverter;
 
 /**
  * Provides arithmetic operations.<br/>
