@@ -14,10 +14,10 @@
  */
 package com.rapiddweller.script.math;
 
-import java.util.Date;
-
 import com.rapiddweller.common.BeanUtil;
 import com.rapiddweller.common.TimeUtil;
+
+import java.util.Date;
 
 /**
  * {@link TypeArithmetic} implementation for the {@link Date} class.<br/>

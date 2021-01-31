@@ -14,10 +14,10 @@
  */
 package com.rapiddweller.script;
 
-import java.io.Closeable;
-
 import com.rapiddweller.common.Context;
 import com.rapiddweller.common.bean.ClassProvider;
+
+import java.io.Closeable;
 
 /**
  * Base interface for Databene Script actors to interoperate with their environment.<br/><br/>

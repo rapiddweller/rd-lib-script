@@ -14,15 +14,15 @@
  */
 package com.rapiddweller.script.math;
 
-import static org.junit.Assert.*;
+import com.rapiddweller.common.TimeUtil;
+import org.junit.Test;
 
 import java.io.File;
 import java.sql.Time;
 import java.util.Calendar;
 import java.util.Date;
 
-import com.rapiddweller.common.TimeUtil;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Tests the {@link DateArithmetic}.<br/><br/>

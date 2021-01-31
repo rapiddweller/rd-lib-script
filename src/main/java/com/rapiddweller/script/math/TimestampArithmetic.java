@@ -14,11 +14,11 @@
  */
 package com.rapiddweller.script.math;
 
-import java.sql.Timestamp;
-import java.util.Date;
-
 import com.rapiddweller.common.BeanUtil;
 import com.rapiddweller.common.TimeUtil;
+
+import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  * {@link TypeArithmetic} implementation for the {@link Date} type.<br/>

@@ -15,59 +15,18 @@
 
 package com.rapiddweller.script;
 
+import com.rapiddweller.common.*;
+import com.rapiddweller.script.antlr.DatabeneScriptLexer;
+import com.rapiddweller.script.expression.*;
+import org.antlr.runtime.*;
+import org.antlr.runtime.tree.CommonTree;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.List;
 import java.util.Objects;
-
-import org.antlr.runtime.ANTLRReaderStream;
-import org.antlr.runtime.CommonToken;
-import org.antlr.runtime.CommonTokenStream;
-import org.antlr.runtime.ParserRuleReturnScope;
-import org.antlr.runtime.RecognitionException;
-import org.antlr.runtime.tree.CommonTree;
-import com.rapiddweller.common.ArrayFormat;
-import com.rapiddweller.common.Assert;
-import com.rapiddweller.common.Context;
-import com.rapiddweller.common.ParseUtil;
-import com.rapiddweller.common.StringUtil;
-import com.rapiddweller.common.SyntaxError;
-import com.rapiddweller.script.antlr.DatabeneScriptLexer;
-import com.rapiddweller.script.expression.AssignmentExpression;
-import com.rapiddweller.script.expression.BeanConstruction;
-import com.rapiddweller.script.expression.BitwiseAndExpression;
-import com.rapiddweller.script.expression.BitwiseComplementExpression;
-import com.rapiddweller.script.expression.BitwiseExclusiveOrExpression;
-import com.rapiddweller.script.expression.BitwiseOrExpression;
-import com.rapiddweller.script.expression.ConditionalAndExpression;
-import com.rapiddweller.script.expression.ConditionalExpression;
-import com.rapiddweller.script.expression.ConditionalOrExpression;
-import com.rapiddweller.script.expression.ConstantExpression;
-import com.rapiddweller.script.expression.DivisionExpression;
-import com.rapiddweller.script.expression.EqualsExpression;
-import com.rapiddweller.script.expression.FieldExpression;
-import com.rapiddweller.script.expression.ForNameExpression;
-import com.rapiddweller.script.expression.GreaterExpression;
-import com.rapiddweller.script.expression.GreaterOrEqualsExpression;
-import com.rapiddweller.script.expression.IndexExpression;
-import com.rapiddweller.script.expression.InvocationExpression;
-import com.rapiddweller.script.expression.LeftShiftExpression;
-import com.rapiddweller.script.expression.LessExpression;
-import com.rapiddweller.script.expression.LessOrEqualsExpression;
-import com.rapiddweller.script.expression.LogicalComplementExpression;
-import com.rapiddweller.script.expression.ModuloExpression;
-import com.rapiddweller.script.expression.MultiplicationExpression;
-import com.rapiddweller.script.expression.NotEqualsExpression;
-import com.rapiddweller.script.expression.ParameterizedConstruction;
-import com.rapiddweller.script.expression.RightShiftExpression;
-import com.rapiddweller.script.expression.SubtractionExpression;
-import com.rapiddweller.script.expression.SumExpression;
-import com.rapiddweller.script.expression.TypeConvertingExpression;
-import com.rapiddweller.script.expression.UnaryMinusExpression;
-import com.rapiddweller.script.expression.UnsignedRightShiftExpression;
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.LogManager;
-import org.apache.poi.ss.formula.functions.T;
 
 /**
  * Parses Benerator Script statements and converts expressions and statements to Java objects.<br/>

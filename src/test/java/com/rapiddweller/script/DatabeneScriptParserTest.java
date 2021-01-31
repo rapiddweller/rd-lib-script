@@ -14,20 +14,15 @@
  */
 package com.rapiddweller.script;
 
-import java.util.Map;
-
-import com.rapiddweller.common.BeanUtil;
-import com.rapiddweller.common.CollectionUtil;
-import com.rapiddweller.common.Context;
-import com.rapiddweller.common.ObjectNotFoundException;
-import com.rapiddweller.common.SyntaxError;
-import com.rapiddweller.common.TimeUtil;
+import com.rapiddweller.common.*;
 import com.rapiddweller.common.context.DefaultContext;
 import com.rapiddweller.common.converter.ConverterManager;
 import com.rapiddweller.script.expression.ExpressionUtil;
-
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.Map;
+
 import static junit.framework.Assert.*;
 
 /**
@@ -119,14 +114,14 @@ public class DatabeneScriptParserTest {
 	}
 	
 	@Test
-	public void testReference() throws Exception {
+	public void testReference() {
 		Context context = new DefaultContext();
 		context.set("testString", "Hello");
 		checkExpression("Hello", "testString", context);
 	}
 	
 	@Test
-	public void testReferenceInvocation() throws Exception {
+	public void testReferenceInvocation() {
 		Context context = new DefaultContext();
 		context.set("testString", "Hello");
 		checkExpression(5, "testString.length()", context);
@@ -138,21 +133,21 @@ public class DatabeneScriptParserTest {
 	}
 	
 	@Test
-	public void testArrayIndex() throws Exception {
+	public void testArrayIndex() {
 		Context context = new DefaultContext();
 		context.set("testArray", new String[] { "Alice", "Bob", "Charly" });
 		checkExpression("Bob", "testArray[1]", context);
 	}
 	
 	@Test
-	public void testListIndex() throws Exception {
+	public void testListIndex() {
 		Context context = new DefaultContext();
 		context.set("testList", CollectionUtil.toList("Alice", "Bob", "Charly"));
 		checkExpression("Bob", "testList[1]", context);
 	}
 	
 	@Test
-	public void testMapIndex() throws Exception {
+	public void testMapIndex() {
 		Context context = new DefaultContext();
 		context.set("testMap", CollectionUtil.buildMap("Alice", 23, "Bob", 34, "Charly", 45));
 		checkExpression(34, "testMap['Bob']", context);
@@ -188,7 +183,7 @@ public class DatabeneScriptParserTest {
 	}
 	
 	@Test
-	public void testSubFieldMethod() throws Exception {
+	public void testSubFieldMethod() {
 		Context context = new DefaultContext();
 		context.set("tc", this);
 		checkExpression("hi!", "tc.stringAttrib.trim()", context);
@@ -414,7 +409,7 @@ public class DatabeneScriptParserTest {
 	}
 	
 	@Test
-	public void testObjectSpecByRef() throws Exception {
+	public void testObjectSpecByRef() {
 		Context context = new DefaultContext();
 		context.set("greeting", "Howdy");
 		checkBeanSpec("Howdy", "greeting", context);
@@ -610,7 +605,7 @@ public class DatabeneScriptParserTest {
 	
 	// private helpers -------------------------------------------------------------------------------------------------
 
-	private void checkExpression(Object expected, String script) throws Exception {
+	private void checkExpression(Object expected, String script) {
     	checkExpression(expected, script, context);
     }
     
@@ -621,7 +616,7 @@ public class DatabeneScriptParserTest {
 		assertEqual(expected, actual, script);
     }
     
-    private static void checkBeanSpec(Object expected, String script) throws Exception {
+    private static void checkBeanSpec(Object expected, String script) {
     	checkBeanSpec(expected, script, new DefaultContext());
     }
     

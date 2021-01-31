@@ -14,18 +14,14 @@
  */
 package com.rapiddweller.script;
 
-import java.util.Arrays;
-
-import com.rapiddweller.common.ArrayFormat;
-import com.rapiddweller.common.ArrayUtil;
-import com.rapiddweller.common.BeanUtil;
-import com.rapiddweller.common.ConfigurationError;
-import com.rapiddweller.common.Context;
+import com.rapiddweller.common.*;
 import com.rapiddweller.common.bean.DefaultClassProvider;
 import com.rapiddweller.script.expression.DynamicExpression;
 import com.rapiddweller.script.expression.ExpressionUtil;
-import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.util.Arrays;
 
 /**
  * {@link Expression} implementation that evaluates an invocation syntax on a qualified name 

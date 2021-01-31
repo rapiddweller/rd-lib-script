@@ -14,10 +14,10 @@
  */
 package com.rapiddweller.script.expression;
 
-import java.util.Collection;
-
 import com.rapiddweller.common.Context;
 import com.rapiddweller.script.Expression;
+
+import java.util.Collection;
 
 /**
  * Boolean {@link Expression} which tells if a value is contained in a given collection.<br/><br/>
