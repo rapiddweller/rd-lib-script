@@ -24,9 +24,13 @@ jobs:
   setup:
     runs-on: ubuntu-latest
     container: maven:3.6-adoptopenjdk-11
+    defaults:
+      run:
+        shell: bash
     steps:
       - uses: actions/checkout@v2
-      - run: echo $(mvn -q -Dexec.executable=echo -Dexec.args='${project.artifactId}' --non-recursive exec:exec);
+      - name: debug if something is wrong with maven
+        run: echo $(mvn -q -Dexec.executable=echo -Dexec.args='${project.artifactId}' --non-recursive exec:exec);
       - run: eval $SET_VERSION
         shell: bash
       - run: |
