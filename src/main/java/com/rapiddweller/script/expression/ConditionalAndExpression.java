@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.rapiddweller.script.expression;
 
 import com.rapiddweller.common.Context;
@@ -19,25 +20,34 @@ import com.rapiddweller.common.converter.AnyConverter;
 import com.rapiddweller.script.Expression;
 
 /**
- * Boolean {@link Expression} that combines the result 
+ * Boolean {@link Expression} that combines the result
  * of two other boolean expressions with a logical AND.<br/><br/>
  * Created: 24.11.2010 14:04:38
- * @since 0.5.8
+ *
  * @author Volker Bergmann
+ * @since 0.5.8
  */
 public class ConditionalAndExpression extends CompositeExpression<Object, Boolean> {
 
-	@SafeVarargs
-    public ConditionalAndExpression(String symbol, Expression<Object>... terms) {
-        super(symbol, terms);
-    }
+  /**
+   * Instantiates a new Conditional and expression.
+   *
+   * @param symbol the symbol
+   * @param terms  the terms
+   */
+  @SafeVarargs
+  public ConditionalAndExpression(String symbol, Expression<Object>... terms) {
+    super(symbol, terms);
+  }
 
-	@Override
-	public Boolean evaluate(Context context) {
-		for (Expression<Object> term : terms)
-			if (!AnyConverter.convert(term.evaluate(context), Boolean.class))
-				return false;
-		return true;
-	}
-	
+  @Override
+  public Boolean evaluate(Context context) {
+    for (Expression<Object> term : terms) {
+      if (!AnyConverter.convert(term.evaluate(context), Boolean.class)) {
+        return false;
+      }
+    }
+    return true;
+  }
+
 }

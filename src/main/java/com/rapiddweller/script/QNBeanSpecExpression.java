@@ -12,15 +12,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.rapiddweller.script;
 
-import com.rapiddweller.common.*;
+import com.rapiddweller.common.ArrayFormat;
+import com.rapiddweller.common.BeanUtil;
+import com.rapiddweller.common.ConfigurationError;
+import com.rapiddweller.common.Context;
+import com.rapiddweller.common.ExceptionUtil;
 import com.rapiddweller.common.bean.DefaultClassProvider;
 import com.rapiddweller.script.expression.DynamicExpression;
 
 /**
  * {@link Expression} instance that evaluates the Benerator script notation for Java object specification
- * as one of the following: 
+ * as one of the following:
  * <ul>
  *   <li>reference: <code>myInstance</code></li>
  *   <li>class name: <code>com.my.SpecialClass</code></li>
@@ -29,36 +34,52 @@ import com.rapiddweller.script.expression.DynamicExpression;
  * </ul>
  * <br/>
  * Created at 08.10.2009 18:15:15
- * @since 0.6.0
+ *
  * @author Volker Bergmann
+ * @since 0.6.0
  */
-
 public class QNBeanSpecExpression extends DynamicExpression<Object> {
-	
-	final String[] qn;
 
-    public QNBeanSpecExpression(String[] qn) {
-    	this.qn = qn;
-    }
+  /**
+   * The Qn.
+   */
+  final String[] qn;
 
-    @Override
-	public Object evaluate(Context context) {
-    	return resolve(context).getBean();
-    }
+  /**
+   * Instantiates a new Qn bean spec expression.
+   *
+   * @param qn the qn
+   */
+  public QNBeanSpecExpression(String[] qn) {
+    this.qn = qn;
+  }
 
-    public BeanSpec resolve(Context context) {
-    	String objectOrClassName = ArrayFormat.format(".", qn);
-    	try {
-    		if (context.contains(objectOrClassName))
-    			return BeanSpec.createReference(context.get(objectOrClassName));
-			Class<?> type = DefaultClassProvider.resolveByObjectOrDefaultInstance(objectOrClassName, context);
-    		return BeanSpec.createConstruction(BeanUtil.newInstance(type));
-    	} catch (ConfigurationError e) {
-    		if (ExceptionUtil.getRootCause(e) instanceof ClassNotFoundException)
-    			return new QNExpression(qn).resolve(context);
-    		else
-    			throw new ConfigurationError("Cannot resolve " + objectOrClassName, e);
-    	}
+  @Override
+  public Object evaluate(Context context) {
+    return resolve(context).getBean();
+  }
+
+  /**
+   * Resolve bean spec.
+   *
+   * @param context the context
+   * @return the bean spec
+   */
+  public BeanSpec resolve(Context context) {
+    String objectOrClassName = ArrayFormat.format(".", qn);
+    try {
+      if (context.contains(objectOrClassName)) {
+        return BeanSpec.createReference(context.get(objectOrClassName));
+      }
+      Class<?> type = DefaultClassProvider.resolveByObjectOrDefaultInstance(objectOrClassName, context);
+      return BeanSpec.createConstruction(BeanUtil.newInstance(type));
+    } catch (ConfigurationError e) {
+      if (ExceptionUtil.getRootCause(e) instanceof ClassNotFoundException) {
+        return new QNExpression(qn).resolve(context);
+      } else {
+        throw new ConfigurationError("Cannot resolve " + objectOrClassName, e);
+      }
     }
+  }
 
 }

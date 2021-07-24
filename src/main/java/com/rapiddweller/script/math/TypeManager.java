@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.rapiddweller.script.math;
 
 import com.rapiddweller.common.comparator.TypeComparator;
@@ -26,31 +27,38 @@ import java.util.Date;
  * Provides information how types can be combined in arithmetic operations.<br/>
  * <br/>
  * Created at 06.10.2009 09:49:53
- * @since 0.6.0
+ *
  * @author Volker Bergmann
+ * @since 0.6.0
  */
-
 public class TypeManager {
 
-	private static final TypeComparator comparator = new TypeComparator(
-			boolean.class, Boolean.class, 
-			char.class, Character.class,
-			byte.class, Byte.class,
-			short.class, Short.class,
-			int.class, Integer.class,
-			long.class, Long.class,
-			BigInteger.class,
-			float.class, Float.class,
-			double.class, Double.class,
-			BigDecimal.class,
-			Time.class,
-			Date.class,
-			Timestamp.class,
-			String.class
-		);
-	
-	public static Class<?> combinedType(Class<?> type1, Class<?> type2) {
-		return (comparator.compare(type1, type2) > 0 ? type1 : type2);
-	}
+  private static final TypeComparator comparator = new TypeComparator(
+      boolean.class, Boolean.class,
+      char.class, Character.class,
+      byte.class, Byte.class,
+      short.class, Short.class,
+      int.class, Integer.class,
+      long.class, Long.class,
+      BigInteger.class,
+      float.class, Float.class,
+      double.class, Double.class,
+      BigDecimal.class,
+      Time.class,
+      Date.class,
+      Timestamp.class,
+      String.class
+  );
+
+  /**
+   * Combined type class.
+   *
+   * @param type1 the type 1
+   * @param type2 the type 2
+   * @return the class
+   */
+  public static Class<?> combinedType(Class<?> type1, Class<?> type2) {
+    return (comparator.compare(type1, type2) > 0 ? type1 : type2);
+  }
 
 }

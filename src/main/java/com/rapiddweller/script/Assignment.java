@@ -12,36 +12,53 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.rapiddweller.script;
 
 /**
  * Represents an assignment of an expression (result) to a target name.<br/><br/>
  * Created at 08.10.2009 19:06:08
- * @since 0.6.0
+ *
  * @author Volker Bergmann
+ * @since 0.6.0
  */
-
 public class Assignment {
-	
-	private final String name;
-	private final Expression<?> expression;
 
-	public Assignment(String name, Expression<?> expression) {
-	    this.name = name;
-	    this.expression = expression;
-    }
+  private final String name;
+  private final Expression<?> expression;
 
-	public String getName() {
-		return name;
-	}
-	
-	public Expression<?> getExpression() {
-		return expression;
-	}
-	
-	@Override
-	public String toString() {
-	    return name + "=" + expression;
-	}
-	
+  /**
+   * Instantiates a new Assignment.
+   *
+   * @param name       the name
+   * @param expression the expression
+   */
+  public Assignment(String name, Expression<?> expression) {
+    this.name = name;
+    this.expression = expression;
+  }
+
+  /**
+   * Gets name.
+   *
+   * @return the name
+   */
+  public String getName() {
+    return name;
+  }
+
+  /**
+   * Gets expression.
+   *
+   * @return the expression
+   */
+  public Expression<?> getExpression() {
+    return expression;
+  }
+
+  @Override
+  public String toString() {
+    return name + "=" + expression;
+  }
+
 }

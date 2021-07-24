@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.rapiddweller.script.math;
 
 import com.rapiddweller.common.TimeUtil;
@@ -27,52 +28,77 @@ import static org.junit.Assert.assertEquals;
 /**
  * Tests the {@link DateArithmetic}.<br/><br/>
  * Created: 13.10.2009 17:34:36
- * @since 0.6.0
+ *
  * @author Volker Bergmann
+ * @since 0.6.0
  */
 public class DateArithmeticTest {
-	
-	private static final Date DATE     = TimeUtil.date(2009, 9, 13);
-	private static final Time TIME     = TimeUtil.time(17, 36, 37, 389);
-	private static final Date DATETIME = TimeUtil.date(2009, 9, 13, 17, 36, 37, 389);
-	private static final long ONE_DAY_MILLIS = 24L * 3600 * 1000;
-	
-	final DateArithmetic arithmetic = new DateArithmetic();
-	
-	@Test
-	public void testGetBaseType() {
-		assertEquals(Date.class, arithmetic.getBaseType());
-	}
-	
-	@Test
-	public void testAdd() {
-		assertEquals(DATETIME, arithmetic.add(DATE, TIME));
-		assertEquals(TimeUtil.add(DATE, Calendar.DATE, 1), arithmetic.add(DATE, ONE_DAY_MILLIS));
-	}
 
-	@Test(expected = IllegalArgumentException.class)
-	public void testAdd_IllegalType() {
-		arithmetic.add(DATE, new File("test"));
-	}
+  private static final Date DATE = TimeUtil.date(2009, 9, 13);
+  private static final Time TIME = TimeUtil.time(17, 36, 37, 389);
+  private static final Date DATETIME = TimeUtil.date(2009, 9, 13, 17, 36, 37, 389);
+  private static final long ONE_DAY_MILLIS = 24L * 3600 * 1000;
 
-	@Test
-	public void testSubtract() {
-		assertEquals(DATE, arithmetic.subtract(DATETIME, TIME));
-	}
+  /**
+   * The Arithmetic.
+   */
+  final DateArithmetic arithmetic = new DateArithmetic();
 
-	@Test(expected = IllegalArgumentException.class)
-	public void testSubtract_IllegalType() {
-		arithmetic.subtract(DATE, new File("test"));
-	}
+  /**
+   * Test get base type.
+   */
+  @Test
+  public void testGetBaseType() {
+    assertEquals(Date.class, arithmetic.getBaseType());
+  }
 
-	@Test(expected = UnsupportedOperationException.class)
-	public void testMultiply() {
-		arithmetic.multiply(DATE, TIME);
-	}
+  /**
+   * Test add.
+   */
+  @Test
+  public void testAdd() {
+    assertEquals(DATETIME, arithmetic.add(DATE, TIME));
+    assertEquals(TimeUtil.add(DATE, Calendar.DATE, 1), arithmetic.add(DATE, ONE_DAY_MILLIS));
+  }
 
-	@Test(expected = UnsupportedOperationException.class)
-	public void testDivide() {
-		arithmetic.divide(DATE, TIME);
-	}
+  /**
+   * Test add illegal type.
+   */
+  @Test(expected = IllegalArgumentException.class)
+  public void testAdd_IllegalType() {
+    arithmetic.add(DATE, new File("test"));
+  }
+
+  /**
+   * Test subtract.
+   */
+  @Test
+  public void testSubtract() {
+    assertEquals(DATE, arithmetic.subtract(DATETIME, TIME));
+  }
+
+  /**
+   * Test subtract illegal type.
+   */
+  @Test(expected = IllegalArgumentException.class)
+  public void testSubtract_IllegalType() {
+    arithmetic.subtract(DATE, new File("test"));
+  }
+
+  /**
+   * Test multiply.
+   */
+  @Test(expected = UnsupportedOperationException.class)
+  public void testMultiply() {
+    arithmetic.multiply(DATE, TIME);
+  }
+
+  /**
+   * Test divide.
+   */
+  @Test(expected = UnsupportedOperationException.class)
+  public void testDivide() {
+    arithmetic.divide(DATE, TIME);
+  }
 
 }

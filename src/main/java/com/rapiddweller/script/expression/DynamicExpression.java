@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.rapiddweller.script.expression;
 
 import com.rapiddweller.script.Expression;
@@ -19,14 +20,16 @@ import com.rapiddweller.script.Expression;
 /**
  * Non-constant {@link Expression}.<br/><br/>
  * Created: 15.03.2010 12:05:32
- * @since 0.6.0
+ *
+ * @param <E> the type parameter
  * @author Volker Bergmann
+ * @since 0.6.0
  */
 public abstract class DynamicExpression<E> implements Expression<E> {
 
-	@Override
-	public boolean isConstant() {
-	    return false;
-    }
+  @Override
+  public boolean isConstant() {
+    return false;
+  }
 
 }

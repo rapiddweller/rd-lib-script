@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.rapiddweller.script.expression;
 
 import com.rapiddweller.common.ArrayUtil;
@@ -22,48 +23,61 @@ import com.rapiddweller.script.Expression;
  * {@link Expression} implementation which assembles other expression that evaluate to arrays
  * and joins their results to a single array.<br/><br/>
  * Created: 11.09.2010 07:57:38
- * @since 0.5.4
+ *
+ * @param <E> the type parameter
  * @author Volker Bergmann
+ * @since 0.5.4
  */
 public class ArrayJoinExpression<E> extends CompositeExpression<E[], E[]> {
-	
-	private Class<E> componentType;
 
-    @SafeVarargs
-    public ArrayJoinExpression(Class<E> componentType, Expression<E[]>... terms) {
-	    super(terms);
-	    this.componentType = componentType;
-    }
+  private Class<E> componentType;
 
-    @Override
-	@SuppressWarnings("unchecked")
-    public E[] evaluate(Context context) {
-    	E[][] arrays = (E[][]) ExpressionUtil.evaluateAll(terms, context);
-    	int totalLength = totalLength(arrays);
-    	E[] result = ArrayUtil.newInstance(componentType(arrays), totalLength);
-    	int resultIndex = 0;
-    	for (E[] array : arrays)
-			for (E e : array) result[resultIndex] = e;
-    	return result;
-    }
+  /**
+   * Instantiates a new Array join expression.
+   *
+   * @param componentType the component type
+   * @param terms         the terms
+   */
+  @SafeVarargs
+  public ArrayJoinExpression(Class<E> componentType, Expression<E[]>... terms) {
+    super(terms);
+    this.componentType = componentType;
+  }
 
-	@SuppressWarnings("unchecked")
-    private Class<E> componentType(E[][] arrays) {
-		if (this.componentType == null) {
-		    for (E[] array : arrays)
-		    	if (array != null) {
-		    		this.componentType = (Class<E>) array.getClass().getComponentType();
-		    		break;
-		    	}
-		}
-		return (this.componentType != null ? this.componentType : (Class<E>) Object.class);
+  @Override
+  @SuppressWarnings("unchecked")
+  public E[] evaluate(Context context) {
+    E[][] arrays = (E[][]) ExpressionUtil.evaluateAll(terms, context);
+    int totalLength = totalLength(arrays);
+    E[] result = ArrayUtil.newInstance(componentType(arrays), totalLength);
+    int resultIndex = 0;
+    for (E[] array : arrays) {
+      for (E e : array) {
+        result[resultIndex] = e;
+      }
     }
+    return result;
+  }
 
-	private static <T> int totalLength(T[][] arrays) {
-	    int totalLength = 0;
-    	for (T[] array : arrays)
-    		totalLength += array.length;
-	    return totalLength;
+  @SuppressWarnings("unchecked")
+  private Class<E> componentType(E[][] arrays) {
+    if (this.componentType == null) {
+      for (E[] array : arrays) {
+        if (array != null) {
+          this.componentType = (Class<E>) array.getClass().getComponentType();
+          break;
+        }
+      }
     }
+    return (this.componentType != null ? this.componentType : (Class<E>) Object.class);
+  }
+
+  private static <T> int totalLength(T[][] arrays) {
+    int totalLength = 0;
+    for (T[] array : arrays) {
+      totalLength += array.length;
+    }
+    return totalLength;
+  }
 
 }

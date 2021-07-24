@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.rapiddweller.script.expression;
 
 import com.rapiddweller.common.ArrayFormat;
@@ -22,41 +23,55 @@ import com.rapiddweller.script.Expression;
 import java.util.Comparator;
 
 /**
- * Calculates the maximum value of several arguments. 
+ * Calculates the maximum value of several arguments.
  * <code>null</code> values are ignored <br/><br/>
  * Created: 19.10.2009 01:31:42
- * @since 0.5.0
+ *
+ * @param <E> the type parameter
  * @author Volker Bergmann
+ * @since 0.5.0
  */
-public class MaxExpression<E> extends CompositeExpression<E,E> {
+public class MaxExpression<E> extends CompositeExpression<E, E> {
 
-	private final Comparator<E> comparator;
+  private final Comparator<E> comparator;
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-    public MaxExpression(Expression<E>... terms) {
-	    this(new ComparableComparator(), terms);
+  /**
+   * Instantiates a new Max expression.
+   *
+   * @param terms the terms
+   */
+  @SuppressWarnings({"unchecked", "rawtypes"})
+  public MaxExpression(Expression<E>... terms) {
+    this(new ComparableComparator(), terms);
+  }
+
+  /**
+   * Instantiates a new Max expression.
+   *
+   * @param comparator the comparator
+   * @param terms      the terms
+   */
+  @SafeVarargs
+  public MaxExpression(Comparator<E> comparator, Expression<E>... terms) {
+    super("", terms);
+    this.comparator = comparator;
+  }
+
+  @Override
+  public E evaluate(Context context) {
+    E max = terms[0].evaluate(context);
+    for (int i = 1; i < terms.length; i++) {
+      E tmp = terms[i].evaluate(context);
+      if (comparator.compare(tmp, max) > 0) {
+        max = tmp;
+      }
     }
+    return max;
+  }
 
-	@SafeVarargs
-    public MaxExpression(Comparator<E> comparator, Expression<E>... terms) {
-	    super("", terms);
-	    this.comparator = comparator;
-    }
+  @Override
+  public String toString() {
+    return "max(" + ArrayFormat.format(terms) + ')';
+  }
 
-    @Override
-	public E evaluate(Context context) {
-    	E max = terms[0].evaluate(context);
-	    for (int i = 1; i < terms.length; i++) {
-	    	E tmp = terms[i].evaluate(context);
-	    	if (comparator.compare(tmp, max) > 0)
-	    		max = tmp;
-	    }
-	    return max;
-    }
-
-    @Override
-    public String toString() {
-        return "max(" + ArrayFormat.format(terms) + ')';
-    }
-    
 }

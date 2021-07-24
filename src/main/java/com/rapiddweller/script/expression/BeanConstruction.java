@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.rapiddweller.script.expression;
 
 import com.rapiddweller.common.BeanUtil;
@@ -22,42 +23,57 @@ import com.rapiddweller.script.Assignment;
 import com.rapiddweller.script.Expression;
 
 /**
- * {@link Expression} implementation that instantiates a JavaBean by default constructor and 
+ * {@link Expression} implementation that instantiates a JavaBean by default constructor and
  * calls its property setters for initializing state.<br/>
  * <br/>
  * Created at 06.10.2009 11:48:59
- * @since 0.6.0
+ *
+ * @param <E> the type parameter
  * @author Volker Bergmann
+ * @since 0.6.0
  */
-
 public class BeanConstruction<E> extends DynamicExpression<E> {
-	
-	private final Expression<E> instantiation;
-	private final Assignment[] assignments;
 
-    public BeanConstruction(String beanClassName, Assignment[] assignments) {
-	    this(new DefaultConstruction<>(beanClassName), assignments);
-    }
+  private final Expression<E> instantiation;
+  private final Assignment[] assignments;
 
-    public BeanConstruction(Expression<E> instantiation, Assignment[] assignments) {
-	    this.instantiation = instantiation;
-	    this.assignments = assignments;
-    }
+  /**
+   * Instantiates a new Bean construction.
+   *
+   * @param beanClassName the bean class name
+   * @param assignments   the assignments
+   */
+  public BeanConstruction(String beanClassName, Assignment[] assignments) {
+    this(new DefaultConstruction<>(beanClassName), assignments);
+  }
 
-	@Override
-	public E evaluate(Context context) {
-	    E bean = instantiation.evaluate(context);
-	    for (Assignment assignment : assignments) {
-	    	String name = assignment.getName();
-	    	Object value = assignment.getExpression().evaluate(context);
-	    	if (BeanUtil.hasProperty(bean.getClass(), name))
-	    		BeanUtil.setPropertyValue(bean, name, value, false);
-	    	else
-	    		AnyMutator.setValue(bean, name, value, true, true);
-	    }
-	    if (bean instanceof ContextAware)
-	    	((ContextAware) bean).setContext(context);
-		return bean;
+  /**
+   * Instantiates a new Bean construction.
+   *
+   * @param instantiation the instantiation
+   * @param assignments   the assignments
+   */
+  public BeanConstruction(Expression<E> instantiation, Assignment[] assignments) {
+    this.instantiation = instantiation;
+    this.assignments = assignments;
+  }
+
+  @Override
+  public E evaluate(Context context) {
+    E bean = instantiation.evaluate(context);
+    for (Assignment assignment : assignments) {
+      String name = assignment.getName();
+      Object value = assignment.getExpression().evaluate(context);
+      if (BeanUtil.hasProperty(bean.getClass(), name)) {
+        BeanUtil.setPropertyValue(bean, name, value, false);
+      } else {
+        AnyMutator.setValue(bean, name, value, true, true);
+      }
     }
+    if (bean instanceof ContextAware) {
+      ((ContextAware) bean).setContext(context);
+    }
+    return bean;
+  }
 
 }

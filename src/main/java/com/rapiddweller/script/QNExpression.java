@@ -12,9 +12,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.rapiddweller.script;
 
-import com.rapiddweller.common.*;
+import com.rapiddweller.common.ArrayFormat;
+import com.rapiddweller.common.ArrayUtil;
+import com.rapiddweller.common.ConfigurationError;
+import com.rapiddweller.common.Context;
+import com.rapiddweller.common.ObjectNotFoundException;
 import com.rapiddweller.common.accessor.FeatureAccessor;
 import com.rapiddweller.common.bean.DefaultClassProvider;
 import com.rapiddweller.script.expression.DynamicExpression;
@@ -22,76 +27,96 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 /**
- * {@link Expression} implementation that evaluates a qualified name as attributes of an object reference or 
+ * {@link Expression} implementation that evaluates a qualified name as attributes of an object reference or
  * static fields of a Java class.<br/>
  * <br/>
  * Created at 08.10.2009 07:18:53
- * @since 0.6.0
+ *
  * @author Volker Bergmann
+ * @since 0.6.0
  */
-
 public class QNExpression extends DynamicExpression<Object> {
 
-	private static final Logger LOGGER = LogManager.getLogger(DatabeneScriptParser.class);
-	
-	private final String[] qnParts;
-	
-	public QNExpression(String[] qnParts) {
-	    this.qnParts = qnParts;
-    }
+  private static final Logger LOGGER = LogManager.getLogger(DatabeneScriptParser.class);
 
-    @Override
-	public Object evaluate(Context context) {
-    	try {
-    		return resolveNamePart(qnParts, qnParts.length, context);
-    	} catch (ObjectNotFoundException e) {
-    		throw new ObjectNotFoundException("Unable to resolve " + ArrayFormat.format(".", qnParts));
-    	}
-    }
+  private final String[] qnParts;
 
-    public static Object resolveNamePart(String[] qnParts, int qnLength, Context context) {
-    	String objectOrClassName = ArrayFormat.formatPart(".", 0, qnLength, qnParts);
-    	if (context.contains(objectOrClassName)) {
-    		return context.get(objectOrClassName);
-    	} else {
-    		try {
-    			return DefaultClassProvider.resolveByObjectOrDefaultInstance(objectOrClassName, context);
-    		} catch (ConfigurationError e) {
-    			// ignore errors signaling that a class was not found
-    		}
-			LOGGER.debug("Class not found: {}", objectOrClassName);
-			if (qnLength > 1) {
-    			return readField(qnParts, qnLength - 1, qnParts[qnLength - 1], context);
-			} else
-				throw new ObjectNotFoundException("'" + objectOrClassName + "' is not defined");
-    	}
-    }
+  /**
+   * Instantiates a new Qn expression.
+   *
+   * @param qnParts the qn parts
+   */
+  public QNExpression(String[] qnParts) {
+    this.qnParts = qnParts;
+  }
 
-    private static Object readField(String[] qnParts, int qnLength, String fieldName, Context context) {
-    	return FeatureAccessor.getValue(resolveNamePart(qnParts, qnLength, context), fieldName);
+  @Override
+  public Object evaluate(Context context) {
+    try {
+      return resolveNamePart(qnParts, qnParts.length, context);
+    } catch (ObjectNotFoundException e) {
+      throw new ObjectNotFoundException("Unable to resolve " + ArrayFormat.format(".", qnParts));
     }
+  }
 
-	public BeanSpec resolve(Context context) {
-        String qn = ArrayFormat.format(".", qnParts);
-        if (context.contains(qn)) {
-        	return BeanSpec.createReference(context.get(qn));
-        } else {
-    		try {
-    			Class<?> bean = DefaultClassProvider.resolveByObjectOrDefaultInstance(qn, context);
-				return BeanSpec.createConstruction(bean);
-    		} catch (ConfigurationError e) {
-    			// ignore this
-    		}
-			LOGGER.debug("Class not found: {}", qn);
-	    	Object bean = readField(qnParts, qnParts.length - 1, ArrayUtil.lastElementOf(qnParts), context);
-			return BeanSpec.createReference(bean);
-        }
-	}
-    
-    @Override
-    public String toString() {
-        return ArrayFormat.format(".", qnParts);
+  /**
+   * Resolve name part object.
+   *
+   * @param qnParts  the qn parts
+   * @param qnLength the qn length
+   * @param context  the context
+   * @return the object
+   */
+  public static Object resolveNamePart(String[] qnParts, int qnLength, Context context) {
+    String objectOrClassName = ArrayFormat.formatPart(".", 0, qnLength, qnParts);
+    if (context.contains(objectOrClassName)) {
+      return context.get(objectOrClassName);
+    } else {
+      try {
+        return DefaultClassProvider.resolveByObjectOrDefaultInstance(objectOrClassName, context);
+      } catch (ConfigurationError e) {
+        // ignore errors signaling that a class was not found
+      }
+      LOGGER.debug("Class not found: {}", objectOrClassName);
+      if (qnLength > 1) {
+        return readField(qnParts, qnLength - 1, qnParts[qnLength - 1], context);
+      } else {
+        throw new ObjectNotFoundException("'" + objectOrClassName + "' is not defined");
+      }
     }
+  }
+
+  private static Object readField(String[] qnParts, int qnLength, String fieldName, Context context) {
+    return FeatureAccessor.getValue(resolveNamePart(qnParts, qnLength, context), fieldName);
+  }
+
+  /**
+   * Resolve bean spec.
+   *
+   * @param context the context
+   * @return the bean spec
+   */
+  public BeanSpec resolve(Context context) {
+    String qn = ArrayFormat.format(".", qnParts);
+    if (context.contains(qn)) {
+      return BeanSpec.createReference(context.get(qn));
+    } else {
+      try {
+        Class<?> bean = DefaultClassProvider.resolveByObjectOrDefaultInstance(qn, context);
+        return BeanSpec.createConstruction(bean);
+      } catch (ConfigurationError e) {
+        // ignore this
+      }
+      LOGGER.debug("Class not found: {}", qn);
+      Object bean = readField(qnParts, qnParts.length - 1, ArrayUtil.lastElementOf(qnParts), context);
+      return BeanSpec.createReference(bean);
+    }
+  }
+
+  @Override
+  public String toString() {
+    return ArrayFormat.format(".", qnParts);
+  }
 
 }
 

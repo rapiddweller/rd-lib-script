@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.rapiddweller.script;
 
 import com.rapiddweller.common.Weighted;
@@ -21,65 +22,88 @@ import com.rapiddweller.common.Weighted;
  * The sample value may have an additional weight information.<br/>
  * <br/>
  * Created: 07.06.2006 19:05:13
- * @since 0.1
+ *
+ * @param <E> the type parameter
  * @author Volker Bergmann
+ * @since 0.1
  */
 public class WeightedSample<E> implements Weighted {
 
-    /** The value of the sample */
-    private E value;
+  /**
+   * The value of the sample
+   */
+  private E value;
 
-    /** The optional weight of the sample */
-    private double weight;
+  /**
+   * The optional weight of the sample
+   */
+  private double weight;
 
-    /** Initializes the Sample to the specified value and weight */
-    public WeightedSample(E value, double weight) {
-        this.weight = weight;
-        this.value = value;
-    }
+  /**
+   * Initializes the Sample to the specified value and weight
+   *
+   * @param value  the value
+   * @param weight the weight
+   */
+  public WeightedSample(E value, double weight) {
+    this.weight = weight;
+    this.value = value;
+  }
 
-    // properties ------------------------------------------------------------------------------------------------------
+  // properties ------------------------------------------------------------------------------------------------------
 
-    /**
-     * Returns the value property
-     * @see #weight
-     */
-    public E getValue() {
-        return value;
-    }
+  /**
+   * Returns the value property
+   *
+   * @return the value
+   * @see #weight #weight#weight#weight
+   */
+  public E getValue() {
+    return value;
+  }
 
-    /**
-     * Sets the weight property
-     * @see #weight
-     */
-    public void setValue(E value) {
-        this.value = value;
-    }
+  /**
+   * Sets the weight property
+   *
+   * @param value the value
+   * @see #weight #weight#weight#weight
+   */
+  public void setValue(E value) {
+    this.value = value;
+  }
 
-    /**
-     * Returns the weight property value
-     * @see #weight
-     */
-    @Override
-	public double getWeight() {
-        return weight;
-    }
+  /**
+   * Returns the weight property value
+   *
+   * @see #weight
+   */
+  @Override
+  public double getWeight() {
+    return weight;
+  }
 
-    /**
-     * Sets the weight property value
-     * @see #weight
-     */
-    public void setWeight(double weight) {
-        this.weight = weight;
-    }
+  /**
+   * Sets the weight property value
+   *
+   * @param weight the weight
+   * @see #weight #weight#weight#weight
+   */
+  public void setWeight(double weight) {
+    this.weight = weight;
+  }
 
-	public void addWeight(double weightDelta) {
-		this.weight += weightDelta;
-	}
-	
-    @Override
-    public String toString() {
-        return value + "(" + weight + ')';
-    }
+  /**
+   * Add weight.
+   *
+   * @param weightDelta the weight delta
+   */
+  public void addWeight(double weightDelta) {
+    this.weight += weightDelta;
+  }
+
+  @Override
+  public String toString() {
+    return value + "(" + weight + ')';
+  }
 
 }

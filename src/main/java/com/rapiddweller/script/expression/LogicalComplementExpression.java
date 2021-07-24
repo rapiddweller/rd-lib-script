@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.rapiddweller.script.expression;
 
 import com.rapiddweller.common.Context;
@@ -21,22 +22,34 @@ import com.rapiddweller.script.Expression;
 /**
  * {@link Expression} that evaluates to the logical complement of another expression's result.<br/><br/>
  * Created: 24.11.2010 14:14:21
- * @since 0.5.8
+ *
  * @author Volker Bergmann
+ * @since 0.5.8
  */
 public class LogicalComplementExpression extends UnaryExpression<Boolean> {
-	
-	public LogicalComplementExpression(Expression<?> term) {
-		this("!", term);
-	}
 
-	public LogicalComplementExpression(String symbol, Expression<?> term) {
-		super(symbol, term);
-	}
+  /**
+   * Instantiates a new Logical complement expression.
+   *
+   * @param term the term
+   */
+  public LogicalComplementExpression(Expression<?> term) {
+    this("!", term);
+  }
 
-	@Override
-	public Boolean evaluate(Context context) {
-		return !AnyConverter.convert(term.evaluate(context), Boolean.class);
-	}
-	
+  /**
+   * Instantiates a new Logical complement expression.
+   *
+   * @param symbol the symbol
+   * @param term   the term
+   */
+  public LogicalComplementExpression(String symbol, Expression<?> term) {
+    super(symbol, term);
+  }
+
+  @Override
+  public Boolean evaluate(Context context) {
+    return !AnyConverter.convert(term.evaluate(context), Boolean.class);
+  }
+
 }

@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.rapiddweller.script.expression;
 
 import com.rapiddweller.script.DefaultScriptContext;
@@ -26,34 +27,44 @@ import static org.junit.Assert.assertEquals;
 /**
  * Tests the {@link QNInvocationExpression}.<br/><br/>
  * Created: 18.05.2011 16:50:14
- * @since 0.6.6
+ *
  * @author Volker Bergmann
+ * @since 0.6.6
  */
 public class QNInvocationExpressionTest {
 
-	private ScriptContext context;
-	
-	@Before
-	public void setup() {
-		context = new DefaultScriptContext();
-	}
+  private ScriptContext context;
 
-	@Test
-	public void testClass() {
-		check("Hello Alice", "com.rapiddweller.script.ScriptTestUtil.sayHello", "Alice");
-	}
+  /**
+   * Sets .
+   */
+  @Before
+  public void setup() {
+    context = new DefaultScriptContext();
+  }
 
-	@Test
-	public void testImportedClass() {
-		context.importClass("com.rapiddweller.script.*");
-		check("Hello Alice", "ScriptTestUtil.sayHello", "Alice");
-	}
+  /**
+   * Test class.
+   */
+  @Test
+  public void testClass() {
+    check("Hello Alice", "com.rapiddweller.script.ScriptTestUtil.sayHello", "Alice");
+  }
 
-	private void check(Object expected, String qn, String arg) {
-		QNInvocationExpression ex = new QNInvocationExpression(
-				qn.split("\\."), new Expression<?>[] { ExpressionUtil.constant(arg) });
-		Object actual = ex.evaluate(context);
-		assertEquals(expected, actual);
-	}
+  /**
+   * Test imported class.
+   */
+  @Test
+  public void testImportedClass() {
+    context.importClass("com.rapiddweller.script.*");
+    check("Hello Alice", "ScriptTestUtil.sayHello", "Alice");
+  }
+
+  private void check(Object expected, String qn, String arg) {
+    QNInvocationExpression ex = new QNInvocationExpression(
+        qn.split("\\."), new Expression<?>[] {ExpressionUtil.constant(arg)});
+    Object actual = ex.evaluate(context);
+    assertEquals(expected, actual);
+  }
 
 }

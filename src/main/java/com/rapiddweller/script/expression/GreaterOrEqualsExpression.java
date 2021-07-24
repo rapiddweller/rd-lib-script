@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.rapiddweller.script.expression;
 
 import com.rapiddweller.common.Context;
@@ -22,19 +23,26 @@ import com.rapiddweller.script.math.ArithmeticEngine;
  * Boolean {@link Expression} that evaluates
  * if term1 is greater than or equal to term2.<br/><br/>
  * Created: 24.11.2010 14:23:56
- * @since 0.5.8
+ *
  * @author Volker Bergmann
+ * @since 0.5.8
  */
 public class GreaterOrEqualsExpression extends BinaryExpression<Boolean> {
-	
-	public GreaterOrEqualsExpression(Expression<?> term1, Expression<?> term2) {
-		super(">=", term1, term2);
-	}
 
-	@Override
-	public Boolean evaluate(Context context) {
-	    ArithmeticEngine engine = ArithmeticEngine.defaultInstance();
-		return engine.greaterOrEquals(term1.evaluate(context), term2.evaluate(context));
-	}
-	
+  /**
+   * Instantiates a new Greater or equals expression.
+   *
+   * @param term1 the term 1
+   * @param term2 the term 2
+   */
+  public GreaterOrEqualsExpression(Expression<?> term1, Expression<?> term2) {
+    super(">=", term1, term2);
+  }
+
+  @Override
+  public Boolean evaluate(Context context) {
+    ArithmeticEngine engine = ArithmeticEngine.defaultInstance();
+    return engine.greaterOrEquals(term1.evaluate(context), term2.evaluate(context));
+  }
+
 }

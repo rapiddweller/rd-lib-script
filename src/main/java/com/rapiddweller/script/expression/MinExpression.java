@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.rapiddweller.script.expression;
 
 import com.rapiddweller.common.ArrayFormat;
@@ -25,41 +26,54 @@ import java.util.Comparator;
  * {@link Expression} implementation that calculates the minimum of several values.<br/>
  * <br/>
  * Created at 27.07.2009 09:06:36
- * @since 0.5.0
+ *
+ * @param <E> the type parameter
  * @author Volker Bergmann
+ * @since 0.5.0
  */
+public class MinExpression<E> extends CompositeExpression<E, E> {
 
-public class MinExpression<E> extends CompositeExpression<E,E> {
+  private final Comparator<E> comparator;
 
-	private final Comparator<E> comparator;
+  /**
+   * Instantiates a new Min expression.
+   *
+   * @param terms the terms
+   */
+  @SuppressWarnings({"unchecked", "rawtypes"})
+  public MinExpression(Expression<E>... terms) {
+    this(new ComparableComparator(), terms);
+  }
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-    public MinExpression(Expression<E>... terms) {
-	    this(new ComparableComparator(), terms);
+  /**
+   * Instantiates a new Min expression.
+   *
+   * @param comparator the comparator
+   * @param terms      the terms
+   */
+  @SafeVarargs
+  public MinExpression(Comparator<E> comparator, Expression<E>... terms) {
+    super("", terms);
+    this.comparator = comparator;
+  }
+
+  @Override
+  public E evaluate(Context context) {
+    E min = terms[0].evaluate(context);
+    for (int i = 1; i < terms.length; i++) {
+      E tmp = terms[i].evaluate(context);
+      if (min == null) {
+        min = tmp;
+      } else if (tmp != null && comparator.compare(tmp, min) < 0) {
+        min = tmp;
+      }
     }
+    return min;
+  }
 
-	@SafeVarargs
-    public MinExpression(Comparator<E> comparator, Expression<E>... terms) {
-	    super("", terms);
-	    this.comparator = comparator;
-    }
+  @Override
+  public String toString() {
+    return "min(" + ArrayFormat.format(terms) + ')';
+  }
 
-    @Override
-	public E evaluate(Context context) {
-    	E min = terms[0].evaluate(context);
-	    for (int i = 1; i < terms.length; i++) {
-	    	E tmp = terms[i].evaluate(context);
-	    	if (min == null)
-	    		min = tmp;
-	    	else if (tmp != null && comparator.compare(tmp, min) < 0)
-	    		min = tmp;
-	    }
-	    return min;
-    }
-	
-    @Override
-    public String toString() {
-        return "min(" + ArrayFormat.format(terms) + ')';
-    }
-    
 }

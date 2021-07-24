@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.rapiddweller.script.expression;
 
 import com.rapiddweller.common.Context;
@@ -22,19 +23,27 @@ import java.util.Collection;
 /**
  * Boolean {@link Expression} which tells if a value is contained in a given collection.<br/><br/>
  * Created: 08.06.2011 10:15:02
- * @since 0.5.8
+ *
  * @author Volker Bergmann
+ * @since 0.5.8
  */
 public class ValueCollectionContainsExpression extends BinaryExpression<Boolean> {
 
-	public ValueCollectionContainsExpression(String symbol, Expression<?> term1, Expression<? extends Collection<?>> term2) {
-		super(symbol, term1, term2);
-	}
+  /**
+   * Instantiates a new Value collection contains expression.
+   *
+   * @param symbol the symbol
+   * @param term1  the term 1
+   * @param term2  the term 2
+   */
+  public ValueCollectionContainsExpression(String symbol, Expression<?> term1, Expression<? extends Collection<?>> term2) {
+    super(symbol, term1, term2);
+  }
 
-	@Override
-	public Boolean evaluate(Context context) {
-		Collection<?> collection = (Collection<?>) term2.evaluate(context);
-		return collection.contains(term1.evaluate(context));
-	}
-	
+  @Override
+  public Boolean evaluate(Context context) {
+    Collection<?> collection = (Collection<?>) term2.evaluate(context);
+    return collection.contains(term1.evaluate(context));
+  }
+
 }

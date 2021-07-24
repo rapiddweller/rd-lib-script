@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.rapiddweller.script.expression;
 
 import com.rapiddweller.common.BeanUtil;
@@ -20,18 +21,25 @@ import com.rapiddweller.common.Context;
 /**
  * Instantiates a class by default constructor.<br/><br/>
  * Created: 25.10.2009 08:32:58
- * @since 0.6.0
+ *
+ * @param <E> the type parameter
  * @author Volker Bergmann
+ * @since 0.6.0
  */
 public class DefaultConstruction<E> extends Construction<E> {
 
-	public DefaultConstruction(String className) {
-	    super(className);
-    }
+  /**
+   * Instantiates a new Default construction.
+   *
+   * @param className the class name
+   */
+  public DefaultConstruction(String className) {
+    super(className);
+  }
 
-	@Override
-	public E evaluate(Context context) {
-	    return BeanUtil.newInstance(getType(context));
-    }
+  @Override
+  public E evaluate(Context context) {
+    return BeanUtil.newInstance(getType(context));
+  }
 
 }

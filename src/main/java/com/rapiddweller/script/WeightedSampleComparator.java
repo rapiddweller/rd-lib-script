@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.rapiddweller.script;
 
 import com.rapiddweller.common.comparator.DoubleComparator;
@@ -21,14 +22,16 @@ import java.util.Comparator;
 /**
  * {@link Comparator} which compares {@link WeightedSample} objects by their 'weight' property value.<br/><br/>
  * Created: 11.11.2011 17:01:10
- * @since 0.7.3
+ *
+ * @param <E> the type parameter
  * @author Volker Bergmann
+ * @since 0.7.3
  */
-public class WeightedSampleComparator<E> implements Comparator<WeightedSample<E>>{
+public class WeightedSampleComparator<E> implements Comparator<WeightedSample<E>> {
 
-	@Override
-	public int compare(WeightedSample<E> s1, WeightedSample<E> s2) {
-		return DoubleComparator.compare(s1.getWeight(), s2.getWeight());
-	}
+  @Override
+  public int compare(WeightedSample<E> s1, WeightedSample<E> s2) {
+    return DoubleComparator.compare(s1.getWeight(), s2.getWeight());
+  }
 
 }

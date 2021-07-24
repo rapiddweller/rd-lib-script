@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.rapiddweller.script;
 
 import com.rapiddweller.common.comparator.ReverseComparator;
@@ -22,16 +23,25 @@ import java.util.List;
 /**
  * Provides utility methods for handling weighted data.<br/><br/>
  * Created: 11.11.2011 17:04:17
- * @since 0.7.3
+ *
  * @author Volker Bergmann
+ * @since 0.7.3
  */
 public class WeightUtil {
 
-	public static <T> void sortByWeight(List<WeightedSample<T>> list, boolean ascending) {
-		Comparator<WeightedSample<T>> comparator = new WeightedSampleComparator<>();
-		if (!ascending)
-			comparator = new ReverseComparator<>(comparator);
-		list.sort(comparator);
-	}
-	
+  /**
+   * Sort by weight.
+   *
+   * @param <T>       the type parameter
+   * @param list      the list
+   * @param ascending the ascending
+   */
+  public static <T> void sortByWeight(List<WeightedSample<T>> list, boolean ascending) {
+    Comparator<WeightedSample<T>> comparator = new WeightedSampleComparator<>();
+    if (!ascending) {
+      comparator = new ReverseComparator<>(comparator);
+    }
+    list.sort(comparator);
+  }
+
 }

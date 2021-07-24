@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.rapiddweller.script.expression;
 
 import com.rapiddweller.common.Context;
@@ -19,37 +20,45 @@ import com.rapiddweller.common.converter.AnyConverter;
 import com.rapiddweller.script.Expression;
 
 /**
- * {@link Expression} implementation that evaluates a boolean (condition) expression 
+ * {@link Expression} implementation that evaluates a boolean (condition) expression
  * and, depending if the result was true or false, evaluates the first or second expression delegate.
  * The semantic is like the Java expression <code>(condition ? alt1 : alt2)</code>.<br/>
  * <br/>
  * Created at 06.10.2009 16:04:15
- * @since 0.6.0
+ *
+ * @param <E> the type parameter
  * @author Volker Bergmann
+ * @since 0.6.0
  */
-
 public class ConditionalExpression<E> extends DynamicExpression<E> {
-	
-	private final Expression<Boolean> condition;
-	private final Expression<? extends E> alt1;
-	private final Expression<? extends E> alt2;
-	
-    public ConditionalExpression(Expression<Boolean> condition, 
-    		Expression<? extends E> alt1, Expression<? extends E> alt2) {
-	    this.condition = condition;
-	    this.alt1 = alt1;
-	    this.alt2 = alt2;
-    }
 
-	@Override
-	public E evaluate(Context context) {
-        boolean cond = AnyConverter.convert(condition.evaluate(context), Boolean.class);
-        return (cond ? alt1 : alt2).evaluate(context);
-    }
+  private final Expression<Boolean> condition;
+  private final Expression<? extends E> alt1;
+  private final Expression<? extends E> alt2;
 
-	@Override
-	public String toString() {
-	    return "(" + condition + " ? " + alt1 + " : " + alt2 + ")";
-	}
-	
+  /**
+   * Instantiates a new Conditional expression.
+   *
+   * @param condition the condition
+   * @param alt1      the alt 1
+   * @param alt2      the alt 2
+   */
+  public ConditionalExpression(Expression<Boolean> condition,
+                               Expression<? extends E> alt1, Expression<? extends E> alt2) {
+    this.condition = condition;
+    this.alt1 = alt1;
+    this.alt2 = alt2;
+  }
+
+  @Override
+  public E evaluate(Context context) {
+    boolean cond = AnyConverter.convert(condition.evaluate(context), Boolean.class);
+    return (cond ? alt1 : alt2).evaluate(context);
+  }
+
+  @Override
+  public String toString() {
+    return "(" + condition + " ? " + alt1 + " : " + alt2 + ")";
+  }
+
 }

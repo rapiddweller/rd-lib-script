@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.rapiddweller.script.expression;
 
 import com.rapiddweller.common.Context;
@@ -20,22 +21,30 @@ import com.rapiddweller.script.Expression;
 /**
  * String {@link Expression} that concatenates the output of other String Expressions.<br/><br/>
  * Created: 07.06.2011 22:03:08
- * @since 0.5.8
+ *
  * @author Volker Bergmann
+ * @since 0.5.8
  */
 public class ConcatExpression extends CompositeExpression<Object, String> {
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public ConcatExpression(String symbol, Expression... terms) {
-		super(symbol, terms);
-	}
+  /**
+   * Instantiates a new Concat expression.
+   *
+   * @param symbol the symbol
+   * @param terms  the terms
+   */
+  @SuppressWarnings({"rawtypes", "unchecked"})
+  public ConcatExpression(String symbol, Expression... terms) {
+    super(symbol, terms);
+  }
 
-	@Override
-	public String evaluate(Context context) {
-		StringBuilder result = new StringBuilder(String.valueOf(terms[0].evaluate(context)));
-		for (int i = 1; i < terms.length; i++)
-			result.append(terms[i].evaluate(context));
-		return result.toString();
-	}
+  @Override
+  public String evaluate(Context context) {
+    StringBuilder result = new StringBuilder(String.valueOf(terms[0].evaluate(context)));
+    for (int i = 1; i < terms.length; i++) {
+      result.append(terms[i].evaluate(context));
+    }
+    return result.toString();
+  }
 
 }

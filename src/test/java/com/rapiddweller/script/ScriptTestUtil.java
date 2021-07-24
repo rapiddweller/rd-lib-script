@@ -12,20 +12,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.rapiddweller.script;
 
 /**
  * Helper class for testing.<br/><br/>
  * Created: 18.05.2011 16:18:57
- * @since 0.6.6
+ *
  * @author Volker Bergmann
+ * @since 0.6.6
  */
 public class ScriptTestUtil {
-	
-	public static String pubvar = "pubVarContent";
 
-	public static String sayHello(String arg) {
-		return "Hello " + arg;
-	}
+  /**
+   * The constant pubvar.
+   */
+  public static String pubvar = "pubVarContent";
+
+  /**
+   * Say hello string.
+   *
+   * @param arg the arg
+   * @return the string
+   */
+  public static String sayHello(String arg) {
+    return "Hello " + arg;
+  }
 
 }

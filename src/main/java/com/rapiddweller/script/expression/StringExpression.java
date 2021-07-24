@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.rapiddweller.script.expression;
 
 import com.rapiddweller.common.Context;
@@ -19,25 +20,31 @@ import com.rapiddweller.common.converter.ToStringConverter;
 import com.rapiddweller.script.Expression;
 
 /**
- * Wrapper for an {@link Expression} that converts its result to a {@link String} 
+ * Wrapper for an {@link Expression} that converts its result to a {@link String}
  * using the {@link ToStringConverter}.<br/><br/>
  * Created: 27.10.2009 13:35:29
- * @since 0.5.0
+ *
  * @author Volker Bergmann
+ * @since 0.5.0
  */
 public class StringExpression extends UnaryExpression<String> {
-	
-	private final ToStringConverter converter;
 
-	public StringExpression(Expression<?> term) {
-	    super("(string) ", term);
-	    this.converter = new ToStringConverter(null);
-    }
+  private final ToStringConverter converter;
 
-    @Override
-	public String evaluate(Context context) {
-		Object tmp = term.evaluate(context);
-		return (tmp instanceof String ? (String) tmp : converter.convert(tmp));
-	}
-	
+  /**
+   * Instantiates a new String expression.
+   *
+   * @param term the term
+   */
+  public StringExpression(Expression<?> term) {
+    super("(string) ", term);
+    this.converter = new ToStringConverter(null);
+  }
+
+  @Override
+  public String evaluate(Context context) {
+    Object tmp = term.evaluate(context);
+    return (tmp instanceof String ? (String) tmp : converter.convert(tmp));
+  }
+
 }

@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.rapiddweller.script.expression;
 
 import com.rapiddweller.common.Context;
@@ -21,23 +22,36 @@ import com.rapiddweller.script.math.ArithmeticEngine;
 /**
  * {@link Expression} which calculates the unary minus operation.<br/><br/>
  * Created: 08.06.2011 09:37:40
- * @since 0.5.8
+ *
+ * @param <E> the type parameter
  * @author Volker Bergmann
+ * @since 0.5.8
  */
 public class UnaryMinusExpression<E> extends UnaryExpression<E> {
 
-	public UnaryMinusExpression(Expression<?> term) {
-		this("-", term);
-	}
+  /**
+   * Instantiates a new Unary minus expression.
+   *
+   * @param term the term
+   */
+  public UnaryMinusExpression(Expression<?> term) {
+    this("-", term);
+  }
 
-	public UnaryMinusExpression(String symbol, Expression<?> term) {
-		super(symbol, term);
-	}   
+  /**
+   * Instantiates a new Unary minus expression.
+   *
+   * @param symbol the symbol
+   * @param term   the term
+   */
+  public UnaryMinusExpression(String symbol, Expression<?> term) {
+    super(symbol, term);
+  }
 
-	@Override
-	@SuppressWarnings("unchecked")
-	public E evaluate(Context context) {
-		return (E) ArithmeticEngine.defaultInstance().negate(term.evaluate(context));
-	}
+  @Override
+  @SuppressWarnings("unchecked")
+  public E evaluate(Context context) {
+    return (E) ArithmeticEngine.defaultInstance().negate(term.evaluate(context));
+  }
 
 }

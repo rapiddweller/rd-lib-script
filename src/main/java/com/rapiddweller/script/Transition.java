@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.rapiddweller.script;
 
 import com.rapiddweller.common.NullSafeComparator;
@@ -20,47 +21,65 @@ import com.rapiddweller.common.NullSafeComparator;
  * Represents the transition of one state to another.<br/>
  * <br/>
  * Created at 17.07.2009 08:05:07
- * @since 0.6.0
+ *
  * @author Volker Bergmann
+ * @since 0.6.0
  */
-
 public class Transition {
 
-	private final Object from;
-	private final Object to;
-	
-	public Transition(Object from, Object to) {
-	    this.from = from;
-	    this.to = to;
-    }
+  private final Object from;
+  private final Object to;
 
-	public Object getFrom() {
-    	return from;
-    }
+  /**
+   * Instantiates a new Transition.
+   *
+   * @param from the from
+   * @param to   the to
+   */
+  public Transition(Object from, Object to) {
+    this.from = from;
+    this.to = to;
+  }
 
-	public Object getTo() {
-    	return to;
-    }
+  /**
+   * Gets from.
+   *
+   * @return the from
+   */
+  public Object getFrom() {
+    return from;
+  }
 
-	@Override
-    public int hashCode() {
-	    return from.hashCode() * 31 + to.hashCode();
-    }
+  /**
+   * Gets to.
+   *
+   * @return the to
+   */
+  public Object getTo() {
+    return to;
+  }
 
-    @Override
-    public boolean equals(Object obj) {
-	    if (this == obj)
-		    return true;
-	    if (obj == null || getClass() != obj.getClass())
-		    return false;
-	    Transition that = (Transition) obj;
-	    return NullSafeComparator.equals(this.from, that.from) 
-	    	&& NullSafeComparator.equals(this.to, that.to);
+  @Override
+  public int hashCode() {
+    return from.hashCode() * 31 + to.hashCode();
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj) {
+      return true;
     }
-	
-	@Override
-	public String toString() {
-	    return from + "->" + to;
-	}
+    if (obj == null || getClass() != obj.getClass()) {
+      return false;
+    }
+    Transition that = (Transition) obj;
+    return NullSafeComparator.equals(this.from, that.from)
+        && NullSafeComparator.equals(this.to, that.to);
+  }
+
+  @Override
+  public String toString() {
+    return from + "->" + to;
+  }
 
 }

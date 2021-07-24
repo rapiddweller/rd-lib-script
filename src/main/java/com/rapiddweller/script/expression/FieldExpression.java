@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.rapiddweller.script.expression;
 
 import com.rapiddweller.common.Context;
@@ -22,29 +23,35 @@ import com.rapiddweller.script.Expression;
  * Evaluates an attribute of an object or class.<br/>
  * <br/>
  * Created at 08.10.2009 10:20:10
- * @since 0.6.0
+ *
  * @author Volker Bergmann
+ * @since 0.6.0
  */
-
 public class FieldExpression extends DynamicExpression<Object> {
-	
-	private final Expression<?> targetEx;
-	private final String featureName;
 
-    public FieldExpression(Expression<?> targetEx, String featureName) {
-    	this.targetEx = targetEx;
-    	this.featureName = featureName;
-    }
+  private final Expression<?> targetEx;
+  private final String featureName;
 
-    @Override
-	public Object evaluate(Context context) {
-	    Object target = targetEx.evaluate(context);
-	    return FeatureAccessor.getValue(target, featureName);
-    }
+  /**
+   * Instantiates a new Field expression.
+   *
+   * @param targetEx    the target ex
+   * @param featureName the feature name
+   */
+  public FieldExpression(Expression<?> targetEx, String featureName) {
+    this.targetEx = targetEx;
+    this.featureName = featureName;
+  }
 
-    @Override
-    public String toString() {
-    	return targetEx + "." + featureName;
-    }
-    
+  @Override
+  public Object evaluate(Context context) {
+    Object target = targetEx.evaluate(context);
+    return FeatureAccessor.getValue(target, featureName);
+  }
+
+  @Override
+  public String toString() {
+    return targetEx + "." + featureName;
+  }
+
 }

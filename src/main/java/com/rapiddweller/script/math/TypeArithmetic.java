@@ -12,34 +12,85 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.rapiddweller.script.math;
 
 /**
  * Parent class for defining arithmetics for special JDK or custom data types.<br/>
  * <br/>
  * Created at 06.10.2009 10:28:30
- * @since 0.6.0
+ *
+ * @param <E> the type parameter
  * @author Volker Bergmann
+ * @since 0.6.0
  */
-
 public abstract class TypeArithmetic<E> {
-	
-	protected final Class<E> baseType;
-	
-    public TypeArithmetic(Class<E> baseType) {
-	    this.baseType = baseType;
-    }
-    
-	public Class<E> getBaseType() {
-		return baseType;
-	}
-	
-	public abstract E add(Object summand1, Object summand2) throws IllegalArgumentException, UnsupportedOperationException;
 
-    public abstract Object subtract(Object minuend, Object subtrahend) throws IllegalArgumentException, UnsupportedOperationException;
+  /**
+   * The Base type.
+   */
+  protected final Class<E> baseType;
 
-    public abstract Object multiply(Object factor1, Object factor2) throws IllegalArgumentException, UnsupportedOperationException;
+  /**
+   * Instantiates a new Type arithmetic.
+   *
+   * @param baseType the base type
+   */
+  public TypeArithmetic(Class<E> baseType) {
+    this.baseType = baseType;
+  }
 
-    public abstract Object divide(Object quotient, Object divisor) throws IllegalArgumentException, UnsupportedOperationException;
+  /**
+   * Gets base type.
+   *
+   * @return the base type
+   */
+  public Class<E> getBaseType() {
+    return baseType;
+  }
+
+  /**
+   * Add e.
+   *
+   * @param summand1 the summand 1
+   * @param summand2 the summand 2
+   * @return the e
+   * @throws IllegalArgumentException      the illegal argument exception
+   * @throws UnsupportedOperationException the unsupported operation exception
+   */
+  public abstract E add(Object summand1, Object summand2) throws IllegalArgumentException, UnsupportedOperationException;
+
+  /**
+   * Subtract object.
+   *
+   * @param minuend    the minuend
+   * @param subtrahend the subtrahend
+   * @return the object
+   * @throws IllegalArgumentException      the illegal argument exception
+   * @throws UnsupportedOperationException the unsupported operation exception
+   */
+  public abstract Object subtract(Object minuend, Object subtrahend) throws IllegalArgumentException, UnsupportedOperationException;
+
+  /**
+   * Multiply object.
+   *
+   * @param factor1 the factor 1
+   * @param factor2 the factor 2
+   * @return the object
+   * @throws IllegalArgumentException      the illegal argument exception
+   * @throws UnsupportedOperationException the unsupported operation exception
+   */
+  public abstract Object multiply(Object factor1, Object factor2) throws IllegalArgumentException, UnsupportedOperationException;
+
+  /**
+   * Divide object.
+   *
+   * @param quotient the quotient
+   * @param divisor  the divisor
+   * @return the object
+   * @throws IllegalArgumentException      the illegal argument exception
+   * @throws UnsupportedOperationException the unsupported operation exception
+   */
+  public abstract Object divide(Object quotient, Object divisor) throws IllegalArgumentException, UnsupportedOperationException;
 
 }

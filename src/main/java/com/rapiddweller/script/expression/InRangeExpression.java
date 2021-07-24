@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.rapiddweller.script.expression;
 
 import com.rapiddweller.common.Context;
@@ -21,28 +22,36 @@ import com.rapiddweller.script.math.ArithmeticEngine;
 /**
  * Boolean {@link Expression} that tells if a value lies within a given range.<br/><br/>
  * Created: 07.06.2011 22:07:56
- * @since 0.5.8
+ *
  * @author Volker Bergmann
+ * @since 0.5.8
  */
 public class InRangeExpression extends CompositeExpression<Object, Boolean> {
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public InRangeExpression(Expression value, Expression min, Expression max) {
-		super(value, min, max);
-	}
+  /**
+   * Instantiates a new In range expression.
+   *
+   * @param value the value
+   * @param min   the min
+   * @param max   the max
+   */
+  @SuppressWarnings({"rawtypes", "unchecked"})
+  public InRangeExpression(Expression value, Expression min, Expression max) {
+    super(value, min, max);
+  }
 
-	@Override
-	public Boolean evaluate(Context context) {
-		Object value = terms[0].evaluate(context);
-		Object minValue = terms[1].evaluate(context);
-		Object maxValue = terms[2].evaluate(context);
-		return ArithmeticEngine.defaultInstance().lessOrEquals(minValue, value) &&
-			ArithmeticEngine.defaultInstance().lessOrEquals(value, maxValue);
-	}
+  @Override
+  public Boolean evaluate(Context context) {
+    Object value = terms[0].evaluate(context);
+    Object minValue = terms[1].evaluate(context);
+    Object maxValue = terms[2].evaluate(context);
+    return ArithmeticEngine.defaultInstance().lessOrEquals(minValue, value) &&
+        ArithmeticEngine.defaultInstance().lessOrEquals(value, maxValue);
+  }
 
-	@Override
-	public String toString() {
-		return "(" + terms[0] + " <= " + terms[1] + " <= " + terms[2] + ")";
-	}
+  @Override
+  public String toString() {
+    return "(" + terms[0] + " <= " + terms[1] + " <= " + terms[2] + ")";
+  }
 
 }

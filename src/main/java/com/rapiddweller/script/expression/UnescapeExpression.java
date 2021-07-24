@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.rapiddweller.script.expression;
 
 import com.rapiddweller.common.Context;
@@ -21,18 +22,24 @@ import com.rapiddweller.script.Expression;
 /**
  * {@link Expression} proxy which unescapes the output of its source.<br/><br/>
  * Created: 11.04.2011 14:12:16
- * @since 0.5.8
+ *
  * @author Volker Bergmann
+ * @since 0.5.8
  */
 public class UnescapeExpression extends ExpressionProxy<String> {
-	
-	public UnescapeExpression(Expression<String> source) {
-		super(source);
-	}
-	
-	@Override
-	public String evaluate(Context context) {
-		return StringUtil.unescape(super.evaluate(context));
-	}
-	
+
+  /**
+   * Instantiates a new Unescape expression.
+   *
+   * @param source the source
+   */
+  public UnescapeExpression(Expression<String> source) {
+    super(source);
+  }
+
+  @Override
+  public String evaluate(Context context) {
+    return StringUtil.unescape(super.evaluate(context));
+  }
+
 }

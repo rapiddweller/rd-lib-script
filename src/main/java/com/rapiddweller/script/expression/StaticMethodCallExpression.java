@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.rapiddweller.script.expression;
 
 import com.rapiddweller.common.BeanUtil;
@@ -22,26 +23,33 @@ import com.rapiddweller.script.Expression;
  * {@link Expression} implementation that performs a static method call.<br/>
  * <br/>
  * Created at 27.07.2009 08:58:30
- * @since 0.5.0
+ *
  * @author Volker Bergmann
+ * @since 0.5.0
  */
-
 public class StaticMethodCallExpression extends DynamicExpression<Object> {
-	
-	private final Class<?> targetClass;
-	private final String methodName;
-	private final Expression<?>[] argExpressions;
-	
-	public StaticMethodCallExpression(Class<?> targetClass, String methodName, Expression<?> ... argExpressions) {
-	    this.targetClass = targetClass;
-	    this.methodName = methodName;
-	    this.argExpressions = argExpressions;
-    }
 
-	@Override
-	public Object evaluate(Context context) {
-    	Object[] args = ExpressionUtil.evaluateAll(argExpressions, context);
-		return BeanUtil.invokeStatic(targetClass, methodName, args);
-    }
+  private final Class<?> targetClass;
+  private final String methodName;
+  private final Expression<?>[] argExpressions;
+
+  /**
+   * Instantiates a new Static method call expression.
+   *
+   * @param targetClass    the target class
+   * @param methodName     the method name
+   * @param argExpressions the arg expressions
+   */
+  public StaticMethodCallExpression(Class<?> targetClass, String methodName, Expression<?>... argExpressions) {
+    this.targetClass = targetClass;
+    this.methodName = methodName;
+    this.argExpressions = argExpressions;
+  }
+
+  @Override
+  public Object evaluate(Context context) {
+    Object[] args = ExpressionUtil.evaluateAll(argExpressions, context);
+    return BeanUtil.invokeStatic(targetClass, methodName, args);
+  }
 
 }

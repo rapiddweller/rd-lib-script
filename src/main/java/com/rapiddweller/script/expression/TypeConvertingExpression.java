@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.rapiddweller.script.expression;
 
 import com.rapiddweller.common.Context;
@@ -22,28 +23,35 @@ import com.rapiddweller.script.Expression;
  * {@link Expression} implementation that evaluates another expression and converts its results.<br/>
  * <br/>
  * Created at 28.07.2009 06:49:43
- * @since 0.5.0
+ *
+ * @param <E> the type parameter
  * @author Volker Bergmann
+ * @since 0.5.0
  */
-
 public class TypeConvertingExpression<E> extends UnaryExpression<E> {
-	
-	private final AnyConverter<E> converter;
 
-    @SuppressWarnings("rawtypes")
-    public TypeConvertingExpression(Expression source, Class<E> resultType) {
-    	super("", source);
-	    this.converter = new AnyConverter<>(resultType);
-    }
+  private final AnyConverter<E> converter;
 
-	@Override
-	public E evaluate(Context context) {
-	    return converter.convert(term.evaluate(context));
-    }
+  /**
+   * Instantiates a new Type converting expression.
+   *
+   * @param source     the source
+   * @param resultType the result type
+   */
+  @SuppressWarnings("rawtypes")
+  public TypeConvertingExpression(Expression source, Class<E> resultType) {
+    super("", source);
+    this.converter = new AnyConverter<>(resultType);
+  }
 
-	@Override
-	public String toString() {
-	    return getClass().getSimpleName() + '[' + term + " -> " + converter + ']';
-	}
-	
+  @Override
+  public E evaluate(Context context) {
+    return converter.convert(term.evaluate(context));
+  }
+
+  @Override
+  public String toString() {
+    return getClass().getSimpleName() + '[' + term + " -> " + converter + ']';
+  }
+
 }

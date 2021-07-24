@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.rapiddweller.script.expression;
 
 import com.rapiddweller.common.BeanUtil;
@@ -25,38 +26,46 @@ import java.util.Map;
 /**
  * {@link Expression} that evaluates an index argument.<br/><br/>
  * Created: 24.11.2010 14:12:48
- * @since 0.6.4
+ *
  * @author Volker Bergmann
+ * @since 0.6.4
  */
 public class IndexExpression extends BinaryExpression<Object> {
-	
-	public IndexExpression(Expression<?> term1, Expression<?> term2) {
-		super(term1, term2);
-	}
 
-	@Override
-	public Object evaluate(Context context) {
-	    Object container = term1.evaluate(context);
-	    Object indexObject = term2.evaluate(context);
-	    if (container instanceof List) {
-			int index = AnyConverter.convert(indexObject, Integer.class);
-	    	return ((List<?>) container).get(index);
-	    } else if (container.getClass().isArray()) {
-			int index = AnyConverter.convert(indexObject, Integer.class);
-	    	return ((Object[]) container)[index];
-	    } else if (container instanceof String) {
-			int index = AnyConverter.convert(indexObject, Integer.class);
-	    	return ((String) container).charAt(index);
-	    } else if (container instanceof Map) {
-	    	return ((Map<?,?>) container).get(indexObject);
-	    } else
-	    	throw new IllegalArgumentException("Cannot do index-based access on " 
-	    			+ BeanUtil.simpleClassName(container));
-	}
-	
-	@Override
-	public String toString() {
-		return term1 + "[" + term2 + "]";
-	}
-	
+  /**
+   * Instantiates a new Index expression.
+   *
+   * @param term1 the term 1
+   * @param term2 the term 2
+   */
+  public IndexExpression(Expression<?> term1, Expression<?> term2) {
+    super(term1, term2);
+  }
+
+  @Override
+  public Object evaluate(Context context) {
+    Object container = term1.evaluate(context);
+    Object indexObject = term2.evaluate(context);
+    if (container instanceof List) {
+      int index = AnyConverter.convert(indexObject, Integer.class);
+      return ((List<?>) container).get(index);
+    } else if (container.getClass().isArray()) {
+      int index = AnyConverter.convert(indexObject, Integer.class);
+      return ((Object[]) container)[index];
+    } else if (container instanceof String) {
+      int index = AnyConverter.convert(indexObject, Integer.class);
+      return ((String) container).charAt(index);
+    } else if (container instanceof Map) {
+      return ((Map<?, ?>) container).get(indexObject);
+    } else {
+      throw new IllegalArgumentException("Cannot do index-based access on "
+          + BeanUtil.simpleClassName(container));
+    }
+  }
+
+  @Override
+  public String toString() {
+    return term1 + "[" + term2 + "]";
+  }
+
 }

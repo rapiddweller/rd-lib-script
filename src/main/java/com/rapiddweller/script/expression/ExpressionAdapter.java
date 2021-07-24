@@ -12,28 +12,40 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.rapiddweller.script.expression;
 
 import com.rapiddweller.script.Expression;
 
 /**
- * Adapter that makes use of a 'source' expression of one type 
+ * Adapter that makes use of a 'source' expression of one type
  * to calculate and return a result of a possibly different type.<br/><br/>
  * Created: 11.09.2010 07:01:10
- * @since 0.5.4
+ *
+ * @param <S> the type parameter
+ * @param <T> the type parameter
  * @author Volker Bergmann
+ * @since 0.5.4
  */
 public abstract class ExpressionAdapter<S, T> implements Expression<T> {
 
-	protected final Expression<S> source;
+  /**
+   * The Source.
+   */
+  protected final Expression<S> source;
 
-	public ExpressionAdapter(Expression<S> source) {
-	    this.source = source;
-    }
-	
-	@Override
-	public boolean isConstant() {
-	    return source.isConstant();
-	}
+  /**
+   * Instantiates a new Expression adapter.
+   *
+   * @param source the source
+   */
+  public ExpressionAdapter(Expression<S> source) {
+    this.source = source;
+  }
+
+  @Override
+  public boolean isConstant() {
+    return source.isConstant();
+  }
 
 }

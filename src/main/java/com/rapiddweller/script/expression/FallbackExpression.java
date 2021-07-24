@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.rapiddweller.script.expression;
 
 import com.rapiddweller.common.Context;
@@ -20,24 +21,32 @@ import com.rapiddweller.script.Expression;
 /**
  * Expression which evaluates a list of expressions and returns the first result which is not null.<br/><br/>
  * Created: 16.06.2010 07:39:20
- * @since 0.5.3
+ *
+ * @param <E> the type parameter
  * @author Volker Bergmann
+ * @since 0.5.3
  */
-public class FallbackExpression<E> extends CompositeExpression<E,E> {
+public class FallbackExpression<E> extends CompositeExpression<E, E> {
 
-    @SafeVarargs
-    public FallbackExpression(Expression<E>... terms) {
-	    super(terms);
-    }
+  /**
+   * Instantiates a new Fallback expression.
+   *
+   * @param terms the terms
+   */
+  @SafeVarargs
+  public FallbackExpression(Expression<E>... terms) {
+    super(terms);
+  }
 
-    @Override
-	public E evaluate(Context context) {
-    	for (Expression<E> term : terms) {
-        	E result = (term != null ? term.evaluate(context) : null);
-        	if (result != null)
-        		return result;
-    	}
-	    return null;
+  @Override
+  public E evaluate(Context context) {
+    for (Expression<E> term : terms) {
+      E result = (term != null ? term.evaluate(context) : null);
+      if (result != null) {
+        return result;
+      }
     }
+    return null;
+  }
 
 }
