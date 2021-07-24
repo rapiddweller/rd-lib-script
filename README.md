@@ -1,7 +1,7 @@
 # rd-lib-script
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/492f94f55b28496cbe614fd7b6006b58)](https://www.codacy.com/gh/rapiddweller/rd-lib-script/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=rapiddweller/rd-lib-script&amp;utm_campaign=Badge_Grade)
 [![Codacy Badge](https://app.codacy.com/project/badge/Coverage/492f94f55b28496cbe614fd7b6006b58)](https://www.codacy.com/gh/rapiddweller/rd-lib-script/dashboard?utm_source=github.com&utm_medium=referral&utm_content=rapiddweller/rd-lib-script&utm_campaign=Badge_Coverage)
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.rapiddweller/rd-lib-common/badge.svg)](https://search.maven.org/artifact/com.rapiddweller/rd-lib-common)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.rapiddweller/rd-lib-script/badge.svg)](https://search.maven.org/artifact/com.rapiddweller/rd-lib-script)
 
 'rapiddweller Script' is an open source software library for resolving Java-like script expressions,
 forked from Databene Scripts written by Volker Bergmann.
