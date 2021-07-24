@@ -12,44 +12,74 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.rapiddweller.script;
 
 /**
  * A bean specification which can declare if it wraps a 'value' or just represents a 'reference'.
  * This is used for managing scopes with 'local' objects and references to 'global' ones.<br/><br/>
  * Created: 13.04.2011 19:07:09
- * @since 0.6.6
+ *
  * @author Volker Bergmann
+ * @since 0.6.6
  */
 public class BeanSpec {
-	
-	private final Object bean;
-	private final boolean reference;
 
-	public BeanSpec(Object bean, boolean reference) {
-		this.bean = bean;
-		this.reference = reference;
-	}
+  private final Object bean;
+  private final boolean reference;
 
-	public Object getBean() {
-		return bean;
-	}
-	
-	public boolean isReference() {
-		return reference;
-	}
+  /**
+   * Instantiates a new Bean spec.
+   *
+   * @param bean      the bean
+   * @param reference the reference
+   */
+  public BeanSpec(Object bean, boolean reference) {
+    this.bean = bean;
+    this.reference = reference;
+  }
 
-	public static BeanSpec createReference(Object bean) {
-		return new BeanSpec(bean, true);
-	}
+  /**
+   * Gets bean.
+   *
+   * @return the bean
+   */
+  public Object getBean() {
+    return bean;
+  }
 
-	public static BeanSpec createConstruction(Object bean) {
-		return new BeanSpec(bean, false);
-	}
-	
-	@Override
-	public String toString() {
-		return (reference ? "reference to " : "creation of ") + bean;
-	}
-	
+  /**
+   * Is reference boolean.
+   *
+   * @return the boolean
+   */
+  public boolean isReference() {
+    return reference;
+  }
+
+  /**
+   * Create reference bean spec.
+   *
+   * @param bean the bean
+   * @return the bean spec
+   */
+  public static BeanSpec createReference(Object bean) {
+    return new BeanSpec(bean, true);
+  }
+
+  /**
+   * Create construction bean spec.
+   *
+   * @param bean the bean
+   * @return the bean spec
+   */
+  public static BeanSpec createConstruction(Object bean) {
+    return new BeanSpec(bean, false);
+  }
+
+  @Override
+  public String toString() {
+    return (reference ? "reference to " : "creation of ") + bean;
+  }
+
 }

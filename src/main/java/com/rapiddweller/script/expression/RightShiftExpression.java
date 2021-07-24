@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.rapiddweller.script.expression;
 
 import com.rapiddweller.common.Context;
@@ -21,18 +22,25 @@ import com.rapiddweller.script.math.ArithmeticEngine;
 /**
  * Numerical {@link Expression} that performs a right shift.<br/><br/>
  * Created: 24.11.2010 14:21:31
- * @since 0.6.4
+ *
  * @author Volker Bergmann
+ * @since 0.6.4
  */
 public class RightShiftExpression extends BinaryExpression<Object> {
-	
-	public RightShiftExpression(Expression<?> term1, Expression<?> term2) {
-		super(">>", term1, term2);
-	}
 
-	@Override
-	public Object evaluate(Context context) {
-		return ArithmeticEngine.defaultInstance().shiftRight(term1.evaluate(context), term2.evaluate(context));
-	}
-	
+  /**
+   * Instantiates a new Right shift expression.
+   *
+   * @param term1 the term 1
+   * @param term2 the term 2
+   */
+  public RightShiftExpression(Expression<?> term1, Expression<?> term2) {
+    super(">>", term1, term2);
+  }
+
+  @Override
+  public Object evaluate(Context context) {
+    return ArithmeticEngine.defaultInstance().shiftRight(term1.evaluate(context), term2.evaluate(context));
+  }
+
 }

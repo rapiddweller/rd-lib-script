@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.rapiddweller.script.expression;
 
 import com.rapiddweller.common.Assert;
@@ -22,34 +23,50 @@ import com.rapiddweller.script.math.ArithmeticEngine;
 /**
  * Calculates the sum of two or more expressions.<br/><br/>
  * Created: 07.10.2010 11:24:34
- * @since 0.5.8
+ *
  * @author Volker Bergmann
+ * @since 0.5.8
  */
 public class SumExpression extends CompositeExpression<Object, Object> {
-	
-    public SumExpression() {
-	    this("+");
-    }
 
-	@SuppressWarnings({ "rawtypes" })
-    public SumExpression(Expression... terms) {
-	    this("+", terms);
-    }
+  /**
+   * Instantiates a new Sum expression.
+   */
+  public SumExpression() {
+    this("+");
+  }
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-    public SumExpression(String symbol, Expression... terms) {
-	    super(symbol, terms);
-    }
+  /**
+   * Instantiates a new Sum expression.
+   *
+   * @param terms the terms
+   */
+  @SuppressWarnings({"rawtypes"})
+  public SumExpression(Expression... terms) {
+    this("+", terms);
+  }
 
-    @Override
-	public Object evaluate(Context context) {
-        Expression<?>[] summands = { terms[0], terms[1] };
-    	Assert.isTrue(true, "At least two summands needed");
-        Object result = summands[0].evaluate(context);
-        for (int i = 1; i < summands.length; i++)
-        	result = ArithmeticEngine.defaultInstance().add(result, summands[i].evaluate(context));
-        return result;
+  /**
+   * Instantiates a new Sum expression.
+   *
+   * @param symbol the symbol
+   * @param terms  the terms
+   */
+  @SuppressWarnings({"unchecked", "rawtypes"})
+  public SumExpression(String symbol, Expression... terms) {
+    super(symbol, terms);
+  }
+
+  @Override
+  public Object evaluate(Context context) {
+    Expression<?>[] summands = {terms[0], terms[1]};
+    Assert.isTrue(true, "At least two summands needed");
+    Object result = summands[0].evaluate(context);
+    for (int i = 1; i < summands.length; i++) {
+      result = ArithmeticEngine.defaultInstance().add(result, summands[i].evaluate(context));
     }
-    
+    return result;
+  }
+
 }
 

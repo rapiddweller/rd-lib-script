@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.rapiddweller.script.expression;
 
 import com.rapiddweller.common.ArrayFormat;
@@ -22,48 +23,80 @@ import com.rapiddweller.script.Expression;
  * Expression that evaluates the results of other Expressions.<br/>
  * <br/>
  * Created: 18.06.2007 17:02:17
+ *
+ * @param <S> the type parameter
+ * @param <R> the type parameter
  * @author Volker Bergmann
  */
 public abstract class CompositeExpression<S, R> implements WrapperExpression<R> {
 
-	protected final String symbol;
-    protected Expression<S>[] terms;
+  /**
+   * The Symbol.
+   */
+  protected final String symbol;
+  /**
+   * The Terms.
+   */
+  protected Expression<S>[] terms;
 
-    @SafeVarargs
-    protected CompositeExpression(Expression<S>... terms) {
-    	this(null, terms);
-    }
+  /**
+   * Instantiates a new Composite expression.
+   *
+   * @param terms the terms
+   */
+  @SafeVarargs
+  protected CompositeExpression(Expression<S>... terms) {
+    this(null, terms);
+  }
 
-    @SafeVarargs
-    protected CompositeExpression(String symbol, Expression<S>... terms) {
-    	this.symbol = symbol;
-        this.terms = terms;
-    }
+  /**
+   * Instantiates a new Composite expression.
+   *
+   * @param symbol the symbol
+   * @param terms  the terms
+   */
+  @SafeVarargs
+  protected CompositeExpression(String symbol, Expression<S>... terms) {
+    this.symbol = symbol;
+    this.terms = terms;
+  }
 
-	public Expression<S>[] getTerms() {
-		return terms;
-	}
-	
-	@Override
-	public Expression<?>[] getSourceExpressions() {
-		return getTerms();
-	}
-	
-    public void addTerm(Expression<S> term) {
-    	this.terms = ArrayUtil.append(term, this.terms);
+  /**
+   * Get terms expression [ ].
+   *
+   * @return the expression [ ]
+   */
+  public Expression<S>[] getTerms() {
+    return terms;
+  }
+
+  @Override
+  public Expression<?>[] getSourceExpressions() {
+    return getTerms();
+  }
+
+  /**
+   * Add term.
+   *
+   * @param term the term
+   */
+  public void addTerm(Expression<S> term) {
+    this.terms = ArrayUtil.append(term, this.terms);
+  }
+
+  @Override
+  public boolean isConstant() {
+    for (Expression<?> term : terms) {
+      if (!term.isConstant()) {
+        return false;
+      }
     }
-    
-    @Override
-	public boolean isConstant() {
-        for (Expression<?> term : terms)
-        	if (!term.isConstant())
-        		return false;
-        return true;
-    }
-    
-	@Override
-	public String toString() {
-	    return "(" + ArrayFormat.format(" " + symbol + " ", terms) + ")";
-	}
-	
+    return true;
+  }
+
+  @Override
+  public String toString() {
+    return "(" + ArrayFormat.format(" " + symbol + " ", terms) + ")";
+  }
+
 }

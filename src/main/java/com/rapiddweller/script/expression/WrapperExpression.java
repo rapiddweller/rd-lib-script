@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.rapiddweller.script.expression;
 
 import com.rapiddweller.script.Expression;
@@ -19,9 +20,16 @@ import com.rapiddweller.script.Expression;
 /**
  * New common interface for scanning through {@link Expression}s that wrap other expressions.<br/><br/>
  * Created: 08.06.2011 13:48:12
- * @since 0.5.8
+ *
+ * @param <E> the type parameter
  * @author Volker Bergmann
+ * @since 0.5.8
  */
 public interface WrapperExpression<E> extends Expression<E> {
-	Expression<?>[] getSourceExpressions();
+  /**
+   * Get source expressions expression [ ].
+   *
+   * @return the expression [ ]
+   */
+  Expression<?>[] getSourceExpressions();
 }

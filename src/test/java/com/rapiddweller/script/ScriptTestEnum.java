@@ -12,14 +12,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.rapiddweller.script;
 
 /**
  * Simple enumeration for testing.<br/><br/>
  * Created: 01.11.2011 10:47:23
- * @since 0.7.3
+ *
  * @author Volker Bergmann
+ * @since 0.7.3
  */
 public enum ScriptTestEnum {
-	ALPHA, BETA
+  /**
+   * Alpha script test enum.
+   */
+  ALPHA,
+  /**
+   * Beta script test enum.
+   */
+  BETA
 }

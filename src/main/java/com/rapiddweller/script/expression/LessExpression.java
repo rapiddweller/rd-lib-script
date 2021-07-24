@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.rapiddweller.script.expression;
 
 import com.rapiddweller.common.Context;
@@ -19,21 +20,28 @@ import com.rapiddweller.script.Expression;
 import com.rapiddweller.script.math.ArithmeticEngine;
 
 /**
- * Boolean {@link Expression} that checks if the result of one 
+ * Boolean {@link Expression} that checks if the result of one
  * expressions is less than the result of another one.<br/><br/>
  * Created: 24.11.2010 14:23:13
- * @since 0.5.8
+ *
  * @author Volker Bergmann
+ * @since 0.5.8
  */
 public class LessExpression extends BinaryExpression<Boolean> {
-	
-	public LessExpression(Expression<?> term1, Expression<?> term2) {
-		super("<", term1, term2);
-	}
 
-	@Override
-	public Boolean evaluate(Context context) {
-	    return ArithmeticEngine.defaultInstance().less(term1.evaluate(context), term2.evaluate(context));
-	}
-	
+  /**
+   * Instantiates a new Less expression.
+   *
+   * @param term1 the term 1
+   * @param term2 the term 2
+   */
+  public LessExpression(Expression<?> term1, Expression<?> term2) {
+    super("<", term1, term2);
+  }
+
+  @Override
+  public Boolean evaluate(Context context) {
+    return ArithmeticEngine.defaultInstance().less(term1.evaluate(context), term2.evaluate(context));
+  }
+
 }

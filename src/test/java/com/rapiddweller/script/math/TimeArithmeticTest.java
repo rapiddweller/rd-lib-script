@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.rapiddweller.script.math;
 
 import com.rapiddweller.common.TimeUtil;
@@ -26,57 +27,85 @@ import static org.junit.Assert.assertEquals;
 /**
  * Tests the {@link TimeArithmetic}.<br/><br/>
  * Created: 13.10.2009 18:00:06
- * @since 0.6.0
+ *
  * @author Volker Bergmann
+ * @since 0.6.0
  */
 public class TimeArithmeticTest {
 
-	private static final Time TIME_BASE   = TimeUtil.time(1, 2, 3, 456);
-	private static final Time TIME_OFFSET = TimeUtil.time(6, 5, 4, 321);
-	private static final Time TIME_SUM    = TimeUtil.time(7, 7, 7, 777);
-	private static final long ONE_OUR_MILLIS = 3600L * 1000;
-	
-	final TimeArithmetic arithmetic = new TimeArithmetic();
-	
-	@Test
-	public void testGetBaseType() {
-		assertEquals(Time.class, arithmetic.getBaseType());
-	}
-	
-	@Test
-	public void testAdd_Time() {
-		assertEquals(TIME_SUM, arithmetic.add(TIME_BASE, TIME_OFFSET));
-	}
+  private static final Time TIME_BASE = TimeUtil.time(1, 2, 3, 456);
+  private static final Time TIME_OFFSET = TimeUtil.time(6, 5, 4, 321);
+  private static final Time TIME_SUM = TimeUtil.time(7, 7, 7, 777);
+  private static final long ONE_OUR_MILLIS = 3600L * 1000;
 
-	@Test
-	public void testAdd_Millis() {
-		assertEquals(TimeUtil.add(TIME_BASE, Calendar.HOUR, 1), arithmetic.add(TIME_BASE, ONE_OUR_MILLIS));
-	}
+  /**
+   * The Arithmetic.
+   */
+  final TimeArithmetic arithmetic = new TimeArithmetic();
 
-	@Test(expected = IllegalArgumentException.class)
-	public void testAdd_IllegalType() {
-		arithmetic.add(TIME_BASE, new File("test"));
-	}
+  /**
+   * Test get base type.
+   */
+  @Test
+  public void testGetBaseType() {
+    assertEquals(Time.class, arithmetic.getBaseType());
+  }
 
-	@Test
-	public void testSubtract() {
-		assertEquals(TIME_BASE, arithmetic.subtract(TIME_SUM, TIME_OFFSET));
-		assertEquals(TIME_OFFSET, arithmetic.subtract(TIME_SUM, TIME_BASE));
-	}
+  /**
+   * Test add time.
+   */
+  @Test
+  public void testAdd_Time() {
+    assertEquals(TIME_SUM, arithmetic.add(TIME_BASE, TIME_OFFSET));
+  }
 
-	@Test(expected = IllegalArgumentException.class)
-	public void testSubtract_IllegalType() {
-		arithmetic.subtract(TIME_BASE, new File("test"));
-	}
+  /**
+   * Test add millis.
+   */
+  @Test
+  public void testAdd_Millis() {
+    assertEquals(TimeUtil.add(TIME_BASE, Calendar.HOUR, 1), arithmetic.add(TIME_BASE, ONE_OUR_MILLIS));
+  }
 
-	@Test(expected = UnsupportedOperationException.class)
-	public void testMultiply() {
-		arithmetic.multiply(TIME_BASE, TIME_OFFSET);
-	}
+  /**
+   * Test add illegal type.
+   */
+  @Test(expected = IllegalArgumentException.class)
+  public void testAdd_IllegalType() {
+    arithmetic.add(TIME_BASE, new File("test"));
+  }
 
-	@Test(expected = UnsupportedOperationException.class)
-	public void testDivide() {
-		arithmetic.divide(TIME_BASE, TIME_OFFSET);
-	}
+  /**
+   * Test subtract.
+   */
+  @Test
+  public void testSubtract() {
+    assertEquals(TIME_BASE, arithmetic.subtract(TIME_SUM, TIME_OFFSET));
+    assertEquals(TIME_OFFSET, arithmetic.subtract(TIME_SUM, TIME_BASE));
+  }
+
+  /**
+   * Test subtract illegal type.
+   */
+  @Test(expected = IllegalArgumentException.class)
+  public void testSubtract_IllegalType() {
+    arithmetic.subtract(TIME_BASE, new File("test"));
+  }
+
+  /**
+   * Test multiply.
+   */
+  @Test(expected = UnsupportedOperationException.class)
+  public void testMultiply() {
+    arithmetic.multiply(TIME_BASE, TIME_OFFSET);
+  }
+
+  /**
+   * Test divide.
+   */
+  @Test(expected = UnsupportedOperationException.class)
+  public void testDivide() {
+    arithmetic.divide(TIME_BASE, TIME_OFFSET);
+  }
 
 }

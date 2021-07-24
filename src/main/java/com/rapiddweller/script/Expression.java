@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.rapiddweller.script;
 
 import com.rapiddweller.common.Context;
@@ -19,10 +20,24 @@ import com.rapiddweller.common.Context;
 /**
  * Represents an Expression that evaluates some internal state and returns the result.<br/><br/>
  * Created: 18.06.2007 17:00:22
- * @since 0.2
+ *
+ * @param <E> the type parameter
  * @author Volker Bergmann
+ * @since 0.2
  */
 public interface Expression<E> {
-	E evaluate(Context context);
-	boolean isConstant();
+  /**
+   * Evaluate e.
+   *
+   * @param context the context
+   * @return the e
+   */
+  E evaluate(Context context);
+
+  /**
+   * Is constant boolean.
+   *
+   * @return the boolean
+   */
+  boolean isConstant();
 }

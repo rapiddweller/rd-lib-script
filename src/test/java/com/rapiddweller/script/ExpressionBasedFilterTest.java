@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.rapiddweller.script;
 
 import com.rapiddweller.common.Context;
@@ -24,20 +25,24 @@ import static org.junit.Assert.assertTrue;
 /**
  * Tests the {@link ExpressionBasedFilter}.<br/><br/>
  * Created: 08.03.2011 14:15:33
- * @since 0.5.8
+ *
  * @author Volker Bergmann
+ * @since 0.5.8
  */
 public class ExpressionBasedFilterTest {
 
-	@Test
-	public void test() {
-		Context context = new DefaultContext();
-		Expression<Boolean> expression = new IsThreeExpression();
-		ExpressionBasedFilter<Integer> filter = new ExpressionBasedFilter<>(expression, context);
-		assertFalse(filter.accept(null));
-		assertFalse(filter.accept(2));
-		assertTrue(filter.accept(3));
-		assertFalse(filter.accept(4));
-	}
-	
+  /**
+   * Test.
+   */
+  @Test
+  public void test() {
+    Context context = new DefaultContext();
+    Expression<Boolean> expression = new IsThreeExpression();
+    ExpressionBasedFilter<Integer> filter = new ExpressionBasedFilter<>(expression, context);
+    assertFalse(filter.accept(null));
+    assertFalse(filter.accept(2));
+    assertTrue(filter.accept(3));
+    assertFalse(filter.accept(4));
+  }
+
 }

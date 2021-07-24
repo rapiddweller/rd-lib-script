@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.rapiddweller.script.expression;
 
 import com.rapiddweller.common.Context;
@@ -21,18 +22,24 @@ import com.rapiddweller.script.math.ArithmeticEngine;
 /**
  * {@link Expression} that evaluates to the bitwise complement of another expression's result.<br/><br/>
  * Created: 24.11.2010 14:15:16
- * @since 0.6.4
+ *
  * @author Volker Bergmann
+ * @since 0.6.4
  */
 public class BitwiseComplementExpression extends UnaryExpression<Object> {
-	
-	public BitwiseComplementExpression(Expression<?> term) {
-		super("~", term);
-	}
 
-	@Override
-	public Object evaluate(Context context) {
-		return ArithmeticEngine.defaultInstance().bitwiseComplement(term.evaluate(context));
-	}
-	
+  /**
+   * Instantiates a new Bitwise complement expression.
+   *
+   * @param term the term
+   */
+  public BitwiseComplementExpression(Expression<?> term) {
+    super("~", term);
+  }
+
+  @Override
+  public Object evaluate(Context context) {
+    return ArithmeticEngine.defaultInstance().bitwiseComplement(term.evaluate(context));
+  }
+
 }

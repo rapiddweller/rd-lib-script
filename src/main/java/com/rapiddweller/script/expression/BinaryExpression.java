@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.rapiddweller.script.expression;
 
 import com.rapiddweller.script.Expression;
@@ -20,39 +21,62 @@ import com.rapiddweller.script.Expression;
  * Abstract parent class for expression that evaluate two terms.<br/>
  * <br/>
  * Created at 06.10.2009 14:26:04
- * @since 0.5.0
+ *
+ * @param <E> the type parameter
  * @author Volker Bergmann
+ * @since 0.5.0
  */
-
 public abstract class BinaryExpression<E> implements WrapperExpression<E> {
 
-	protected String symbol;
-	protected final Expression<?> term1;
-	protected final Expression<?> term2;
+  /**
+   * The Symbol.
+   */
+  protected String symbol;
+  /**
+   * The Term 1.
+   */
+  protected final Expression<?> term1;
+  /**
+   * The Term 2.
+   */
+  protected final Expression<?> term2;
 
-	public BinaryExpression(Expression<?> term1, Expression<?> term2) {
-		this(null, term1, term2);
-    }
-	
-	public BinaryExpression(String symbol, Expression<?> term1, Expression<?> term2) {
-		this.symbol = symbol;
-	    this.term1 = term1;
-	    this.term2 = term2;
-    }
-	
-	@Override
-	public Expression<?>[] getSourceExpressions() {
-		return new Expression[] { term1, term2 };
-	}
-	
-	@Override
-	public boolean isConstant() {
-	    return term1.isConstant() && term2.isConstant();
-	}
-	
-	@Override
-	public String toString() {
-		return "(" + term1 + " " + symbol + " " + term2 + ")";
-	}
-	
+  /**
+   * Instantiates a new Binary expression.
+   *
+   * @param term1 the term 1
+   * @param term2 the term 2
+   */
+  public BinaryExpression(Expression<?> term1, Expression<?> term2) {
+    this(null, term1, term2);
+  }
+
+  /**
+   * Instantiates a new Binary expression.
+   *
+   * @param symbol the symbol
+   * @param term1  the term 1
+   * @param term2  the term 2
+   */
+  public BinaryExpression(String symbol, Expression<?> term1, Expression<?> term2) {
+    this.symbol = symbol;
+    this.term1 = term1;
+    this.term2 = term2;
+  }
+
+  @Override
+  public Expression<?>[] getSourceExpressions() {
+    return new Expression[] {term1, term2};
+  }
+
+  @Override
+  public boolean isConstant() {
+    return term1.isConstant() && term2.isConstant();
+  }
+
+  @Override
+  public String toString() {
+    return "(" + term1 + " " + symbol + " " + term2 + ")";
+  }
+
 }

@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.rapiddweller.script;
 
 import com.rapiddweller.common.bean.ClassCache;
@@ -20,34 +21,43 @@ import com.rapiddweller.common.context.DefaultContext;
 /**
  * Default implementation of the {@link ScriptContext} interface.<br/><br/>
  * Created: 01.11.2011 10:51:50
- * @since 0.7.3
+ *
  * @author Volker Bergmann
+ * @since 0.7.3
  */
 public class DefaultScriptContext extends DefaultContext implements ScriptContext {
 
-	private final ClassCache classCache;
+  private final ClassCache classCache;
 
-	public DefaultScriptContext() {
-		this.classCache = new ClassCache();
-	}
-	
-	@Override
-	public Class<?> forName(String className) {
-		return classCache.forName(className);
-	}
-	
-	@Override
-	public void importClass(String className) {
-		classCache.importClass(className);
-	}
+  /**
+   * Instantiates a new Default script context.
+   */
+  public DefaultScriptContext() {
+    this.classCache = new ClassCache();
+  }
 
-	public void importPackage(String packageName) {
-		classCache.importPackage(packageName);
-	}
+  @Override
+  public Class<?> forName(String className) {
+    return classCache.forName(className);
+  }
 
-	@Override
-	public void close() {
-		// nothing to do
-	}
+  @Override
+  public void importClass(String className) {
+    classCache.importClass(className);
+  }
+
+  /**
+   * Import package.
+   *
+   * @param packageName the package name
+   */
+  public void importPackage(String packageName) {
+    classCache.importPackage(packageName);
+  }
+
+  @Override
+  public void close() {
+    // nothing to do
+  }
 
 }

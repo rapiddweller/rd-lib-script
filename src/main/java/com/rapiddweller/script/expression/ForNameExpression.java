@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.rapiddweller.script.expression;
 
 import com.rapiddweller.common.Context;
@@ -21,25 +22,34 @@ import com.rapiddweller.script.Expression;
 /**
  * Resolves a class by its class name.<br/><br/>
  * Created: 07.10.2010 11:41:59
- * @since 0.5.4
+ *
  * @author Volker Bergmann
+ * @since 0.5.4
  */
-public class ForNameExpression implements Expression<Class<?>>{
-	
-	protected final Expression<String> className;
+public class ForNameExpression implements Expression<Class<?>> {
 
-	public ForNameExpression(Expression<String> className) {
-	    this.className = className;
-    }
+  /**
+   * The Class name.
+   */
+  protected final Expression<String> className;
 
-	@Override
-	public boolean isConstant() {
-	    return className.isConstant();
-    }
+  /**
+   * Instantiates a new For name expression.
+   *
+   * @param className the class name
+   */
+  public ForNameExpression(Expression<String> className) {
+    this.className = className;
+  }
 
-	@Override
-	public Class<?> evaluate(Context context) {
-		return DefaultClassProvider.resolveByObjectOrDefaultInstance(className.evaluate(context), context);
-    }
+  @Override
+  public boolean isConstant() {
+    return className.isConstant();
+  }
+
+  @Override
+  public Class<?> evaluate(Context context) {
+    return DefaultClassProvider.resolveByObjectOrDefaultInstance(className.evaluate(context), context);
+  }
 
 }

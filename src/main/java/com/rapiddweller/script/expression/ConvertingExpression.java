@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.rapiddweller.script.expression;
 
 import com.rapiddweller.common.Context;
@@ -19,24 +20,36 @@ import com.rapiddweller.common.Converter;
 import com.rapiddweller.script.Expression;
 
 /**
- * {@link Expression} adapter that uses a {@link Converter} for converting 
+ * {@link Expression} adapter that uses a {@link Converter} for converting
  * the result of a given expression (e.g. to a different type).<br/><br/>
  * Created: 11.09.2010 06:59:38
- * @since 0.5.4
+ *
+ * @param <S> the type parameter
+ * @param <T> the type parameter
  * @author Volker Bergmann
+ * @since 0.5.4
  */
 public class ConvertingExpression<S, T> extends ExpressionAdapter<S, T> {
 
-	protected final Converter<S, T> converter;
-	
-	public ConvertingExpression(Expression<S> source, Converter<S, T> converter) {
-	    super(source);
-	    this.converter = converter;
-    }
+  /**
+   * The Converter.
+   */
+  protected final Converter<S, T> converter;
 
-	@Override
-	public T evaluate(Context context) {
-	    return converter.convert(source != null ? source.evaluate(context) : null);
-    }
+  /**
+   * Instantiates a new Converting expression.
+   *
+   * @param source    the source
+   * @param converter the converter
+   */
+  public ConvertingExpression(Expression<S> source, Converter<S, T> converter) {
+    super(source);
+    this.converter = converter;
+  }
+
+  @Override
+  public T evaluate(Context context) {
+    return converter.convert(source != null ? source.evaluate(context) : null);
+  }
 
 }

@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.rapiddweller.script;
 
 import com.rapiddweller.common.Context;
@@ -22,11 +23,18 @@ import java.io.Closeable;
 /**
  * Base interface for Databene Script actors to interoperate with their environment.<br/><br/>
  * Created: 01.11.2011 10:43:49
- * @since 0.7.3
+ *
  * @author Volker Bergmann
+ * @since 0.7.3
  */
 public interface ScriptContext extends Context, ClassProvider, Closeable {
-	void importClass(String className);
-	@Override
-	void close();
+  /**
+   * Import class.
+   *
+   * @param className the class name
+   */
+  void importClass(String className);
+
+  @Override
+  void close();
 }

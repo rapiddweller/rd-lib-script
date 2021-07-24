@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.rapiddweller.script.expression;
 
 import com.rapiddweller.common.BeanUtil;
@@ -22,26 +23,33 @@ import com.rapiddweller.script.Expression;
  * {@link Expression} implementation that evaluates a method on a class or object.<br/>
  * <br/>
  * Created at 07.10.2009 22:10:06
- * @since 0.6.0
+ *
  * @author Volker Bergmann
+ * @since 0.6.0
  */
-
 public class InvocationExpression extends DynamicExpression<Object> {
-	
-	private final Expression<?> target;
-	private final String methodName;
-	private final Expression<?>[] argExpressions;
 
-    public InvocationExpression(Expression<?> target, String methodMame, Expression<?>[] argExpressions) {
-    	this.target = target;
-    	this.methodName = methodMame;
-    	this.argExpressions = argExpressions;
-    }
+  private final Expression<?> target;
+  private final String methodName;
+  private final Expression<?>[] argExpressions;
 
-	@Override
-	public Object evaluate(Context context) {
-		Object[] args = ExpressionUtil.evaluateAll(argExpressions, context);
-	    return BeanUtil.invoke(target.evaluate(context), methodName, args);
-    }
+  /**
+   * Instantiates a new Invocation expression.
+   *
+   * @param target         the target
+   * @param methodMame     the method mame
+   * @param argExpressions the arg expressions
+   */
+  public InvocationExpression(Expression<?> target, String methodMame, Expression<?>[] argExpressions) {
+    this.target = target;
+    this.methodName = methodMame;
+    this.argExpressions = argExpressions;
+  }
+
+  @Override
+  public Object evaluate(Context context) {
+    Object[] args = ExpressionUtil.evaluateAll(argExpressions, context);
+    return BeanUtil.invoke(target.evaluate(context), methodName, args);
+  }
 
 }

@@ -12,18 +12,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.rapiddweller.script.expression;
 
 /**
  * Expression that resolves to null.<br/><br/>
  * Created: 08.06.2011 08:44:22
- * @since 0.5.8
+ *
  * @author Volker Bergmann
+ * @since 0.5.8
  */
 public class NullExpression extends ConstantExpression<Object> {
 
-	public NullExpression() {
-		super(null);
-	}
-	
+  /**
+   * Instantiates a new Null expression.
+   */
+  public NullExpression() {
+    super(null);
+  }
+
 }

@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.rapiddweller.script.expression;
 
 import com.rapiddweller.common.Context;
@@ -21,37 +22,54 @@ import com.rapiddweller.script.Expression;
  * Expression that represents and returns a constant value.<br/>
  * <br/>
  * Created: 18.06.2007 17:38:58
+ *
+ * @param <E> the type parameter
  * @author Volker Bergmann
  */
 public class ConstantExpression<E> implements Expression<E> {
 
-    private E value;
+  private E value;
 
-    public ConstantExpression(E value) {
-        this.value = value;
-    }
+  /**
+   * Instantiates a new Constant expression.
+   *
+   * @param value the value
+   */
+  public ConstantExpression(E value) {
+    this.value = value;
+  }
 
-    public E getValue() {
-        return value;
-    }
+  /**
+   * Gets value.
+   *
+   * @return the value
+   */
+  public E getValue() {
+    return value;
+  }
 
-    public void setValue(E value) {
-        this.value = value;
-    }
+  /**
+   * Sets value.
+   *
+   * @param value the value
+   */
+  public void setValue(E value) {
+    this.value = value;
+  }
 
-    @Override
-	public E evaluate(Context context) {
-        return value;
-    }
-    
-    @Override
-	public boolean isConstant() {
-        return true;
-    }
-    
-    @Override
-    public String toString() {
-    	return String.valueOf(value);
-    }
-    
+  @Override
+  public E evaluate(Context context) {
+    return value;
+  }
+
+  @Override
+  public boolean isConstant() {
+    return true;
+  }
+
+  @Override
+  public String toString() {
+    return String.valueOf(value);
+  }
+
 }

@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.rapiddweller.script.math;
 
 import com.rapiddweller.common.BeanUtil;
@@ -23,64 +24,70 @@ import java.util.Date;
  * {@link TypeArithmetic} implementation for the {@link Date} class.<br/>
  * <br/>
  * Created at 06.10.2009 10:31:14
- * @since 0.6.0
+ *
  * @author Volker Bergmann
+ * @since 0.6.0
  */
-
 public class DateArithmetic extends TypeArithmetic<Date> {
 
-    public DateArithmetic() {
-	    super(Date.class);
-    }
-    
-    // Arithmetic interface implementation -----------------------------------------------------------------------------
+  /**
+   * Instantiates a new Date arithmetic.
+   */
+  public DateArithmetic() {
+    super(Date.class);
+  }
 
-    @Override
-    public Date add(Object summand1, Object summand2) {
-    	if (summand1 instanceof Date)
-    		return addImpl((Date) summand1, summand2);
-    	else if (summand2 instanceof Date)
-    		return addImpl((Date) summand2, summand1);
-    	else
-    		throw new IllegalArgumentException("No argument is of type " + baseType + ": " + 
-    				summand1 + ", " + summand2);
-    }
+  // Arithmetic interface implementation -----------------------------------------------------------------------------
 
-    @Override
-    public Object subtract(Object minuend, Object subtrahend) {
-    	return subtractImpl((Date) minuend, subtrahend);
+  @Override
+  public Date add(Object summand1, Object summand2) {
+    if (summand1 instanceof Date) {
+      return addImpl((Date) summand1, summand2);
+    } else if (summand2 instanceof Date) {
+      return addImpl((Date) summand2, summand1);
+    } else {
+      throw new IllegalArgumentException("No argument is of type " + baseType + ": " +
+          summand1 + ", " + summand2);
     }
+  }
 
-    @Override
-    public Object multiply(Object factor1, Object factor2) {
-	    throw new UnsupportedOperationException("Cannot multiply dates");
-    }
-    
-    @Override
-    public Object divide(Object quotient, Object divisor) {
-	    throw new UnsupportedOperationException("Cannot divide dates");
-    }
-    
-    // private methods -------------------------------------------------------------------------------------------------
+  @Override
+  public Object subtract(Object minuend, Object subtrahend) {
+    return subtractImpl((Date) minuend, subtrahend);
+  }
 
-	private Date addImpl(Date summand1, Object summand2) {
-    	if (summand2 instanceof Number)
-    		return new Date(summand1.getTime() + ((Number) summand2).longValue());
-    	else if (summand2 instanceof Date)
-    		return TimeUtil.add(summand1, (Date) summand2);
-    	else
-    		throw new IllegalArgumentException("Cannot add " +
-    				BeanUtil.simpleClassName(summand2) + " to " + baseType.getClass().getName());
-    }
+  @Override
+  public Object multiply(Object factor1, Object factor2) {
+    throw new UnsupportedOperationException("Cannot multiply dates");
+  }
 
-    private static Object subtractImpl(Date minuend, Object subtrahend) {
-	    if (subtrahend instanceof Number)
-    		return new Date(minuend.getTime() - ((Number) subtrahend).longValue());
-    	else if (subtrahend instanceof Date) {
-    		return TimeUtil.subtract(minuend,  (Date) subtrahend);
-    	} else
-    		throw new IllegalArgumentException("Cannot subtract " +
-    				BeanUtil.simpleClassName(subtrahend) + " from " + minuend.getClass().getName());
+  @Override
+  public Object divide(Object quotient, Object divisor) {
+    throw new UnsupportedOperationException("Cannot divide dates");
+  }
+
+  // private methods -------------------------------------------------------------------------------------------------
+
+  private Date addImpl(Date summand1, Object summand2) {
+    if (summand2 instanceof Number) {
+      return new Date(summand1.getTime() + ((Number) summand2).longValue());
+    } else if (summand2 instanceof Date) {
+      return TimeUtil.add(summand1, (Date) summand2);
+    } else {
+      throw new IllegalArgumentException("Cannot add " +
+          BeanUtil.simpleClassName(summand2) + " to " + baseType.getName());
     }
+  }
+
+  private static Object subtractImpl(Date minuend, Object subtrahend) {
+    if (subtrahend instanceof Number) {
+      return new Date(minuend.getTime() - ((Number) subtrahend).longValue());
+    } else if (subtrahend instanceof Date) {
+      return TimeUtil.subtract(minuend, (Date) subtrahend);
+    } else {
+      throw new IllegalArgumentException("Cannot subtract " +
+          BeanUtil.simpleClassName(subtrahend) + " from " + minuend.getClass().getName());
+    }
+  }
 
 }

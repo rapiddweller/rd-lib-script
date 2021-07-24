@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.rapiddweller.script.math;
 
 import org.junit.Test;
@@ -22,26 +23,32 @@ import static org.junit.Assert.assertEquals;
  * Tests the {@link TypeManager}.<br/>
  * <br/>
  * Created at 06.10.2009 09:55:20
- * @since 0.6.0
+ *
  * @author Volker Bergmann
+ * @since 0.6.0
  */
-
 public class TypeManagerTest {
 
-	@Test
-	public void testSame() {
-		check(Integer.class, Integer.class, Integer.class);
-		check(Long.class, Long.class, Long.class);
-	}
+  /**
+   * Test same.
+   */
+  @Test
+  public void testSame() {
+    check(Integer.class, Integer.class, Integer.class);
+    check(Long.class, Long.class, Long.class);
+  }
 
-	@Test
-	public void testDifferent() {
-		check(Long.class, Integer.class, Long.class);		// 1st < 2nd
-		check(Long.class, Long.class, Integer.class);		// 2nd < 1st
-	}
+  /**
+   * Test different.
+   */
+  @Test
+  public void testDifferent() {
+    check(Long.class, Integer.class, Long.class);        // 1st < 2nd
+    check(Long.class, Long.class, Integer.class);        // 2nd < 1st
+  }
 
-    private static void check(Class<?> expectedResult, Class<?> type1, Class<?> type2) {
-	    assertEquals(expectedResult, TypeManager.combinedType(type1, type2));
-    }
-	
+  private static void check(Class<?> expectedResult, Class<?> type1, Class<?> type2) {
+    assertEquals(expectedResult, TypeManager.combinedType(type1, type2));
+  }
+
 }

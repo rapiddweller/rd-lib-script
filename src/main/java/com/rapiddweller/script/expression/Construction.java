@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.rapiddweller.script.expression;
 
 import com.rapiddweller.common.Context;
@@ -20,24 +21,45 @@ import com.rapiddweller.common.bean.DefaultClassProvider;
 /**
  * Common parent class for Expressions that instantiate a Java object.<br/><br/>
  * Created: 25.10.2009 08:29:14
- * @since 0.6.0
+ *
+ * @param <E> the type parameter
  * @author Volker Bergmann
+ * @since 0.6.0
  */
 public abstract class Construction<E> extends DynamicExpression<E> {
 
-	protected final String className;
+  /**
+   * The Class name.
+   */
+  protected final String className;
 
-	public Construction(String className) {
-		this.className = className;
-    }
+  /**
+   * Instantiates a new Construction.
+   *
+   * @param className the class name
+   */
+  public Construction(String className) {
+    this.className = className;
+  }
 
-	public String getClassName() {
-    	return className;
-    }
+  /**
+   * Gets class name.
+   *
+   * @return the class name
+   */
+  public String getClassName() {
+    return className;
+  }
 
-    @SuppressWarnings("unchecked")
-    public Class<E> getType(Context context) {
-	    return (Class<E>) DefaultClassProvider.resolveByObjectOrDefaultInstance(className, context);
-    }
+  /**
+   * Gets type.
+   *
+   * @param context the context
+   * @return the type
+   */
+  @SuppressWarnings("unchecked")
+  public Class<E> getType(Context context) {
+    return (Class<E>) DefaultClassProvider.resolveByObjectOrDefaultInstance(className, context);
+  }
 
 }

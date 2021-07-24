@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.rapiddweller.script;
 
 import com.rapiddweller.common.Context;
@@ -19,20 +20,21 @@ import com.rapiddweller.common.Context;
 /**
  * Helper class for testing.<br/><br/>
  * Created: 08.03.2011 14:25:07
- * @since 0.5.8
+ *
  * @author Volker Bergmann
+ * @since 0.5.8
  */
 class IsThreeExpression implements Expression<Boolean> {
 
-	@Override
-	public Boolean evaluate(Context context) {
-		Integer candidateValue = (Integer) context.get("_candidate");
-		return (candidateValue != null && candidateValue == 3);
-	}
+  @Override
+  public Boolean evaluate(Context context) {
+    Integer candidateValue = (Integer) context.get("_candidate");
+    return (candidateValue != null && candidateValue == 3);
+  }
 
-	@Override
-	public boolean isConstant() {
-		return false;
-	}
+  @Override
+  public boolean isConstant() {
+    return false;
+  }
 
 }

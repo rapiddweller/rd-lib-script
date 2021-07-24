@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.rapiddweller.script.expression;
 
 import com.rapiddweller.common.ArrayFormat;
@@ -23,41 +24,55 @@ import com.rapiddweller.script.Expression;
  * {@link Expression} implementation that instantiates a Java object by constructor invocation.<br/>
  * <br/>
  * Created at 06.10.2009 11:48:59
- * @since 0.6.0
+ *
+ * @param <E> the type parameter
  * @author Volker Bergmann
+ * @since 0.6.0
  */
-
 public class ParameterizedConstruction<E> extends Construction<E> {
-	
-	private final Expression<?>[] argumentExpressions;
 
-    public ParameterizedConstruction(String className, Expression<?>[] argumentExpressions) {
-	    super(className);
-	    this.argumentExpressions = argumentExpressions;
-    }
-    
-	@Override
-	@SuppressWarnings("unchecked")
-    public E evaluate(Context context) {
-		Class<?> type = getType(context);
-		Object[] arguments = new Object[argumentExpressions.length];
-		for (int i = 0; i < argumentExpressions.length; i++)
-			arguments[i] = argumentExpressions[i].evaluate(context);
-	    return (E) BeanUtil.newInstance(type, false, arguments);
-    }
+  private final Expression<?>[] argumentExpressions;
 
-	public boolean classExists(Context context) {
-		try {
-			getType(context);
-			return true;
-		} catch (Exception e) {
-			return false;
-		}
-	}
-	
-	@Override
-	public String toString() {
-	    return "new " + className + '(' + ArrayFormat.format(", ", argumentExpressions) + ')';
-	}
-	
+  /**
+   * Instantiates a new Parameterized construction.
+   *
+   * @param className           the class name
+   * @param argumentExpressions the argument expressions
+   */
+  public ParameterizedConstruction(String className, Expression<?>[] argumentExpressions) {
+    super(className);
+    this.argumentExpressions = argumentExpressions;
+  }
+
+  @Override
+  @SuppressWarnings("unchecked")
+  public E evaluate(Context context) {
+    Class<?> type = getType(context);
+    Object[] arguments = new Object[argumentExpressions.length];
+    for (int i = 0; i < argumentExpressions.length; i++) {
+      arguments[i] = argumentExpressions[i].evaluate(context);
+    }
+    return (E) BeanUtil.newInstance(type, false, arguments);
+  }
+
+  /**
+   * Class exists boolean.
+   *
+   * @param context the context
+   * @return the boolean
+   */
+  public boolean classExists(Context context) {
+    try {
+      getType(context);
+      return true;
+    } catch (Exception e) {
+      return false;
+    }
+  }
+
+  @Override
+  public String toString() {
+    return "new " + className + '(' + ArrayFormat.format(", ", argumentExpressions) + ')';
+  }
+
 }

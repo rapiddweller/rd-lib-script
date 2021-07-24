@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.rapiddweller.script.expression;
 
 import com.rapiddweller.common.Context;
@@ -21,18 +22,25 @@ import com.rapiddweller.script.math.ArithmeticEngine;
 /**
  * {@link Expression} that performs a left shift.<br/><br/>
  * Created: 24.11.2010 14:21:09
- * @since 0.6.4
+ *
  * @author Volker Bergmann
+ * @since 0.6.4
  */
 public class LeftShiftExpression extends BinaryExpression<Object> {
-	
-	public LeftShiftExpression(Expression<?> term1, Expression<?> term2) {
-		super("<<", term1, term2);
-	}
 
-	@Override
-	public Object evaluate(Context context) {
-		return ArithmeticEngine.defaultInstance().shiftLeft(term1.evaluate(context), term2.evaluate(context));
-	}
-	
+  /**
+   * Instantiates a new Left shift expression.
+   *
+   * @param term1 the term 1
+   * @param term2 the term 2
+   */
+  public LeftShiftExpression(Expression<?> term1, Expression<?> term2) {
+    super("<<", term1, term2);
+  }
+
+  @Override
+  public Object evaluate(Context context) {
+    return ArithmeticEngine.defaultInstance().shiftLeft(term1.evaluate(context), term2.evaluate(context));
+  }
+
 }

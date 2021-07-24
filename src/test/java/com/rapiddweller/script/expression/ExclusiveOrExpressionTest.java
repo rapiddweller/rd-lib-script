@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.rapiddweller.script.expression;
 
 import com.rapiddweller.common.context.DefaultContext;
@@ -23,29 +24,42 @@ import static org.junit.Assert.assertTrue;
 /**
  * Tests the ExclusiveOrExpression.<br/><br/>
  * Created: 08.06.2011 09:07:34
- * @since 0.5.8
+ *
  * @author Volker Bergmann
+ * @since 0.5.8
  */
 public class ExclusiveOrExpressionTest {
 
-	@Test
-	public void testTrueTrue() {
-		assertFalse(new ExclusiveOrExpression(ExpressionUtil.constant(true), ExpressionUtil.constant(true)).evaluate(new DefaultContext()));
-	}
+  /**
+   * Test true true.
+   */
+  @Test
+  public void testTrueTrue() {
+    assertFalse(new ExclusiveOrExpression(ExpressionUtil.constant(true), ExpressionUtil.constant(true)).evaluate(new DefaultContext()));
+  }
 
-	@Test
-	public void testFalseFalse() {
-		assertFalse(new ExclusiveOrExpression(ExpressionUtil.constant(false), ExpressionUtil.constant(false)).evaluate(new DefaultContext()));
-	}
+  /**
+   * Test false false.
+   */
+  @Test
+  public void testFalseFalse() {
+    assertFalse(new ExclusiveOrExpression(ExpressionUtil.constant(false), ExpressionUtil.constant(false)).evaluate(new DefaultContext()));
+  }
 
-	@Test
-	public void testTrueFalse() {
-		assertTrue(new ExclusiveOrExpression(ExpressionUtil.constant(true), ExpressionUtil.constant(false)).evaluate(new DefaultContext()));
-	}
+  /**
+   * Test true false.
+   */
+  @Test
+  public void testTrueFalse() {
+    assertTrue(new ExclusiveOrExpression(ExpressionUtil.constant(true), ExpressionUtil.constant(false)).evaluate(new DefaultContext()));
+  }
 
-	@Test
-	public void testFalseTrue() {
-		assertTrue(new ExclusiveOrExpression(ExpressionUtil.constant(false), ExpressionUtil.constant(true)).evaluate(new DefaultContext()));
-	}
+  /**
+   * Test false true.
+   */
+  @Test
+  public void testFalseTrue() {
+    assertTrue(new ExclusiveOrExpression(ExpressionUtil.constant(false), ExpressionUtil.constant(true)).evaluate(new DefaultContext()));
+  }
 
 }

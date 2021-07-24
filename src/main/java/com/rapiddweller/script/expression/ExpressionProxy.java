@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.rapiddweller.script.expression;
 
 import com.rapiddweller.common.Context;
@@ -20,18 +21,25 @@ import com.rapiddweller.script.Expression;
 /**
  * Parent class for all expression classes that act as proxy of another class.<br/><br/>
  * Created: 21.10.2009 14:43:08
- * @since 0.5.0
+ *
+ * @param <E> the type parameter
  * @author Volker Bergmann
+ * @since 0.5.0
  */
 public class ExpressionProxy<E> extends ExpressionAdapter<E, E> {
-	
-	public ExpressionProxy(Expression<E> source) {
-	    super(source);
-    }
-	
-	@Override
-	public E evaluate(Context context) {
-	    return source.evaluate(context);
-    }
+
+  /**
+   * Instantiates a new Expression proxy.
+   *
+   * @param source the source
+   */
+  public ExpressionProxy(Expression<E> source) {
+    super(source);
+  }
+
+  @Override
+  public E evaluate(Context context) {
+    return source.evaluate(context);
+  }
 
 }

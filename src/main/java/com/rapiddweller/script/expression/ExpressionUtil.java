@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.rapiddweller.script.expression;
 
 import com.rapiddweller.common.Context;
@@ -24,49 +25,102 @@ import java.util.List;
  * Provides {@link Expression}-related utility methods.<br/>
  * <br/>
  * Created at 07.10.2009 22:33:14
- * @since 0.5.0
+ *
  * @author Volker Bergmann
+ * @since 0.5.0
  */
-
 public class ExpressionUtil {
 
-    public static Object[] evaluateAll(Expression<?>[] expressions, Context context) {
-	    Object[] result = new Object[expressions.length];
-		for (int i = 0; i < expressions.length; i++)
-			result[i] = expressions[i].evaluate(context);
-	    return result;
+  /**
+   * Evaluate all object [ ].
+   *
+   * @param expressions the expressions
+   * @param context     the context
+   * @return the object [ ]
+   */
+  public static Object[] evaluateAll(Expression<?>[] expressions, Context context) {
+    Object[] result = new Object[expressions.length];
+    for (int i = 0; i < expressions.length; i++) {
+      result[i] = expressions[i].evaluate(context);
     }
+    return result;
+  }
 
-    public static boolean isNull(Expression<?> ex) {
-    	if (ex == null)
-    		return true;
-    	return (ex instanceof ConstantExpression && ((ConstantExpression<?>) ex).getValue() == null);   
+  /**
+   * Is null boolean.
+   *
+   * @param ex the ex
+   * @return the boolean
+   */
+  public static boolean isNull(Expression<?> ex) {
+    if (ex == null) {
+      return true;
     }
+    return (ex instanceof ConstantExpression && ((ConstantExpression<?>) ex).getValue() == null);
+  }
 
-	public static List<Object> evaluateAll(List<Expression<?>> expressions, Context context) {
-	    List<Object> result = new ArrayList<>(expressions.size());
-		for (Expression<?> expression : expressions)
-			result.add(expression.evaluate(context));
-	    return result;
+  /**
+   * Evaluate all list.
+   *
+   * @param expressions the expressions
+   * @param context     the context
+   * @return the list
+   */
+  public static List<Object> evaluateAll(List<Expression<?>> expressions, Context context) {
+    List<Object> result = new ArrayList<>(expressions.size());
+    for (Expression<?> expression : expressions) {
+      result.add(expression.evaluate(context));
     }
+    return result;
+  }
 
-	public static <T> T evaluate(Expression<T> expression, Context context) {
-	    return (expression != null ? expression.evaluate(context) : null);
-    }
+  /**
+   * Evaluate t.
+   *
+   * @param <T>        the type parameter
+   * @param expression the expression
+   * @param context    the context
+   * @return the t
+   */
+  public static <T> T evaluate(Expression<T> expression, Context context) {
+    return (expression != null ? expression.evaluate(context) : null);
+  }
 
-	public static <T> Expression<T> constant(T value) {
-	    return new ConstantExpression<>(value);
+  /**
+   * Constant expression.
+   *
+   * @param <T>   the type parameter
+   * @param value the value
+   * @return the expression
+   */
+  public static <T> Expression<T> constant(T value) {
+    return new ConstantExpression<>(value);
+  }
+
+  /**
+   * Unescape expression.
+   *
+   * @param source the source
+   * @return the expression
+   */
+  public Expression<String> unescape(Expression<String> source) {
+    return new UnescapeExpression(source);
+  }
+
+  /**
+   * Simplify expression.
+   *
+   * @param <T>        the type parameter
+   * @param expression the expression
+   * @param context    the context
+   * @return the expression
+   */
+  public static <T> Expression<T> simplify(Expression<T> expression, Context context) {
+    if (expression.isConstant() && !(expression instanceof ConstantExpression)) {
+      return new ConstantExpression<>(evaluate(expression, context));
+    } else {
+      return expression;
     }
-	
-	public Expression<String> unescape(Expression<String> source) {
-		return new UnescapeExpression(source);
-	}
-	
-	public static <T> Expression<T> simplify(Expression<T> expression, Context context) {
-		if (expression.isConstant() && !(expression instanceof ConstantExpression)) 
-			return new ConstantExpression<>(evaluate(expression, context));
-		else
-			return expression;
-	}
-	
+  }
+
 }

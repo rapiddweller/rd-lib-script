@@ -12,9 +12,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.rapiddweller.script;
 
-import com.rapiddweller.common.*;
+import com.rapiddweller.common.ArrayFormat;
+import com.rapiddweller.common.ArrayUtil;
+import com.rapiddweller.common.BeanUtil;
+import com.rapiddweller.common.ConfigurationError;
+import com.rapiddweller.common.Context;
 import com.rapiddweller.common.bean.DefaultClassProvider;
 import com.rapiddweller.script.expression.DynamicExpression;
 import com.rapiddweller.script.expression.ExpressionUtil;
@@ -24,55 +29,63 @@ import org.apache.logging.log4j.Logger;
 import java.util.Arrays;
 
 /**
- * {@link Expression} implementation that evaluates an invocation syntax on a qualified name 
+ * {@link Expression} implementation that evaluates an invocation syntax on a qualified name
  * as static method call or call on an object reference.<br/>
  * <br/>
  * Created at 07.10.2009 22:27:26
- * @since 0.6.0
+ *
  * @author Volker Bergmann
+ * @since 0.6.0
  */
-
 public class QNInvocationExpression extends DynamicExpression<Object> {
-	
-	private static final Logger LOGGER = LogManager.getLogger(QNInvocationExpression.class);
 
-	private final String[] qn;
-	private final Expression<?>[] argExpressions;
-	
-    public QNInvocationExpression(String[] qn, Expression<?>[] argExpressions) {
-    	this.qn = qn;
-    	this.argExpressions = argExpressions;
-    }
+  private static final Logger LOGGER = LogManager.getLogger(QNInvocationExpression.class);
 
-	@Override
-	public Object evaluate(Context context) {
-		Object[] args = ExpressionUtil.evaluateAll(argExpressions, context);
-		String methodName = ArrayUtil.lastElementOf(qn);
-		return invoke(qn, qn.length - 1, methodName, args, context);
-    }
+  private final String[] qn;
+  private final Expression<?>[] argExpressions;
 
-    private static Object invoke(String[] qn, int qnLength, String methodName, Object[] args, Context context) {
-	    String objectOrClassName = ArrayFormat.formatPart(".", 0, qnLength, qn);
-	    if (context.contains(objectOrClassName)) {
-	    	Object target = context.get(objectOrClassName);
-			return BeanUtil.invoke(target, methodName, args);
-	    }
-    	try {
-    		Class<?> type = DefaultClassProvider.resolveByObjectOrDefaultInstance(objectOrClassName, context);
-    		return BeanUtil.invokeStatic(type, methodName, false, args);
-    	} catch (ConfigurationError e) {
-    		if (LOGGER.isDebugEnabled())
-    			LOGGER.debug("Class not found: " + objectOrClassName);
-    	}
-    	QNExpression ownerEx = new QNExpression(Arrays.copyOfRange(qn, 0, qnLength));
-    	Object owner = ownerEx.evaluate(context);
-    	if (owner != null)
-			return BeanUtil.invoke(false, owner, methodName, args);
-    	throw new UnsupportedOperationException("Cannot evaluate " + objectOrClassName);
-    }
+  /**
+   * Instantiates a new Qn invocation expression.
+   *
+   * @param qn             the qn
+   * @param argExpressions the arg expressions
+   */
+  public QNInvocationExpression(String[] qn, Expression<?>[] argExpressions) {
+    this.qn = qn;
+    this.argExpressions = argExpressions;
+  }
 
-    @Override
-    public String toString() {
-        return ArrayFormat.format(".", qn) + '(' + ArrayFormat.format(argExpressions) + ')';
+  @Override
+  public Object evaluate(Context context) {
+    Object[] args = ExpressionUtil.evaluateAll(argExpressions, context);
+    String methodName = ArrayUtil.lastElementOf(qn);
+    return invoke(qn, qn.length - 1, methodName, args, context);
+  }
+
+  private static Object invoke(String[] qn, int qnLength, String methodName, Object[] args, Context context) {
+    String objectOrClassName = ArrayFormat.formatPart(".", 0, qnLength, qn);
+    if (context.contains(objectOrClassName)) {
+      Object target = context.get(objectOrClassName);
+      return BeanUtil.invoke(target, methodName, args);
     }
+    try {
+      Class<?> type = DefaultClassProvider.resolveByObjectOrDefaultInstance(objectOrClassName, context);
+      return BeanUtil.invokeStatic(type, methodName, false, args);
+    } catch (ConfigurationError e) {
+      if (LOGGER.isDebugEnabled()) {
+        LOGGER.debug("Class not found: " + objectOrClassName);
+      }
+    }
+    QNExpression ownerEx = new QNExpression(Arrays.copyOfRange(qn, 0, qnLength));
+    Object owner = ownerEx.evaluate(context);
+    if (owner != null) {
+      return BeanUtil.invoke(false, owner, methodName, args);
+    }
+    throw new UnsupportedOperationException("Cannot evaluate " + objectOrClassName);
+  }
+
+  @Override
+  public String toString() {
+    return ArrayFormat.format(".", qn) + '(' + ArrayFormat.format(argExpressions) + ')';
+  }
 }

@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.rapiddweller.script.expression;
 
 import com.rapiddweller.common.Context;
@@ -22,32 +23,39 @@ import com.rapiddweller.script.QNExpression;
 /**
  * Evaluates an assignment expression like <code>x.y = f.d + 3</code>.<br/><br/>
  * Created: 23.02.2010 10:55:56
- * @since 0.6.0
+ *
  * @author Volker Bergmann
+ * @since 0.6.0
  */
 public class AssignmentExpression extends DynamicExpression<Object> {
-	
-	private final String[] lhs;
-	private final Expression<?> rhs;
 
-	public AssignmentExpression(String[] lhs, Expression<?> rhs) {
-	    this.lhs = lhs;
-	    this.rhs = rhs;
-    }
+  private final String[] lhs;
+  private final Expression<?> rhs;
 
-	@Override
-	public Object evaluate(Context context) {
-		Object value = rhs.evaluate(context);
-		if (lhs.length == 1) {
-			// if lhs is a simple variable name then put the result into context by this name
-			context.set(lhs[0], value);
-		} else {
-			// get last parent object of QN and set the feature denoted by the last QN part
-			String fieldName = lhs[lhs.length - 1];
-			Object field = QNExpression.resolveNamePart(lhs, lhs.length - 1, context);
-			AnyMutator.setValue(field, fieldName, value, true, true);
-		}
-	    return value;
+  /**
+   * Instantiates a new Assignment expression.
+   *
+   * @param lhs the lhs
+   * @param rhs the rhs
+   */
+  public AssignmentExpression(String[] lhs, Expression<?> rhs) {
+    this.lhs = lhs;
+    this.rhs = rhs;
+  }
+
+  @Override
+  public Object evaluate(Context context) {
+    Object value = rhs.evaluate(context);
+    if (lhs.length == 1) {
+      // if lhs is a simple variable name then put the result into context by this name
+      context.set(lhs[0], value);
+    } else {
+      // get last parent object of QN and set the feature denoted by the last QN part
+      String fieldName = lhs[lhs.length - 1];
+      Object field = QNExpression.resolveNamePart(lhs, lhs.length - 1, context);
+      AnyMutator.setValue(field, fieldName, value, true, true);
     }
+    return value;
+  }
 
 }

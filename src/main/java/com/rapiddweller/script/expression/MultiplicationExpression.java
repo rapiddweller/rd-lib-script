@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.rapiddweller.script.expression;
 
 import com.rapiddweller.common.Context;
@@ -21,32 +22,47 @@ import com.rapiddweller.script.math.ArithmeticEngine;
 /**
  * Numerical {@link Expression} that multiplies the results of two other numerical expressions.<br/><br/>
  * Created: 24.11.2010 14:06:41
- * @since 0.5.8
+ *
  * @author Volker Bergmann
+ * @since 0.5.8
  */
-public class MultiplicationExpression extends CompositeExpression<Object,Object> {
-	
-	@SuppressWarnings("unchecked")
-	public MultiplicationExpression() {
-		super("*");
-	}
+public class MultiplicationExpression extends CompositeExpression<Object, Object> {
 
-	@SuppressWarnings({ "rawtypes" })
-	public MultiplicationExpression(Expression... terms) {
-		this("*", terms);
-	}
+  /**
+   * Instantiates a new Multiplication expression.
+   */
+  public MultiplicationExpression() {
+    super("*");
+  }
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public MultiplicationExpression(String symbol, Expression... terms) {
-		super(symbol, terms);
-	}
+  /**
+   * Instantiates a new Multiplication expression.
+   *
+   * @param terms the terms
+   */
+  @SuppressWarnings({"rawtypes"})
+  public MultiplicationExpression(Expression... terms) {
+    this("*", terms);
+  }
 
-	@Override
-	public Object evaluate(Context context) {
-		Object result = terms[0].evaluate(context);
-		for (int i = 1; i < terms.length; i++)
-			result = ArithmeticEngine.defaultInstance().multiply(result, terms[i].evaluate(context));
-		return result;
-	}
-	
+  /**
+   * Instantiates a new Multiplication expression.
+   *
+   * @param symbol the symbol
+   * @param terms  the terms
+   */
+  @SuppressWarnings({"rawtypes", "unchecked"})
+  public MultiplicationExpression(String symbol, Expression... terms) {
+    super(symbol, terms);
+  }
+
+  @Override
+  public Object evaluate(Context context) {
+    Object result = terms[0].evaluate(context);
+    for (int i = 1; i < terms.length; i++) {
+      result = ArithmeticEngine.defaultInstance().multiply(result, terms[i].evaluate(context));
+    }
+    return result;
+  }
+
 }

@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.rapiddweller.script.expression;
 
 import com.rapiddweller.common.Context;
@@ -21,22 +22,36 @@ import com.rapiddweller.script.math.ArithmeticEngine;
 /**
  * Numerical {@link Expression} that performs a modulo operation.<br/><br/>
  * Created: 24.11.2010 14:16:09
- * @since 0.5.8
+ *
  * @author Volker Bergmann
+ * @since 0.5.8
  */
 public class ModuloExpression extends BinaryExpression<Object> {
-	
-	public ModuloExpression(Expression<?> term1, Expression<?> term2) {
-		this("%", term1, term2);
-	}
 
-	public ModuloExpression(String symbol, Expression<?> term1, Expression<?> term2) {
-		super(symbol, term1, term2);
-	}
+  /**
+   * Instantiates a new Modulo expression.
+   *
+   * @param term1 the term 1
+   * @param term2 the term 2
+   */
+  public ModuloExpression(Expression<?> term1, Expression<?> term2) {
+    this("%", term1, term2);
+  }
 
-	@Override
-	public Object evaluate(Context context) {
-		return ArithmeticEngine.defaultInstance().mod(term1.evaluate(context), term2.evaluate(context));
-	}
-	
+  /**
+   * Instantiates a new Modulo expression.
+   *
+   * @param symbol the symbol
+   * @param term1  the term 1
+   * @param term2  the term 2
+   */
+  public ModuloExpression(String symbol, Expression<?> term1, Expression<?> term2) {
+    super(symbol, term1, term2);
+  }
+
+  @Override
+  public Object evaluate(Context context) {
+    return ArithmeticEngine.defaultInstance().mod(term1.evaluate(context), term2.evaluate(context));
+  }
+
 }
