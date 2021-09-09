@@ -28,10 +28,8 @@ import org.apache.logging.log4j.Logger;
 
 /**
  * {@link Expression} implementation that evaluates a qualified name as attributes of an object reference or
- * static fields of a Java class.<br/>
- * <br/>
+ * static fields of a Java class.<br/><br/>
  * Created at 08.10.2009 07:18:53
- *
  * @author Volker Bergmann
  * @since 0.6.0
  */
@@ -41,11 +39,6 @@ public class QNExpression extends DynamicExpression<Object> {
 
   private final String[] qnParts;
 
-  /**
-   * Instantiates a new Qn expression.
-   *
-   * @param qnParts the qn parts
-   */
   public QNExpression(String[] qnParts) {
     this.qnParts = qnParts;
   }
@@ -59,23 +52,14 @@ public class QNExpression extends DynamicExpression<Object> {
     }
   }
 
-  /**
-   * Resolve name part object.
-   *
-   * @param qnParts  the qn parts
-   * @param qnLength the qn length
-   * @param context  the context
-   * @return the object
-   */
   public static Object resolveNamePart(String[] qnParts, int qnLength, Context context) {
     String objectOrClassName = ArrayFormat.formatPart(".", 0, qnLength, qnParts);
     if (context.contains(objectOrClassName)) {
       return context.get(objectOrClassName);
     } else {
-      try {
-        return DefaultClassProvider.resolveByObjectOrDefaultInstance(objectOrClassName, context);
-      } catch (ConfigurationError e) {
-        // ignore errors signaling that a class was not found
+      Class<?> result = DefaultClassProvider.resolveByObjectOrDefaultInstance(objectOrClassName, context);
+      if (result != null) {
+        return result;
       }
       LOGGER.debug("Class not found: {}", objectOrClassName);
       if (qnLength > 1) {
@@ -90,12 +74,6 @@ public class QNExpression extends DynamicExpression<Object> {
     return FeatureAccessor.getValue(resolveNamePart(qnParts, qnLength, context), fieldName);
   }
 
-  /**
-   * Resolve bean spec.
-   *
-   * @param context the context
-   * @return the bean spec
-   */
   public BeanSpec resolve(Context context) {
     String qn = ArrayFormat.format(".", qnParts);
     if (context.contains(qn)) {
