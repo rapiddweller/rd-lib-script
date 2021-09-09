@@ -60,8 +60,8 @@ import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.ParserRuleReturnScope;
 import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.tree.CommonTree;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -78,7 +78,7 @@ import java.util.Objects;
  */
 public class DatabeneScriptParser {
 
-  private static final Logger LOGGER = LogManager.getLogger(DatabeneScriptParser.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(DatabeneScriptParser.class);
   private static final Expression<?>[] EMPTY_ARGUMENT_LIST = {};
 
   // interface -------------------------------------------------------------------------------------------------------

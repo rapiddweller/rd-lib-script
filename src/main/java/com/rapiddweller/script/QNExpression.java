@@ -23,8 +23,8 @@ import com.rapiddweller.common.ObjectNotFoundException;
 import com.rapiddweller.common.accessor.FeatureAccessor;
 import com.rapiddweller.common.bean.DefaultClassProvider;
 import com.rapiddweller.script.expression.DynamicExpression;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 /**
  * {@link Expression} implementation that evaluates a qualified name as attributes of an object reference or
@@ -35,7 +35,7 @@ import org.apache.logging.log4j.Logger;
  */
 public class QNExpression extends DynamicExpression<Object> {
 
-  private static final Logger LOGGER = LogManager.getLogger(DatabeneScriptParser.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(DatabeneScriptParser.class);
 
   private final String[] qnParts;
 
