@@ -70,7 +70,8 @@ public class QNInvocationExpression extends DynamicExpression<Object> {
     }
     try {
       Class<?> type = DefaultClassProvider.resolveByObjectOrDefaultInstance(objectOrClassName, context);
-      return BeanUtil.invokeStatic(type, methodName, false, args);
+      if (type != null)
+        return BeanUtil.invokeStatic(type, methodName, false, args);
     } catch (ConfigurationError e) {
       if (LOGGER.isDebugEnabled()) {
         LOGGER.debug("Class not found: " + objectOrClassName);

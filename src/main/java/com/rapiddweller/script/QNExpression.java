@@ -57,7 +57,12 @@ public class QNExpression extends DynamicExpression<Object> {
     if (context.contains(objectOrClassName)) {
       return context.get(objectOrClassName);
     } else {
-      Class<?> result = DefaultClassProvider.resolveByObjectOrDefaultInstance(objectOrClassName, context);
+      Class<?> result = null;
+      try {
+        result = DefaultClassProvider.resolveByObjectOrDefaultInstance(objectOrClassName, context);
+      } catch (ConfigurationError e) {
+        // ignore errors signaling that a class was not found
+      }
       if (result != null) {
         return result;
       }
