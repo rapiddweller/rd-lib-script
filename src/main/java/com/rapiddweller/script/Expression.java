@@ -20,24 +20,16 @@ import com.rapiddweller.common.Context;
 /**
  * Represents an Expression that evaluates some internal state and returns the result.<br/><br/>
  * Created: 18.06.2007 17:00:22
- *
- * @param <E> the type parameter
+ * @param <E> the result type of {@link #evaluate(Context)}
  * @author Volker Bergmann
  * @since 0.2
  */
 public interface Expression<E> {
-  /**
-   * Evaluate e.
-   *
-   * @param context the context
-   * @return the e
-   */
+
+  /** Evaluates the expression using the context and returns the resulting value. */
   E evaluate(Context context);
 
-  /**
-   * Is constant boolean.
-   *
-   * @return the boolean
-   */
+  /** Tells if the expression will return the same value on each invocation. */
   boolean isConstant();
+
 }
