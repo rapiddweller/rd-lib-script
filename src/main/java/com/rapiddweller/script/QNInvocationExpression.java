@@ -30,10 +30,8 @@ import java.util.Arrays;
 
 /**
  * {@link Expression} implementation that evaluates an invocation syntax on a qualified name
- * as static method call or call on an object reference.<br/>
- * <br/>
+ * as static method call or call on an object reference.<br/><br/>
  * Created at 07.10.2009 22:27:26
- *
  * @author Volker Bergmann
  * @since 0.6.0
  */
@@ -44,12 +42,6 @@ public class QNInvocationExpression extends DynamicExpression<Object> {
   private final String[] qn;
   private final Expression<?>[] argExpressions;
 
-  /**
-   * Instantiates a new Qn invocation expression.
-   *
-   * @param qn             the qn
-   * @param argExpressions the arg expressions
-   */
   public QNInvocationExpression(String[] qn, Expression<?>[] argExpressions) {
     this.qn = qn;
     this.argExpressions = argExpressions;
@@ -69,7 +61,7 @@ public class QNInvocationExpression extends DynamicExpression<Object> {
       return BeanUtil.invoke(target, methodName, args);
     }
     try {
-      Class<?> type = DefaultClassProvider.resolveByObjectOrDefaultInstance(objectOrClassName, context);
+      Class<?> type = DefaultClassProvider.resolveByObjectOrDefaultInstance(objectOrClassName, false, context);
       if (type != null)
         return BeanUtil.invokeStatic(type, methodName, false, args);
     } catch (ConfigurationError e) {

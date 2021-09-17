@@ -59,7 +59,7 @@ public class QNExpression extends DynamicExpression<Object> {
     } else {
       Class<?> result = null;
       try {
-        result = DefaultClassProvider.resolveByObjectOrDefaultInstance(objectOrClassName, context);
+        result = DefaultClassProvider.resolveByObjectOrDefaultInstance(objectOrClassName, false, context);
       } catch (ConfigurationError e) {
         // ignore errors signaling that a class was not found
       }
@@ -85,7 +85,7 @@ public class QNExpression extends DynamicExpression<Object> {
       return BeanSpec.createReference(context.get(qn));
     } else {
       try {
-        Class<?> bean = DefaultClassProvider.resolveByObjectOrDefaultInstance(qn, context);
+        Class<?> bean = DefaultClassProvider.resolveByObjectOrDefaultInstance(qn, true, context);
         return BeanSpec.createConstruction(bean);
       } catch (ConfigurationError e) {
         // ignore this

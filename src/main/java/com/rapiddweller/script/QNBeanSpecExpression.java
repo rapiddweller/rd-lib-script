@@ -71,7 +71,7 @@ public class QNBeanSpecExpression extends DynamicExpression<Object> {
       if (context.contains(objectOrClassName)) {
         return BeanSpec.createReference(context.get(objectOrClassName));
       }
-      Class<?> type = DefaultClassProvider.resolveByObjectOrDefaultInstance(objectOrClassName, context);
+      Class<?> type = DefaultClassProvider.resolveByObjectOrDefaultInstance(objectOrClassName, true, context);
       return BeanSpec.createConstruction(BeanUtil.newInstance(type));
     } catch (ConfigurationError e) {
       if (ExceptionUtil.getRootCause(e) instanceof ClassNotFoundException) {

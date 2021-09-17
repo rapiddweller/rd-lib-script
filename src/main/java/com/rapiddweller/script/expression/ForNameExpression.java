@@ -49,7 +49,7 @@ public class ForNameExpression implements Expression<Class<?>> {
 
   @Override
   public Class<?> evaluate(Context context) {
-    return DefaultClassProvider.resolveByObjectOrDefaultInstance(className.evaluate(context), context);
+    return DefaultClassProvider.resolveByObjectOrDefaultInstance(className.evaluate(context), true, context);
   }
 
 }

@@ -59,7 +59,7 @@ public abstract class Construction<E> extends DynamicExpression<E> {
    */
   @SuppressWarnings("unchecked")
   public Class<E> getType(Context context) {
-    return (Class<E>) DefaultClassProvider.resolveByObjectOrDefaultInstance(className, context);
+    return (Class<E>) DefaultClassProvider.resolveByObjectOrDefaultInstance(className, true, context);
   }
 
 }
