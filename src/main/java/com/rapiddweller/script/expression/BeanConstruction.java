@@ -24,10 +24,8 @@ import com.rapiddweller.script.Expression;
 
 /**
  * {@link Expression} implementation that instantiates a JavaBean by default constructor and
- * calls its property setters for initializing state.<br/>
- * <br/>
+ * calls its property setters for initializing state.<br/><br/>
  * Created at 06.10.2009 11:48:59
- *
  * @param <E> the type parameter
  * @author Volker Bergmann
  * @since 0.6.0
@@ -37,22 +35,10 @@ public class BeanConstruction<E> extends DynamicExpression<E> {
   private final Expression<E> instantiation;
   private final Assignment[] assignments;
 
-  /**
-   * Instantiates a new Bean construction.
-   *
-   * @param beanClassName the bean class name
-   * @param assignments   the assignments
-   */
   public BeanConstruction(String beanClassName, Assignment[] assignments) {
     this(new DefaultConstruction<>(beanClassName), assignments);
   }
 
-  /**
-   * Instantiates a new Bean construction.
-   *
-   * @param instantiation the instantiation
-   * @param assignments   the assignments
-   */
   public BeanConstruction(Expression<E> instantiation, Assignment[] assignments) {
     this.instantiation = instantiation;
     this.assignments = assignments;
