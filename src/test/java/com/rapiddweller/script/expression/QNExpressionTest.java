@@ -23,62 +23,53 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Tests the {@link QNExpression}.<br/><br/>
  * Created: 18.05.2011 16:17:22
- *
  * @author Volker Bergmann
  * @since 0.6.6
  */
 public class QNExpressionTest {
 
-  /**
-   * The Context.
-   */
   ScriptContext context;
 
-  /**
-   * St up context.
-   */
   @Before
-  public void stUpContext() {
+  public void setUpContext() {
     context = new DefaultScriptContext();
   }
 
-  /**
-   * Test class.
-   */
   @Test
   public void testClass() {
     check(ScriptTestUtil.class, "com", "rapiddweller", "script", "ScriptTestUtil");
   }
 
-  /**
-   * Test imported class.
-   */
   @Test
   public void testImportedClass() {
     context.importClass("com.rapiddweller.script.*");
     check(ScriptTestUtil.class, context, "ScriptTestUtil");
   }
 
-  /**
-   * Test static field.
-   */
   @Test
   public void testStaticField() {
     check("pubVarContent", "com", "rapiddweller", "script", "ScriptTestUtil", "pubvar");
   }
 
-  /**
-   * Test static field of imported class.
-   */
   @Test
   public void testStaticFieldOfImportedClass() {
     ScriptContext context = new DefaultScriptContext();
     context.importClass("com.rapiddweller.script.*");
     check("pubVarContent", context, "ScriptTestUtil", "pubvar");
+  }
+
+  @Test
+  public void testVariablePath() {
+    ScriptContext context = new DefaultScriptContext();
+    A a = new A();
+    context.set("a", a);
+    assertSame(a.getB().getC(), new QNExpression(new String[] { "a", "b", "c" }).evaluate(context));
   }
 
   // helpers ---------------------------------------------------------------------------------------------------------
@@ -91,4 +82,26 @@ public class QNExpressionTest {
     assertEquals(expected, new QNExpression(parts).evaluate(context));
   }
 
+  public static class A {
+    B b;
+    public A() {
+      this.b = new B();
+    }
+    public B getB() {
+      return b;
+    }
+  }
+
+  public static class B {
+    C c;
+    public B() {
+      this.c = new C();
+    }
+    public C getC() {
+      return c;
+    }
+  }
+
+  public static class C {
+  }
 }
