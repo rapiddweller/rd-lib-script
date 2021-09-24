@@ -1,3 +1,9 @@
+# Release 1.1.4-jdk-11
+
+## Release Highlights
+
+---
+
 # Release 1.1.3-jdk-11
 
 ## Release Highlights
@@ -13,8 +19,6 @@
 * QNExpression: Avoiding issues with ClassProviders- Fixed NPE in QNExpression
 
 * Avoiding ConfigurationError in QNEnvocationExpression
-
-
 
 # Release 1.1.2-jdk-11
 
