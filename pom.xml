@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.rapiddweller</groupId>
     <artifactId>rd-lib-script</artifactId>
-    <version>1.1.3-jdk-11-SNAPSHOT</version>
+    <version>1.1.3-jdk-11</version>
     <packaging>jar</packaging>
     <name>rapiddweller Script</name>
     <description>'rapiddweller Script' is an open source software library for resolving Java-like script expressions,
