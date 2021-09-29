@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2014 Volker Bergmann (volker.bergmann@bergmann-it.de).
+ * Copyright (C) 2011-2021 Volker Bergmann (volker.bergmann@bergmann-it.de).
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,22 +22,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Provides {@link Expression}-related utility methods.<br/>
- * <br/>
+ * Provides {@link Expression}-related utility methods.<br/><br/>
  * Created at 07.10.2009 22:33:14
- *
  * @author Volker Bergmann
  * @since 0.5.0
  */
 public class ExpressionUtil {
 
-  /**
-   * Evaluate all object [ ].
-   *
-   * @param expressions the expressions
-   * @param context     the context
-   * @return the object [ ]
-   */
   public static Object[] evaluateAll(Expression<?>[] expressions, Context context) {
     Object[] result = new Object[expressions.length];
     for (int i = 0; i < expressions.length; i++) {
@@ -46,12 +37,6 @@ public class ExpressionUtil {
     return result;
   }
 
-  /**
-   * Is null boolean.
-   *
-   * @param ex the ex
-   * @return the boolean
-   */
   public static boolean isNull(Expression<?> ex) {
     if (ex == null) {
       return true;
@@ -59,13 +44,6 @@ public class ExpressionUtil {
     return (ex instanceof ConstantExpression && ((ConstantExpression<?>) ex).getValue() == null);
   }
 
-  /**
-   * Evaluate all list.
-   *
-   * @param expressions the expressions
-   * @param context     the context
-   * @return the list
-   */
   public static List<Object> evaluateAll(List<Expression<?>> expressions, Context context) {
     List<Object> result = new ArrayList<>(expressions.size());
     for (Expression<?> expression : expressions) {
@@ -74,47 +52,22 @@ public class ExpressionUtil {
     return result;
   }
 
-  /**
-   * Evaluate t.
-   *
-   * @param <T>        the type parameter
-   * @param expression the expression
-   * @param context    the context
-   * @return the t
-   */
+  public static <T> T evaluateWithDefault(Expression<T> expression, T defaultValue, Context context) {
+    return (expression != null ? expression.evaluate(context) : defaultValue);
+  }
+
   public static <T> T evaluate(Expression<T> expression, Context context) {
     return (expression != null ? expression.evaluate(context) : null);
   }
 
-  /**
-   * Constant expression.
-   *
-   * @param <T>   the type parameter
-   * @param value the value
-   * @return the expression
-   */
   public static <T> Expression<T> constant(T value) {
     return new ConstantExpression<>(value);
   }
 
-  /**
-   * Unescape expression.
-   *
-   * @param source the source
-   * @return the expression
-   */
   public Expression<String> unescape(Expression<String> source) {
     return new UnescapeExpression(source);
   }
 
-  /**
-   * Simplify expression.
-   *
-   * @param <T>        the type parameter
-   * @param expression the expression
-   * @param context    the context
-   * @return the expression
-   */
   public static <T> Expression<T> simplify(Expression<T> expression, Context context) {
     if (expression.isConstant() && !(expression instanceof ConstantExpression)) {
       return new ConstantExpression<>(evaluate(expression, context));
