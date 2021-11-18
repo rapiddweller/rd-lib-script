@@ -20,7 +20,7 @@ import com.rapiddweller.common.Assert;
 import com.rapiddweller.common.Context;
 import com.rapiddweller.common.ParseUtil;
 import com.rapiddweller.common.StringUtil;
-import com.rapiddweller.common.SyntaxError;
+import com.rapiddweller.common.exception.SyntaxError;
 import com.rapiddweller.script.antlr.DatabeneScriptLexer;
 import com.rapiddweller.script.expression.AssignmentExpression;
 import com.rapiddweller.script.expression.BeanConstruction;
@@ -69,10 +69,8 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Parses Benerator Script statements and converts expressions and statements to Java objects.<br/>
- * <br/>
+ * Parses Benerator Script statements and converts expressions and statements to Java objects.<br/><br/>
  * Created at 05.10.2009 18:52:31
- *
  * @author Volker Bergmann
  * @since 0.6.0
  */
@@ -83,13 +81,6 @@ public class DatabeneScriptParser {
 
   // interface -------------------------------------------------------------------------------------------------------
 
-  /**
-   * Parse weighted literal list weighted sample [ ].
-   *
-   * @param text the text
-   * @return the weighted sample [ ]
-   * @throws SyntaxError the syntax error
-   */
   public static WeightedSample<?>[] parseWeightedLiteralList(String text) throws SyntaxError {
     if (StringUtil.isEmpty(text)) {
       return new WeightedSample[0];
@@ -121,13 +112,6 @@ public class DatabeneScriptParser {
     }
   }
 
-  /**
-   * Parse expression expression.
-   *
-   * @param text the text
-   * @return the expression
-   * @throws SyntaxError the syntax error
-   */
   public static Expression<?> parseExpression(String text) throws SyntaxError {
     if (StringUtil.isEmpty(text)) {
       return null;
@@ -154,13 +138,6 @@ public class DatabeneScriptParser {
     }
   }
 
-  /**
-   * Parse transition list weighted transition [ ].
-   *
-   * @param text the text
-   * @return the weighted transition [ ]
-   * @throws SyntaxError the syntax error
-   */
   public static WeightedTransition[] parseTransitionList(String text) throws SyntaxError {
     if (StringUtil.isEmpty(text)) {
       return null;
@@ -192,13 +169,6 @@ public class DatabeneScriptParser {
     }
   }
 
-  /**
-   * Parse bean spec list expression [ ].
-   *
-   * @param text the text
-   * @return the expression [ ]
-   * @throws SyntaxError the syntax error
-   */
   public static Expression<?>[] parseBeanSpecList(String text) throws SyntaxError {
     if (StringUtil.isEmpty(text)) {
       return null;
@@ -207,13 +177,6 @@ public class DatabeneScriptParser {
     return convertBeanSpecList(Objects.requireNonNull(tree));
   }
 
-  /**
-   * Parse bean spec list as tree common tree.
-   *
-   * @param text the text
-   * @return the common tree
-   * @throws SyntaxError the syntax error
-   */
   public static CommonTree parseBeanSpecListAsTree(String text) throws SyntaxError {
     if (StringUtil.isEmpty(text)) {
       return null;
@@ -244,13 +207,6 @@ public class DatabeneScriptParser {
     }
   }
 
-  /**
-   * Resolve bean spec list bean spec [ ].
-   *
-   * @param text    the text
-   * @param context the context
-   * @return the bean spec [ ]
-   */
   public static BeanSpec[] resolveBeanSpecList(String text, Context context) {
     if (StringUtil.isEmpty(text)) {
       return null;
@@ -259,13 +215,6 @@ public class DatabeneScriptParser {
     return resolveBeanSpecList(Objects.requireNonNull(tree), context);
   }
 
-  /**
-   * Parse bean spec expression.
-   *
-   * @param text the text
-   * @return the expression
-   * @throws SyntaxError the syntax error
-   */
   public static Expression<?> parseBeanSpec(String text) throws SyntaxError {
     if (StringUtil.isEmpty(text)) {
       return null;
@@ -296,14 +245,6 @@ public class DatabeneScriptParser {
     }
   }
 
-  /**
-   * Resolve bean spec bean spec.
-   *
-   * @param text    the text
-   * @param context the context
-   * @return the bean spec
-   * @throws SyntaxError the syntax error
-   */
   public static BeanSpec resolveBeanSpec(String text, Context context) throws SyntaxError {
     if (StringUtil.isEmpty(text)) {
       return null;
