@@ -18,6 +18,7 @@
 package com.rapiddweller.script.antlr;
 
 
+import com.rapiddweller.common.exception.ExceptionFactory;
 import org.antlr.runtime.BaseRecognizer;
 import org.antlr.runtime.CharStream;
 import org.antlr.runtime.DFA;
@@ -438,7 +439,7 @@ public class DatabeneScriptLexer extends Lexer {
         return state.token;
       } catch (RecognitionException re) {
         reportError(re);
-        throw new RuntimeException(getClass().getSimpleName() + " error", re); // or throw Error
+        throw ExceptionFactory.getInstance().syntaxError(getClass().getSimpleName() + " error", re); // or throw Error
       }
     }
   }

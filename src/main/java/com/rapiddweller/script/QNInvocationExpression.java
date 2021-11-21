@@ -37,7 +37,7 @@ import java.util.Arrays;
  */
 public class QNInvocationExpression extends DynamicExpression<Object> {
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(QNInvocationExpression.class);
+  private static final Logger logger = LoggerFactory.getLogger(QNInvocationExpression.class);
 
   private final String[] qn;
   private final Expression<?>[] argExpressions;
@@ -65,8 +65,8 @@ public class QNInvocationExpression extends DynamicExpression<Object> {
       if (type != null)
         return BeanUtil.invokeStatic(type, methodName, false, args);
     } catch (ConfigurationError e) {
-      if (LOGGER.isDebugEnabled()) {
-        LOGGER.debug("Class not found: " + objectOrClassName);
+      if (logger.isDebugEnabled()) {
+        logger.debug("Class not found: " + objectOrClassName);
       }
     }
     QNExpression ownerEx = new QNExpression(Arrays.copyOfRange(qn, 0, qnLength));

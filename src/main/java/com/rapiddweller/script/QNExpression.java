@@ -35,7 +35,7 @@ import org.slf4j.Logger;
  */
 public class QNExpression extends DynamicExpression<Object> {
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(DatabeneScriptParser.class);
+  private static final Logger logger = LoggerFactory.getLogger(QNExpression.class);
 
   private final String[] qnParts;
 
@@ -66,7 +66,7 @@ public class QNExpression extends DynamicExpression<Object> {
       if (result != null) {
         return result;
       }
-      LOGGER.debug("Class not found: {}", objectOrClassName);
+      logger.debug("Class not found: {}", objectOrClassName);
       if (qnLength > 1) {
         return readField(qnParts, qnLength - 1, qnParts[qnLength - 1], context);
       } else {
@@ -90,7 +90,7 @@ public class QNExpression extends DynamicExpression<Object> {
       } catch (ConfigurationError e) {
         // ignore this
       }
-      LOGGER.debug("Class not found: {}", qn);
+      logger.debug("Class not found: {}", qn);
       Object bean = readField(qnParts, qnParts.length - 1, ArrayUtil.lastElementOf(qnParts), context);
       return BeanSpec.createReference(bean);
     }

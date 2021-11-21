@@ -20,6 +20,7 @@ import com.rapiddweller.common.Assert;
 import com.rapiddweller.common.Context;
 import com.rapiddweller.common.ParseUtil;
 import com.rapiddweller.common.StringUtil;
+import com.rapiddweller.common.exception.ExceptionFactory;
 import com.rapiddweller.common.exception.SyntaxError;
 import com.rapiddweller.script.antlr.DatabeneScriptLexer;
 import com.rapiddweller.script.expression.AssignmentExpression;
@@ -76,10 +77,17 @@ import java.util.Objects;
  */
 public class DatabeneScriptParser {
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(DatabeneScriptParser.class);
-  private static final Expression<?>[] EMPTY_ARGUMENT_LIST = {};
+  private static final Logger logger = LoggerFactory.getLogger(DatabeneScriptParser.class);
+  private static final Expression<?>[] NO_EXPRESSIONS = {};
+  private static final WeightedTransition[] NO_TRANSITIONS = {};
+  private static final WeightedSample<?>[] NO_SAMPLES = {};
+  public static final String ILLEGAL_STATE_IN_REGEX_PARSING = "Encountered illegal state in regex parsing";
 
   // interface -------------------------------------------------------------------------------------------------------
+
+  private DatabeneScriptParser() {
+    // private constructor to prevent instantiation of this utility class
+  }
 
   public static WeightedSample<?>[] parseWeightedLiteralList(String text) throws SyntaxError {
     if (StringUtil.isEmpty(text)) {
@@ -91,12 +99,10 @@ public class DatabeneScriptParser {
       checkForSyntaxErrors(text, "weightedLiteralList", parser, r);
       if (r != null) {
         CommonTree tree = (CommonTree) r.getTree();
-        if (LOGGER.isDebugEnabled()) {
-          LOGGER.debug("parsed " + text + " to " + tree.toStringTree());
-        }
+        logParseResult(text, tree);
         return convertWeightedLiteralList(tree);
       } else {
-        return null;
+        return NO_SAMPLES;
       }
     } catch (RuntimeException e) {
       if (e.getCause() instanceof RecognitionException) {
@@ -121,9 +127,7 @@ public class DatabeneScriptParser {
       com.rapiddweller.script.antlr.DatabeneScriptParser.expression_return r = parser.expression();
       checkForSyntaxErrors(text, "expression", parser, r);
       CommonTree tree = (CommonTree) r.getTree();
-      if (LOGGER.isDebugEnabled()) {
-        LOGGER.debug("parsed " + text + " to " + tree.toStringTree());
-      }
+      logParseResult(text, tree);
       return convertNode(tree);
     } catch (RuntimeException e) {
       if (e.getCause() instanceof RecognitionException) {
@@ -132,7 +136,7 @@ public class DatabeneScriptParser {
         throw e;
       }
     } catch (IOException e) {
-      throw new IllegalStateException("Encountered illegal state in regex parsing", e);
+      throw ExceptionFactory.getInstance().internalError(ILLEGAL_STATE_IN_REGEX_PARSING, e);
     } catch (RecognitionException e) {
       throw mapToSyntaxError(e, text);
     }
@@ -140,7 +144,7 @@ public class DatabeneScriptParser {
 
   public static WeightedTransition[] parseTransitionList(String text) throws SyntaxError {
     if (StringUtil.isEmpty(text)) {
-      return null;
+      return NO_TRANSITIONS;
     }
     try {
       com.rapiddweller.script.antlr.DatabeneScriptParser parser = parser(text);
@@ -148,12 +152,10 @@ public class DatabeneScriptParser {
       checkForSyntaxErrors(text, "transitionList", parser, r);
       if (r != null) {
         CommonTree tree = (CommonTree) r.getTree();
-        if (LOGGER.isDebugEnabled()) {
-          LOGGER.debug("parsed " + text + " to " + tree.toStringTree());
-        }
+        logParseResult(text, tree);
         return convertTransitionList(tree);
       } else {
-        return null;
+        return NO_TRANSITIONS;
       }
     } catch (RuntimeException e) {
       if (e.getCause() instanceof RecognitionException) {
@@ -162,7 +164,7 @@ public class DatabeneScriptParser {
         throw e;
       }
     } catch (IOException e) {
-      throw new IllegalStateException("Encountered illegal state in regex parsing", e);
+      throw new IllegalStateException(ILLEGAL_STATE_IN_REGEX_PARSING, e);
     } catch (RecognitionException e) {
       e.printStackTrace();
       throw mapToSyntaxError(e, text);
@@ -171,7 +173,7 @@ public class DatabeneScriptParser {
 
   public static Expression<?>[] parseBeanSpecList(String text) throws SyntaxError {
     if (StringUtil.isEmpty(text)) {
-      return null;
+      return NO_EXPRESSIONS;
     }
     CommonTree tree = parseBeanSpecListAsTree(text);
     return convertBeanSpecList(Objects.requireNonNull(tree));
@@ -187,9 +189,7 @@ public class DatabeneScriptParser {
       checkForSyntaxErrors(text, "beanSpecList", parser, r);
       if (r != null) {
         CommonTree tree = (CommonTree) r.getTree();
-        if (LOGGER.isDebugEnabled()) {
-          LOGGER.debug("parsed " + text + " to " + tree.toStringTree());
-        }
+        logParseResult(text, tree);
         return tree;
       } else {
         return null;
@@ -201,7 +201,7 @@ public class DatabeneScriptParser {
         throw e;
       }
     } catch (IOException e) {
-      throw new IllegalStateException("Encountered illegal state in regex parsing", e);
+      throw new IllegalStateException(ILLEGAL_STATE_IN_REGEX_PARSING, e);
     } catch (RecognitionException e) {
       throw mapToSyntaxError(e, text);
     }
@@ -225,8 +225,8 @@ public class DatabeneScriptParser {
       checkForSyntaxErrors(text, "beanSpec", parser, r);
       if (r != null) {
         CommonTree tree = (CommonTree) r.getTree();
-        if (LOGGER.isDebugEnabled()) {
-          LOGGER.debug("parsed " + text + " to " + tree.toStringTree());
+        if (logger.isDebugEnabled()) {
+          logParseResult(text, tree);
         }
         return convertBeanSpec(tree);
       } else {
@@ -239,7 +239,7 @@ public class DatabeneScriptParser {
         throw e;
       }
     } catch (IOException e) {
-      throw new IllegalStateException("Encountered illegal state in regex parsing", e);
+      throw new IllegalStateException(ILLEGAL_STATE_IN_REGEX_PARSING, e);
     } catch (RecognitionException e) {
       throw mapToSyntaxError(e, text);
     }
@@ -255,8 +255,8 @@ public class DatabeneScriptParser {
       checkForSyntaxErrors(text, "beanSpec", parser, r);
       if (r != null) {
         CommonTree tree = (CommonTree) r.getTree();
-        if (LOGGER.isDebugEnabled()) {
-          LOGGER.debug("parsed " + text + " to " + tree.toStringTree());
+        if (logger.isDebugEnabled()) {
+          logParseResult(text, tree);
         }
         return resolveBeanSpec(tree, context);
       } else {
@@ -269,7 +269,7 @@ public class DatabeneScriptParser {
         throw e;
       }
     } catch (IOException e) {
-      throw new IllegalStateException("Encountered illegal state in regex parsing", e);
+      throw new IllegalStateException(ILLEGAL_STATE_IN_REGEX_PARSING, e);
     } catch (RecognitionException e) {
       throw mapToSyntaxError(e, text);
     }
@@ -325,9 +325,9 @@ public class DatabeneScriptParser {
       } else {
         weight = new ConstantExpression<>(1.);
       }
-      return new WeightedSample<Object>(value.evaluate(null), weight.evaluate(null));
+      return new WeightedSample<>(value.evaluate(null), weight.evaluate(null));
     } else {
-      return new WeightedSample<Object>(convertNode(node).evaluate(null), 1.);
+      return new WeightedSample<>(convertNode(node).evaluate(null), 1.);
     }
   }
 
@@ -651,7 +651,7 @@ public class DatabeneScriptParser {
   private static Expression<?>[] parseArguments(CommonTree node) throws SyntaxError {
     List<CommonTree> childNodes = getChildNodes(node);
     if (childNodes == null) {
-      return EMPTY_ARGUMENT_LIST;
+      return NO_EXPRESSIONS;
     }
     Expression<?>[] result = new Expression[childNodes.size()];
     for (int i = 0; i < childNodes.size(); i++) {
@@ -779,6 +779,10 @@ public class DatabeneScriptParser {
     return new AssignmentExpression(
         convertQualifiedNameToStringArray(childAt(0, node)),
         convertNode(childAt(1, node)));
+  }
+
+  private static void logParseResult(String input, CommonTree result) {
+    logger.debug("parsed {} to {}", input, result.toStringTree());
   }
 
   // CommonTree helpers ----------------------------------------------------------------------------------------------
