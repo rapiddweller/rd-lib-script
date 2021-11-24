@@ -16,6 +16,7 @@
 package com.rapiddweller.script.math;
 
 import com.rapiddweller.common.TimeUtil;
+import com.rapiddweller.common.exception.IllegalArgumentError;
 import org.junit.Test;
 
 import java.io.File;
@@ -27,7 +28,6 @@ import static org.junit.Assert.assertEquals;
 /**
  * Tests the {@link TimestampArithmetic}.<br/><br/>
  * Created: 14.10.2009 11:24:55
- *
  * @author Volker Bergmann
  * @since 0.6.0
  */
@@ -40,22 +40,13 @@ public class TimestampArithmeticTest {
   private static final Timestamp TS_SUM2 = TimeUtil.timestamp(2009, 9, 14, 1, 2, 4, 123456788);
   private static final long ONE_OUR_MILLIS = 3600L * 1000;
 
-  /**
-   * The Arithmetic.
-   */
   final TimestampArithmetic arithmetic = new TimestampArithmetic();
 
-  /**
-   * Test get base type.
-   */
   @Test
   public void testGetBaseType() {
     assertEquals(Timestamp.class, arithmetic.getBaseType());
   }
 
-  /**
-   * Test add timestamp.
-   */
   @Test
   public void testAdd_Timestamp() {
     // simple test
@@ -64,25 +55,16 @@ public class TimestampArithmeticTest {
     assertEquals(TS_SUM2, arithmetic.add(TS_BASE, TS_OFFSET2));
   }
 
-  /**
-   * Test add millis.
-   */
   @Test
   public void testAdd_Millis() {
     assertEquals(TimeUtil.add(TS_BASE, Calendar.HOUR, 1), arithmetic.add(TS_BASE, ONE_OUR_MILLIS));
   }
 
-  /**
-   * Test add illegal type.
-   */
-  @Test(expected = IllegalArgumentException.class)
+  @Test(expected = IllegalArgumentError.class)
   public void testAdd_IllegalType() {
     arithmetic.add(TS_BASE, new File("test"));
   }
 
-  /**
-   * Test subtract.
-   */
   @Test
   public void testSubtract() {
     // normal test
@@ -93,33 +75,21 @@ public class TimestampArithmeticTest {
     assertEquals(TS_OFFSET2, arithmetic.subtract(TS_SUM2, TS_BASE));
   }
 
-  /**
-   * Test subtract millis.
-   */
   @Test
   public void testSubtract_Millis() {
     assertEquals(TimeUtil.add(TS_BASE, Calendar.HOUR, -1), arithmetic.subtract(TS_BASE, ONE_OUR_MILLIS));
   }
 
-  /**
-   * Test subtract illegal type.
-   */
-  @Test(expected = IllegalArgumentException.class)
+  @Test(expected = IllegalArgumentError.class)
   public void testSubtract_IllegalType() {
     arithmetic.subtract(TS_BASE, new File("test"));
   }
 
-  /**
-   * Test multiply.
-   */
   @Test(expected = UnsupportedOperationException.class)
   public void testMultiply() {
     arithmetic.multiply(TS_BASE, TS_OFFSET);
   }
 
-  /**
-   * Test divide.
-   */
   @Test(expected = UnsupportedOperationException.class)
   public void testDivide() {
     arithmetic.divide(TS_BASE, TS_OFFSET);

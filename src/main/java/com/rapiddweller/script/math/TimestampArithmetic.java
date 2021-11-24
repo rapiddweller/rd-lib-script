@@ -17,6 +17,7 @@ package com.rapiddweller.script.math;
 
 import com.rapiddweller.common.BeanUtil;
 import com.rapiddweller.common.TimeUtil;
+import com.rapiddweller.common.exception.ExceptionFactory;
 
 import java.sql.Timestamp;
 import java.util.Date;
@@ -47,7 +48,7 @@ public class TimestampArithmetic extends TypeArithmetic<Timestamp> {
     } else if (summand2 instanceof Timestamp) {
       return addToTimestamp((Timestamp) summand2, summand1);
     } else {
-      throw new IllegalArgumentException("No argument is of type " + baseType + ": " +
+      throw ExceptionFactory.getInstance().illegalArgument("No argument is of type " + baseType + ": " +
           summand1 + ", " + summand2);
     }
   }
@@ -57,7 +58,7 @@ public class TimestampArithmetic extends TypeArithmetic<Timestamp> {
     if (minuend instanceof Timestamp) {
       return subtractFromTimestamp((Timestamp) minuend, subtrahend);
     } else {
-      throw new IllegalArgumentException("No argument is of type " + baseType + ": " +
+      throw ExceptionFactory.getInstance().illegalArgument("No argument is of type " + baseType + ": " +
           minuend + ", " + subtrahend);
     }
   }
@@ -82,7 +83,7 @@ public class TimestampArithmetic extends TypeArithmetic<Timestamp> {
     } else if (summand2 instanceof Date) {
       return addTimestamps(summand1, new Timestamp(((Date) summand2).getTime()));
     } else {
-      throw new IllegalArgumentException("Cannot add " +
+      throw ExceptionFactory.getInstance().illegalArgument("Cannot add " +
           BeanUtil.simpleClassName(summand2) + " to " + baseType.getName());
     }
   }
@@ -102,7 +103,7 @@ public class TimestampArithmetic extends TypeArithmetic<Timestamp> {
     } else if (subtrahend instanceof Date) {
       return subtractTimestamps(minuend, new Timestamp(((Date) subtrahend).getTime()));
     } else {
-      throw new IllegalArgumentException("Cannot subtract " +
+      throw ExceptionFactory.getInstance().illegalArgument("Cannot subtract " +
           BeanUtil.simpleClassName(subtrahend) + " from " + minuend.getClass().getName());
     }
   }

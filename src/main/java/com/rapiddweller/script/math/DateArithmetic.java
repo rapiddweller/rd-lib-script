@@ -17,6 +17,7 @@ package com.rapiddweller.script.math;
 
 import com.rapiddweller.common.BeanUtil;
 import com.rapiddweller.common.TimeUtil;
+import com.rapiddweller.common.exception.ExceptionFactory;
 
 import java.util.Date;
 
@@ -46,7 +47,7 @@ public class DateArithmetic extends TypeArithmetic<Date> {
     } else if (summand2 instanceof Date) {
       return addImpl((Date) summand2, summand1);
     } else {
-      throw new IllegalArgumentException("No argument is of type " + baseType + ": " +
+      throw ExceptionFactory.getInstance().illegalArgument("No argument is of type " + baseType + ": " +
           summand1 + ", " + summand2);
     }
   }
@@ -74,7 +75,7 @@ public class DateArithmetic extends TypeArithmetic<Date> {
     } else if (summand2 instanceof Date) {
       return TimeUtil.add(summand1, (Date) summand2);
     } else {
-      throw new IllegalArgumentException("Cannot add " +
+      throw ExceptionFactory.getInstance().illegalArgument("Cannot add " +
           BeanUtil.simpleClassName(summand2) + " to " + baseType.getName());
     }
   }
@@ -85,7 +86,7 @@ public class DateArithmetic extends TypeArithmetic<Date> {
     } else if (subtrahend instanceof Date) {
       return TimeUtil.subtract(minuend, (Date) subtrahend);
     } else {
-      throw new IllegalArgumentException("Cannot subtract " +
+      throw ExceptionFactory.getInstance().illegalArgument("Cannot subtract " +
           BeanUtil.simpleClassName(subtrahend) + " from " + minuend.getClass().getName());
     }
   }

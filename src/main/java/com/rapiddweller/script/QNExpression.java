@@ -22,6 +22,7 @@ import com.rapiddweller.common.Context;
 import com.rapiddweller.common.ObjectNotFoundException;
 import com.rapiddweller.common.accessor.FeatureAccessor;
 import com.rapiddweller.common.bean.DefaultClassProvider;
+import com.rapiddweller.common.exception.ExceptionFactory;
 import com.rapiddweller.script.expression.DynamicExpression;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
@@ -48,7 +49,8 @@ public class QNExpression extends DynamicExpression<Object> {
     try {
       return resolveNamePart(qnParts, qnParts.length, context);
     } catch (ObjectNotFoundException e) {
-      throw new ObjectNotFoundException("Unable to resolve " + ArrayFormat.format(".", qnParts));
+      throw ExceptionFactory.getInstance().objectNotFound(
+          "Unable to resolve " + ArrayFormat.format(".", qnParts));
     }
   }
 
@@ -70,7 +72,7 @@ public class QNExpression extends DynamicExpression<Object> {
       if (qnLength > 1) {
         return readField(qnParts, qnLength - 1, qnParts[qnLength - 1], context);
       } else {
-        throw new ObjectNotFoundException("'" + objectOrClassName + "' is not defined");
+        throw ExceptionFactory.getInstance().objectNotFound("'" + objectOrClassName + "' is not defined");
       }
     }
   }

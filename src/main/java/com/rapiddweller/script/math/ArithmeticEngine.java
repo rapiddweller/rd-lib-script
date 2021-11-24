@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2014 Volker Bergmann (volker.bergmann@bergmann-it.de).
+ * Copyright (C) 2011-2021 Volker Bergmann (volker.bergmann@bergmann-it.de).
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,6 +17,7 @@ package com.rapiddweller.script.math;
 
 import com.rapiddweller.common.BeanUtil;
 import com.rapiddweller.common.converter.AnyConverter;
+import com.rapiddweller.common.exception.ExceptionFactory;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -24,10 +25,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Provides arithmetic operations.<br/>
- * <br/>
+ * Provides arithmetic operations.<br/><br/>
  * Created at 06.10.2009 08:00:44
- *
  * @author Volker Bergmann
  * @since 0.6.0
  */
@@ -37,6 +36,13 @@ public class ArithmeticEngine {
 
   private static final Map<Class<?>, TypeArithmetic<?>> typeArithmetics;
   private static final ArithmeticEngine defaultInstance = new ArithmeticEngine();
+  public static final String IS_NOT_SUPPORTED = " is not supported";
+  public static final String CANNOT_COMPARE_TYPE = "Cannot compare type ";
+  public static final String WITH = " with ";
+  public static final String NOT_A_NUMBER_OR_BOOLEAN = "Not a number or boolean: ";
+  public static final String ILLEGAL_STATE_FOR = "Illegal state for ";
+  public static final String NOT_A_NUMBER = "Not a number: ";
+  public static final String CANNOT_SHIFT = "Cannot shift ";
 
   static {
     typeArithmetics = new HashMap<>();
@@ -54,24 +60,12 @@ public class ArithmeticEngine {
     }
   }
 
-  /**
-   * Default instance arithmetic engine.
-   *
-   * @return the arithmetic engine
-   */
   public static ArithmeticEngine defaultInstance() {
     return defaultInstance;
   }
 
   // interface -------------------------------------------------------------------------------------------------------
 
-  /**
-   * Add object.
-   *
-   * @param summand1 the summand 1
-   * @param summand2 the summand 2
-   * @return the object
-   */
   public Object add(Object summand1, Object summand2) {
     // null conversion
     if (summand1 == null) {
@@ -110,18 +104,11 @@ public class ArithmeticEngine {
     } else if (resultType == BigDecimal.class) {
       return ((BigDecimal) s1).add((BigDecimal) s2);
     } else {
-      throw new UnsupportedOperationException("Addition of types " + BeanUtil.simpleClassName(summand1) +
-          " and " + BeanUtil.simpleClassName(summand2) + " is not supported");
+      throw ExceptionFactory.getInstance().programmerUnsupported("Addition of types " + BeanUtil.simpleClassName(summand1) +
+          " and " + BeanUtil.simpleClassName(summand2) + IS_NOT_SUPPORTED);
     }
   }
 
-  /**
-   * Subtract object.
-   *
-   * @param minuend    the minuend
-   * @param subtrahend the subtrahend
-   * @return the object
-   */
   public Object subtract(Object minuend, Object subtrahend) {
     // null conversion
     if (subtrahend == null) {
@@ -156,17 +143,12 @@ public class ArithmeticEngine {
     } else if (resultType == BigDecimal.class) {
       return ((BigDecimal) s1).subtract((BigDecimal) s2);
     } else {
-      throw new UnsupportedOperationException("Subtraction of type " + BeanUtil.simpleClassName(subtrahend) +
-          " from " + BeanUtil.simpleClassName(minuend) + " is not supported");
+      throw ExceptionFactory.getInstance().programmerUnsupported(
+          "Subtraction of type " + BeanUtil.simpleClassName(subtrahend) +
+          " from " + BeanUtil.simpleClassName(minuend) + IS_NOT_SUPPORTED);
     }
   }
 
-  /**
-   * Negate object.
-   *
-   * @param value the value
-   * @return the object
-   */
   public Object negate(Object value) {
     // null handling
     if (value == null) {
@@ -191,17 +173,11 @@ public class ArithmeticEngine {
     } else if (type == BigDecimal.class) {
       return ((BigDecimal) value).negate();
     } else {
-      throw new UnsupportedOperationException("Cannot negate " + BeanUtil.simpleClassName(value));
+      throw ExceptionFactory.getInstance().programmerUnsupported(
+          "Cannot negate " + BeanUtil.simpleClassName(value));
     }
   }
 
-  /**
-   * Multiply object.
-   *
-   * @param factor1 the factor 1
-   * @param factor2 the factor 2
-   * @return the object
-   */
   public Object multiply(Object factor1, Object factor2) {
     // null handling
     if (factor1 == null || factor2 == null) {
@@ -232,22 +208,16 @@ public class ArithmeticEngine {
     } else if (resultType == BigDecimal.class) {
       return ((BigDecimal) s1).multiply((BigDecimal) s2);
     } else {
-      throw new UnsupportedOperationException("Multiplication of type " + BeanUtil.simpleClassName(factor1) +
-          " with " + BeanUtil.simpleClassName(factor2) + " is not supported");
+      throw ExceptionFactory.getInstance().illegalArgument(
+          "Multiplication of type " + BeanUtil.simpleClassName(factor1) +
+          WITH + BeanUtil.simpleClassName(factor2) + IS_NOT_SUPPORTED);
     }
   }
 
-  /**
-   * Divide object.
-   *
-   * @param dividend the dividend
-   * @param divisor  the divisor
-   * @return the object
-   */
   public Object divide(Object dividend, Object divisor) {
     // null handling
     if (divisor == null) {
-      throw new IllegalArgumentException("Division by null");
+      throw ExceptionFactory.getInstance().illegalArgument("Division by null");
     }
     if (dividend == null) {
       return null;
@@ -277,25 +247,18 @@ public class ArithmeticEngine {
     } else if (resultType == BigDecimal.class) {
       return ((BigDecimal) s1).divide((BigDecimal) s2);
     } else {
-      throw new UnsupportedOperationException(
+      throw ExceptionFactory.getInstance().programmerUnsupported(
           "Multiplication of type " +
               BeanUtil.simpleClassName(dividend) + " (" + dividend + ") with " +
               BeanUtil.simpleClassName(divisor) + " (" + divisor + ") is not supported");
     }
   }
 
-  /**
-   * Less boolean.
-   *
-   * @param part1 the part 1
-   * @param part2 the part 2
-   * @return the boolean
-   */
   @SuppressWarnings({"unchecked", "rawtypes"})
   public boolean less(Object part1, Object part2) {
     // null handling
     if (part2 == null || part1 == null) {
-      throw new IllegalArgumentException("Cannot compare null");
+      throw ExceptionFactory.getInstance().illegalArgument("Cannot compare null");
     }
     Class<?> resultType = TypeManager.combinedType(part1.getClass(), part2.getClass());
     // convert the terms to the same type and compare them
@@ -304,23 +267,16 @@ public class ArithmeticEngine {
     if (Comparable.class.isAssignableFrom(resultType)) {
       return (((Comparable) s1).compareTo(s2) < 0);
     } else {
-      throw new UnsupportedOperationException("Cannot compare type " +
-          BeanUtil.simpleClassName(part1) + " with " + BeanUtil.simpleClassName(part2));
+      throw ExceptionFactory.getInstance().illegalOperation(CANNOT_COMPARE_TYPE +
+          BeanUtil.simpleClassName(part1) + WITH + BeanUtil.simpleClassName(part2));
     }
   }
 
-  /**
-   * Less or equals boolean.
-   *
-   * @param part1 the part 1
-   * @param part2 the part 2
-   * @return the boolean
-   */
   @SuppressWarnings({"unchecked", "rawtypes"})
   public boolean lessOrEquals(Object part1, Object part2) {
     // null handling
     if (part2 == null || part1 == null) {
-      throw new IllegalArgumentException("Cannot compare null");
+      throw ExceptionFactory.getInstance().illegalArgument("Cannot compare null");
     }
     Class<?> resultType = TypeManager.combinedType(part1.getClass(), part2.getClass());
     // convert the terms to the same type and compare them
@@ -329,18 +285,11 @@ public class ArithmeticEngine {
     if (Comparable.class.isAssignableFrom(resultType)) {
       return (((Comparable) s1).compareTo(s2) <= 0);
     } else {
-      throw new UnsupportedOperationException("Cannot compare type " +
-          BeanUtil.simpleClassName(part1) + " with " + BeanUtil.simpleClassName(part2));
+      throw ExceptionFactory.getInstance().illegalOperation(CANNOT_COMPARE_TYPE +
+          BeanUtil.simpleClassName(part1) + WITH + BeanUtil.simpleClassName(part2));
     }
   }
 
-  /**
-   * Equals boolean.
-   *
-   * @param part1 the part 1
-   * @param part2 the part 2
-   * @return the boolean
-   */
   @SuppressWarnings({"unchecked", "rawtypes"})
   public boolean equals(Object part1, Object part2) {
     // null handling
@@ -358,50 +307,29 @@ public class ArithmeticEngine {
     if (Comparable.class.isAssignableFrom(resultType)) {
       return (((Comparable) s1).compareTo(s2) == 0);
     } else {
-      throw new UnsupportedOperationException("Cannot compare type " +
-          BeanUtil.simpleClassName(part1) + " with " + BeanUtil.simpleClassName(part2));
+      throw ExceptionFactory.getInstance().illegalOperation(CANNOT_COMPARE_TYPE +
+          BeanUtil.simpleClassName(part1) + WITH + BeanUtil.simpleClassName(part2));
     }
   }
 
-  /**
-   * Greater boolean.
-   *
-   * @param o1 the o 1
-   * @param o2 the o 2
-   * @return the boolean
-   */
   public Boolean greater(Object o1, Object o2) {
     return less(o2, o1);
   }
 
-  /**
-   * Greater or equals boolean.
-   *
-   * @param o1 the o 1
-   * @param o2 the o 2
-   * @return the boolean
-   */
   public Boolean greaterOrEquals(Object o1, Object o2) {
     return !less(o1, o2);
   }
 
-  /**
-   * Bitwise and object.
-   *
-   * @param o1 the o 1
-   * @param o2 the o 2
-   * @return the object
-   */
   public Object bitwiseAnd(Object o1, Object o2) {
     Class<?> resultType = TypeManager.combinedType(o1.getClass(), o2.getClass());
     if (resultType == Boolean.class) {
-      return (Boolean) o1 & (Boolean) o2;
+      return (Boolean) o1 && (Boolean) o2;
     }
     if (!(o1 instanceof Number)) {
-      throw new IllegalArgumentException("Not a number or boolean: " + o1);
+      throw ExceptionFactory.getInstance().illegalArgument(NOT_A_NUMBER_OR_BOOLEAN + o1);
     }
     if (!(o2 instanceof Number)) {
-      throw new IllegalArgumentException("Not a number or boolean: " + o2);
+      throw ExceptionFactory.getInstance().illegalArgument(NOT_A_NUMBER_OR_BOOLEAN + o2);
     }
     Number n1 = (Number) o1;
     Number n2 = (Number) o2;
@@ -412,27 +340,20 @@ public class ArithmeticEngine {
     } else if (resultType == Short.class) {
       return n1.shortValue() & n2.shortValue();
     } else {
-      throw new IllegalStateException("Illegal state for " + resultType.getName());
+      throw ExceptionFactory.getInstance().illegalArgument("Illegal type: " + resultType.getName());
     }
   }
 
-  /**
-   * Bitwise or object.
-   *
-   * @param o1 the o 1
-   * @param o2 the o 2
-   * @return the object
-   */
   public Object bitwiseOr(Object o1, Object o2) {
     Class<?> resultType = TypeManager.combinedType(o1.getClass(), o2.getClass());
     if (resultType == Boolean.class) {
-      return (Boolean) o1 | (Boolean) o2;
+      return (Boolean) o1 || (Boolean) o2;
     }
     if (!(o1 instanceof Number)) {
-      throw new IllegalArgumentException("Not a number or boolean: " + o1);
+      throw ExceptionFactory.getInstance().illegalArgument(NOT_A_NUMBER_OR_BOOLEAN + o1);
     }
     if (!(o2 instanceof Number)) {
-      throw new IllegalArgumentException("Not a number or boolean: " + o2);
+      throw ExceptionFactory.getInstance().illegalArgument(NOT_A_NUMBER_OR_BOOLEAN + o2);
     }
     Number n1 = (Number) o1;
     Number n2 = (Number) o2;
@@ -443,27 +364,20 @@ public class ArithmeticEngine {
     } else if (resultType == Short.class) {
       return n1.shortValue() | n2.shortValue();
     } else {
-      throw new IllegalStateException("Illegal state for " + resultType.getName());
+      throw ExceptionFactory.getInstance().illegalArgument(ILLEGAL_STATE_FOR + resultType.getName());
     }
   }
 
-  /**
-   * Bitwise exclusive or object.
-   *
-   * @param o1 the o 1
-   * @param o2 the o 2
-   * @return the object
-   */
   public Object bitwiseExclusiveOr(Object o1, Object o2) {
     Class<?> resultType = TypeManager.combinedType(o1.getClass(), o2.getClass());
     if (resultType == Boolean.class) {
       return (Boolean) o1 ^ (Boolean) o2;
     }
     if (!(o1 instanceof Number)) {
-      throw new IllegalArgumentException("Not a number or boolean: " + o1);
+      throw ExceptionFactory.getInstance().illegalArgument(NOT_A_NUMBER_OR_BOOLEAN + o1);
     }
     if (!(o2 instanceof Number)) {
-      throw new IllegalArgumentException("Not a number or boolean: " + o2);
+      throw ExceptionFactory.getInstance().illegalArgument(NOT_A_NUMBER_OR_BOOLEAN + o2);
     }
     Number n1 = (Number) o1;
     Number n2 = (Number) o2;
@@ -474,23 +388,16 @@ public class ArithmeticEngine {
     } else if (resultType == Short.class) {
       return n1.shortValue() ^ n2.shortValue();
     } else {
-      throw new IllegalStateException("Illegal state for " + resultType.getName());
+      throw ExceptionFactory.getInstance().illegalArgument(ILLEGAL_STATE_FOR + resultType.getName());
     }
   }
 
-  /**
-   * Shift left object.
-   *
-   * @param o1 the o 1
-   * @param o2 the o 2
-   * @return the object
-   */
   public Object shiftLeft(Object o1, Object o2) {
     if (!(o1 instanceof Number)) {
-      throw new IllegalArgumentException("Not a number: " + o1);
+      throw ExceptionFactory.getInstance().illegalArgument(NOT_A_NUMBER + o1);
     }
     if (!(o2 instanceof Number)) {
-      throw new IllegalArgumentException("Not a number: " + o2);
+      throw ExceptionFactory.getInstance().illegalArgument(NOT_A_NUMBER + o2);
     }
     Number n1 = (Number) o1;
     Number n2 = (Number) o2;
@@ -503,23 +410,16 @@ public class ArithmeticEngine {
     } else if (n1 instanceof Byte) {
       return n1.byteValue() << n2.intValue();
     } else {
-      throw new IllegalArgumentException("Cannot shift " + BeanUtil.simpleClassName(o1));
+      throw ExceptionFactory.getInstance().illegalArgument(CANNOT_SHIFT + BeanUtil.simpleClassName(o1));
     }
   }
 
-  /**
-   * Shift right object.
-   *
-   * @param o1 the o 1
-   * @param o2 the o 2
-   * @return the object
-   */
   public Object shiftRight(Object o1, Object o2) {
     if (!(o1 instanceof Number)) {
-      throw new IllegalArgumentException("Not a number: " + o1);
+      throw ExceptionFactory.getInstance().illegalArgument(NOT_A_NUMBER + o1);
     }
     if (!(o2 instanceof Number)) {
-      throw new IllegalArgumentException("Not a number: " + o2);
+      throw ExceptionFactory.getInstance().illegalArgument(NOT_A_NUMBER + o2);
     }
     Number n1 = (Number) o1;
     Number n2 = (Number) o2;
@@ -532,23 +432,16 @@ public class ArithmeticEngine {
     } else if (n1 instanceof Byte) {
       return n1.byteValue() >> n2.intValue();
     } else {
-      throw new IllegalArgumentException("Cannot shift " + BeanUtil.simpleClassName(o1));
+      throw ExceptionFactory.getInstance().illegalArgument(CANNOT_SHIFT + BeanUtil.simpleClassName(o1));
     }
   }
 
-  /**
-   * Shift right unsigned object.
-   *
-   * @param o1 the o 1
-   * @param o2 the o 2
-   * @return the object
-   */
   public Object shiftRightUnsigned(Object o1, Object o2) {
     if (!(o1 instanceof Number)) {
-      throw new IllegalArgumentException("Not a number: " + o1);
+      throw ExceptionFactory.getInstance().illegalArgument(NOT_A_NUMBER + o1);
     }
     if (!(o2 instanceof Number)) {
-      throw new IllegalArgumentException("Not a number: " + o2);
+      throw ExceptionFactory.getInstance().illegalArgument(NOT_A_NUMBER + o2);
     }
     Number n1 = (Number) o1;
     Number n2 = (Number) o2;
@@ -561,23 +454,16 @@ public class ArithmeticEngine {
     } else if (n1 instanceof Byte) {
       return n1.byteValue() >>> n2.intValue();
     } else {
-      throw new IllegalArgumentException("Cannot shift " + BeanUtil.simpleClassName(o1));
+      throw ExceptionFactory.getInstance().illegalArgument(CANNOT_SHIFT + BeanUtil.simpleClassName(o1));
     }
   }
 
-  /**
-   * Mod object.
-   *
-   * @param o1 the o 1
-   * @param o2 the o 2
-   * @return the object
-   */
   public Object mod(Object o1, Object o2) {
     if (!(o1 instanceof Number)) {
-      throw new IllegalArgumentException("Not a number: " + o1);
+      throw ExceptionFactory.getInstance().illegalArgument(NOT_A_NUMBER + o1);
     }
     if (!(o2 instanceof Number)) {
-      throw new IllegalArgumentException("Not a number: " + o2);
+      throw ExceptionFactory.getInstance().illegalArgument(NOT_A_NUMBER + o2);
     }
     Number n1 = (Number) o1;
     Number n2 = (Number) o2;
@@ -592,32 +478,20 @@ public class ArithmeticEngine {
     } else if (n1 instanceof BigInteger) {
       return ((BigInteger) n1).mod((BigInteger) n2);
     } else {
-      throw new IllegalArgumentException("Cannot calculate the modulo of " + BeanUtil.simpleClassName(o1));
+      throw ExceptionFactory.getInstance().illegalArgument("Cannot calculate the modulo of " + BeanUtil.simpleClassName(o1));
     }
   }
 
-  /**
-   * Logical complement object.
-   *
-   * @param value the value
-   * @return the object
-   */
   public Object logicalComplement(Object value) {
     if (!(value instanceof Boolean)) {
-      throw new IllegalArgumentException("Not a boolean: " + value);
+      throw ExceptionFactory.getInstance().illegalArgument("Not a boolean: " + value);
     }
     return !(Boolean) value;
   }
 
-  /**
-   * Bitwise complement object.
-   *
-   * @param value the value
-   * @return the object
-   */
   public Object bitwiseComplement(Object value) {
     if (!(value instanceof Number)) {
-      throw new IllegalArgumentException("Not a number: " + value);
+      throw ExceptionFactory.getInstance().illegalArgument(NOT_A_NUMBER + value);
     }
     Number number = (Number) value;
     if (number instanceof Integer) {
@@ -629,7 +503,7 @@ public class ArithmeticEngine {
     } else if (number instanceof Byte) {
       return ~number.byteValue();
     } else {
-      throw new IllegalArgumentException("Cannot complement " + BeanUtil.simpleClassName(value));
+      throw ExceptionFactory.getInstance().illegalArgument("Cannot complement " + BeanUtil.simpleClassName(value));
     }
   }
 

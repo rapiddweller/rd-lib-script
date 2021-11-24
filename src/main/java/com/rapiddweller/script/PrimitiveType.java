@@ -15,6 +15,8 @@
 
 package com.rapiddweller.script;
 
+import com.rapiddweller.common.exception.ExceptionFactory;
+
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.sql.Time;
@@ -64,10 +66,10 @@ public class PrimitiveType {
 
   public PrimitiveType(String name, Class<?> javaType) {
     if (name == null) {
-      throw new IllegalArgumentException("name is null");
+      throw ExceptionFactory.getInstance().illegalArgument("name is null");
     }
     if (javaType == null) {
-      throw new IllegalArgumentException("javaType is null");
+      throw ExceptionFactory.getInstance().illegalArgument("javaType is null");
     }
     this.name = name;
     this.javaType = javaType;

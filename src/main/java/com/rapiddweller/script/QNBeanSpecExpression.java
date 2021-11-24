@@ -21,6 +21,7 @@ import com.rapiddweller.common.ConfigurationError;
 import com.rapiddweller.common.Context;
 import com.rapiddweller.common.ExceptionUtil;
 import com.rapiddweller.common.bean.DefaultClassProvider;
+import com.rapiddweller.common.exception.ExceptionFactory;
 import com.rapiddweller.script.expression.DynamicExpression;
 
 /**
@@ -34,22 +35,13 @@ import com.rapiddweller.script.expression.DynamicExpression;
  * </ul>
  * <br/>
  * Created at 08.10.2009 18:15:15
- *
  * @author Volker Bergmann
  * @since 0.6.0
  */
 public class QNBeanSpecExpression extends DynamicExpression<Object> {
 
-  /**
-   * The Qn.
-   */
   final String[] qn;
 
-  /**
-   * Instantiates a new Qn bean spec expression.
-   *
-   * @param qn the qn
-   */
   public QNBeanSpecExpression(String[] qn) {
     this.qn = qn;
   }
@@ -59,12 +51,6 @@ public class QNBeanSpecExpression extends DynamicExpression<Object> {
     return resolve(context).getBean();
   }
 
-  /**
-   * Resolve bean spec.
-   *
-   * @param context the context
-   * @return the bean spec
-   */
   public BeanSpec resolve(Context context) {
     String objectOrClassName = ArrayFormat.format(".", qn);
     try {
@@ -77,7 +63,7 @@ public class QNBeanSpecExpression extends DynamicExpression<Object> {
       if (ExceptionUtil.getRootCause(e) instanceof ClassNotFoundException) {
         return new QNExpression(qn).resolve(context);
       } else {
-        throw new ConfigurationError("Cannot resolve " + objectOrClassName, e);
+        throw ExceptionFactory.getInstance().configurationError("Cannot resolve " + objectOrClassName, e);
       }
     }
   }

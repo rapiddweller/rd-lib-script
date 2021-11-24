@@ -16,6 +16,7 @@
 package com.rapiddweller.script.math;
 
 import com.rapiddweller.common.TimeUtil;
+import com.rapiddweller.common.exception.IllegalArgumentError;
 import org.junit.Test;
 
 import java.io.File;
@@ -27,7 +28,6 @@ import static org.junit.Assert.assertEquals;
 /**
  * Tests the {@link TimeArithmetic}.<br/><br/>
  * Created: 13.10.2009 18:00:06
- *
  * @author Volker Bergmann
  * @since 0.6.0
  */
@@ -38,71 +38,44 @@ public class TimeArithmeticTest {
   private static final Time TIME_SUM = TimeUtil.time(7, 7, 7, 777);
   private static final long ONE_OUR_MILLIS = 3600L * 1000;
 
-  /**
-   * The Arithmetic.
-   */
   final TimeArithmetic arithmetic = new TimeArithmetic();
 
-  /**
-   * Test get base type.
-   */
   @Test
   public void testGetBaseType() {
     assertEquals(Time.class, arithmetic.getBaseType());
   }
 
-  /**
-   * Test add time.
-   */
   @Test
   public void testAdd_Time() {
     assertEquals(TIME_SUM, arithmetic.add(TIME_BASE, TIME_OFFSET));
   }
 
-  /**
-   * Test add millis.
-   */
   @Test
   public void testAdd_Millis() {
     assertEquals(TimeUtil.add(TIME_BASE, Calendar.HOUR, 1), arithmetic.add(TIME_BASE, ONE_OUR_MILLIS));
   }
 
-  /**
-   * Test add illegal type.
-   */
-  @Test(expected = IllegalArgumentException.class)
+  @Test(expected = IllegalArgumentError.class)
   public void testAdd_IllegalType() {
     arithmetic.add(TIME_BASE, new File("test"));
   }
 
-  /**
-   * Test subtract.
-   */
   @Test
   public void testSubtract() {
     assertEquals(TIME_BASE, arithmetic.subtract(TIME_SUM, TIME_OFFSET));
     assertEquals(TIME_OFFSET, arithmetic.subtract(TIME_SUM, TIME_BASE));
   }
 
-  /**
-   * Test subtract illegal type.
-   */
-  @Test(expected = IllegalArgumentException.class)
+  @Test(expected = IllegalArgumentError.class)
   public void testSubtract_IllegalType() {
     arithmetic.subtract(TIME_BASE, new File("test"));
   }
 
-  /**
-   * Test multiply.
-   */
   @Test(expected = UnsupportedOperationException.class)
   public void testMultiply() {
     arithmetic.multiply(TIME_BASE, TIME_OFFSET);
   }
 
-  /**
-   * Test divide.
-   */
   @Test(expected = UnsupportedOperationException.class)
   public void testDivide() {
     arithmetic.divide(TIME_BASE, TIME_OFFSET);

@@ -31,11 +31,6 @@ public class StringExpression extends UnaryExpression<String> {
 
   private final ToStringConverter converter;
 
-  /**
-   * Instantiates a new String expression.
-   *
-   * @param term the term
-   */
   public StringExpression(Expression<?> term) {
     super("(string) ", term);
     this.converter = new ToStringConverter(null);

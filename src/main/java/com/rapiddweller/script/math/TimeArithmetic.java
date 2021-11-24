@@ -17,6 +17,7 @@ package com.rapiddweller.script.math;
 
 import com.rapiddweller.common.BeanUtil;
 import com.rapiddweller.common.TimeUtil;
+import com.rapiddweller.common.exception.ExceptionFactory;
 
 import java.sql.Time;
 import java.util.Date;
@@ -46,7 +47,7 @@ public class TimeArithmetic extends TypeArithmetic<Time> {
     } else if (summand2 instanceof Date) {
       return new Time(summand1.getTime() + TimeUtil.millisSinceOwnEpoch((Date) summand2));
     } else {
-      throw new IllegalArgumentException("Cannot add " +
+      throw ExceptionFactory.getInstance().illegalArgument("Cannot add " +
           BeanUtil.simpleClassName(summand2) + " to java.util.Date");
     }
   }
@@ -58,7 +59,7 @@ public class TimeArithmetic extends TypeArithmetic<Time> {
     } else if (summand2 instanceof Number) {
       return addImpl((Time) summand2, summand1);
     } else {
-      throw new IllegalArgumentException("No argument is of type " + baseType + ": " +
+      throw ExceptionFactory.getInstance().illegalArgument("No argument is of type " + baseType + ": " +
           summand1 + ", " + summand2);
     }
   }
@@ -72,11 +73,11 @@ public class TimeArithmetic extends TypeArithmetic<Time> {
       } else if (subtrahend instanceof Number) {
         return new Time(minuendMillis - ((Number) subtrahend).longValue());
       } else {
-        throw new IllegalArgumentException("Subtrahend must be Date, Time, Timestamp or Number, but was: " +
+        throw ExceptionFactory.getInstance().illegalArgument("Subtrahend must be Date, Time, Timestamp or Number, but was: " +
             subtrahend.getClass().getName());
       }
     } else {
-      throw new IllegalArgumentException("Minuend needs to be of type " + baseType + ", but was: " +
+      throw ExceptionFactory.getInstance().illegalArgument("Minuend needs to be of type " + baseType + ", but was: " +
           minuend.getClass().getName());
     }
   }
