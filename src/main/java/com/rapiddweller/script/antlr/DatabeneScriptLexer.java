@@ -439,7 +439,7 @@ public class DatabeneScriptLexer extends Lexer {
         return state.token;
       } catch (RecognitionException re) {
         reportError(re);
-        throw ExceptionFactory.getInstance().syntaxError(getClass().getSimpleName() + " error", re); // or throw Error
+        throw ExceptionFactory.getInstance().syntaxErrorForNothing(getClass().getSimpleName() + " error", re); // or throw Error
       }
     }
   }

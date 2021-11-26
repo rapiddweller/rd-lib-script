@@ -280,14 +280,14 @@ public class DatabeneScriptParser {
   private static void checkForSyntaxErrors(String text, String type,
                                            com.rapiddweller.script.antlr.DatabeneScriptParser parser, ParserRuleReturnScope r) {
     if (parser.getNumberOfSyntaxErrors() > 0) {
-      throw new SyntaxError("Illegal " + type, text, -1, -1);
+      throw ExceptionFactory.getInstance().syntaxErrorForText("Illegal " + type, text, -1, -1);
     }
     CommonToken stop = (CommonToken) r.stop;
     if (stop.getStopIndex() < StringUtil.trimRight(text).length() - 1) {
       if (stop.getStopIndex() == 0) {
-        throw new SyntaxError("Syntax error after " + stop.getText(), text);
+        throw ExceptionFactory.getInstance().syntaxErrorForText("Syntax error after " + stop.getText(), text);
       } else {
-        throw new SyntaxError("Unspecific syntax error", text);
+        throw ExceptionFactory.getInstance().syntaxErrorForText("Unspecific syntax error", text);
       }
     }
   }
@@ -299,7 +299,7 @@ public class DatabeneScriptParser {
   }
 
   private static SyntaxError mapToSyntaxError(RecognitionException cause, String text) {
-    return new SyntaxError("Error parsing Benerator Script expression", cause,
+    return ExceptionFactory.getInstance().syntaxErrorForText("Error parsing Benerator Script expression", cause,
         text, cause.line, cause.charPositionInLine);
   }
 
@@ -342,7 +342,8 @@ public class DatabeneScriptParser {
       }
       return transitions;
     } else {
-      throw new SyntaxError("Unexpected token in transition list: ", node.getToken().getText(),
+      throw ExceptionFactory.getInstance().syntaxErrorForText(
+          "Unexpected token in transition list: ", node.getToken().getText(),
           node.getLine(), node.getCharPositionInLine());
     }
   }
@@ -371,7 +372,7 @@ public class DatabeneScriptParser {
       }
       return specs;
     } else {
-      throw new SyntaxError("Unexpected token", node.getToken().getText(), node.getLine(), node.getCharPositionInLine());
+      throw ExceptionFactory.getInstance().syntaxErrorForText("Unexpected token", node.getToken().getText(), node.getLine(), node.getCharPositionInLine());
     }
   }
 
@@ -386,7 +387,7 @@ public class DatabeneScriptParser {
       }
       return specs;
     } else {
-      throw new SyntaxError("Unexpected token", node.getToken().getText(), node.getLine(), node.getCharPositionInLine());
+      throw ExceptionFactory.getInstance().syntaxErrorForText("Unexpected token", node.getToken().getText(), node.getLine(), node.getCharPositionInLine());
     }
   }
 
@@ -501,7 +502,7 @@ public class DatabeneScriptParser {
       case DatabeneScriptLexer.EQ:
         return convertAssignment(node);
       default:
-        throw new SyntaxError("Unknown token type", String.valueOf(node.getType()),
+        throw ExceptionFactory.getInstance().syntaxErrorForText("Unknown token type", String.valueOf(node.getType()),
             node.getLine(), node.getCharPositionInLine());
     }
   }
