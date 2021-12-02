@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2014 Volker Bergmann (volker.bergmann@bergmann-it.de).
+ * Copyright (C) 2011-2021 Volker Bergmann (volker.bergmann@bergmann-it.de).
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,18 +23,11 @@ import java.io.Closeable;
 /**
  * Base interface for Databene Script actors to interoperate with their environment.<br/><br/>
  * Created: 01.11.2011 10:43:49
- *
  * @author Volker Bergmann
  * @since 0.7.3
  */
 public interface ScriptContext extends Context, ClassProvider, Closeable {
-  /**
-   * Import class.
-   *
-   * @param className the class name
-   */
   void importClass(String className);
-
   @Override
   void close();
 }

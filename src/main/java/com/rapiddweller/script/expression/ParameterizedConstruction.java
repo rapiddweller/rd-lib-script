@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2014 Volker Bergmann (volker.bergmann@bergmann-it.de).
+ * Copyright (C) 2011-2021 Volker Bergmann (volker.bergmann@bergmann-it.de).
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,10 +21,8 @@ import com.rapiddweller.common.Context;
 import com.rapiddweller.script.Expression;
 
 /**
- * {@link Expression} implementation that instantiates a Java object by constructor invocation.<br/>
- * <br/>
+ * {@link Expression} implementation that instantiates a Java object by constructor invocation.<br/><br/>
  * Created at 06.10.2009 11:48:59
- *
  * @param <E> the type parameter
  * @author Volker Bergmann
  * @since 0.6.0
@@ -33,12 +31,6 @@ public class ParameterizedConstruction<E> extends Construction<E> {
 
   private final Expression<?>[] argumentExpressions;
 
-  /**
-   * Instantiates a new Parameterized construction.
-   *
-   * @param className           the class name
-   * @param argumentExpressions the argument expressions
-   */
   public ParameterizedConstruction(String className, Expression<?>[] argumentExpressions) {
     super(className);
     this.argumentExpressions = argumentExpressions;
@@ -52,15 +44,9 @@ public class ParameterizedConstruction<E> extends Construction<E> {
     for (int i = 0; i < argumentExpressions.length; i++) {
       arguments[i] = argumentExpressions[i].evaluate(context);
     }
-    return (E) BeanUtil.newInstance(type, false, arguments);
+    return (E) BeanUtil.newInstance(type, true, arguments);
   }
 
-  /**
-   * Class exists boolean.
-   *
-   * @param context the context
-   * @return the boolean
-   */
   public boolean classExists(Context context) {
     try {
       getType(context);
