@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2014 Volker Bergmann (volker.bergmann@bergmann-it.de).
+ * Copyright (C) 2011-2021 Volker Bergmann (volker.bergmann@bergmann-it.de).
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,7 +21,6 @@ import com.rapiddweller.common.context.DefaultContext;
 /**
  * Default implementation of the {@link ScriptContext} interface.<br/><br/>
  * Created: 01.11.2011 10:51:50
- *
  * @author Volker Bergmann
  * @since 0.7.3
  */
@@ -29,9 +28,6 @@ public class DefaultScriptContext extends DefaultContext implements ScriptContex
 
   private final ClassCache classCache;
 
-  /**
-   * Instantiates a new Default script context.
-   */
   public DefaultScriptContext() {
     this.classCache = new ClassCache();
   }
@@ -51,11 +47,6 @@ public class DefaultScriptContext extends DefaultContext implements ScriptContex
     classCache.importClass(className);
   }
 
-  /**
-   * Import package.
-   *
-   * @param packageName the package name
-   */
   public void importPackage(String packageName) {
     classCache.importPackage(packageName);
   }
