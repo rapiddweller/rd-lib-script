@@ -19,10 +19,8 @@ import com.rapiddweller.common.Context;
 import com.rapiddweller.script.Expression;
 
 /**
- * Expression that represents and returns a constant value.<br/>
- * <br/>
+ * Expression that represents and returns a constant value.<br/><br/>
  * Created: 18.06.2007 17:38:58
- *
  * @param <E> the type parameter
  * @author Volker Bergmann
  */
@@ -30,29 +28,14 @@ public class ConstantExpression<E> implements Expression<E> {
 
   private E value;
 
-  /**
-   * Instantiates a new Constant expression.
-   *
-   * @param value the value
-   */
   public ConstantExpression(E value) {
     this.value = value;
   }
 
-  /**
-   * Gets value.
-   *
-   * @return the value
-   */
   public E getValue() {
     return value;
   }
 
-  /**
-   * Sets value.
-   *
-   * @param value the value
-   */
   public void setValue(E value) {
     this.value = value;
   }
