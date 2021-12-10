@@ -18,6 +18,8 @@ package com.rapiddweller.script.expression;
 import com.rapiddweller.common.Context;
 import com.rapiddweller.script.Expression;
 
+import java.util.Objects;
+
 /**
  * Expression that represents and returns a constant value.<br/><br/>
  * Created: 18.06.2007 17:38:58
@@ -53,6 +55,23 @@ public class ConstantExpression<E> implements Expression<E> {
   @Override
   public String toString() {
     return String.valueOf(value);
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    ConstantExpression<?> that = (ConstantExpression<?>) o;
+    return Objects.equals(this.value, that.value);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(value);
   }
 
 }
