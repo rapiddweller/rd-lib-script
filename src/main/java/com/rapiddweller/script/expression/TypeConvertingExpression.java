@@ -20,10 +20,8 @@ import com.rapiddweller.common.converter.AnyConverter;
 import com.rapiddweller.script.Expression;
 
 /**
- * {@link Expression} implementation that evaluates another expression and converts its results.<br/>
- * <br/>
+ * {@link Expression} implementation that evaluates another expression and converts its results.<br/><br/>
  * Created at 28.07.2009 06:49:43
- *
  * @param <E> the type parameter
  * @author Volker Bergmann
  * @since 0.5.0
@@ -32,12 +30,6 @@ public class TypeConvertingExpression<E> extends UnaryExpression<E> {
 
   private final AnyConverter<E> converter;
 
-  /**
-   * Instantiates a new Type converting expression.
-   *
-   * @param source     the source
-   * @param resultType the result type
-   */
   @SuppressWarnings("rawtypes")
   public TypeConvertingExpression(Expression source, Class<E> resultType) {
     super("", source);
