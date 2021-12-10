@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2014 Volker Bergmann (volker.bergmann@bergmann-it.de).
+ * Copyright (C) 2011-2021 Volker Bergmann (volker.bergmann@bergmann-it.de).
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,7 +19,6 @@ package com.rapiddweller.script;
  * A bean specification which can declare if it wraps a 'value' or just represents a 'reference'.
  * This is used for managing scopes with 'local' objects and references to 'global' ones.<br/><br/>
  * Created: 13.04.2011 19:07:09
- *
  * @author Volker Bergmann
  * @since 0.6.6
  */
@@ -28,51 +27,23 @@ public class BeanSpec {
   private final Object bean;
   private final boolean reference;
 
-  /**
-   * Instantiates a new Bean spec.
-   *
-   * @param bean      the bean
-   * @param reference the reference
-   */
   public BeanSpec(Object bean, boolean reference) {
     this.bean = bean;
     this.reference = reference;
   }
 
-  /**
-   * Gets bean.
-   *
-   * @return the bean
-   */
   public Object getBean() {
     return bean;
   }
 
-  /**
-   * Is reference boolean.
-   *
-   * @return the boolean
-   */
   public boolean isReference() {
     return reference;
   }
 
-  /**
-   * Create reference bean spec.
-   *
-   * @param bean the bean
-   * @return the bean spec
-   */
   public static BeanSpec createReference(Object bean) {
     return new BeanSpec(bean, true);
   }
 
-  /**
-   * Create construction bean spec.
-   *
-   * @param bean the bean
-   * @return the bean spec
-   */
   public static BeanSpec createConstruction(Object bean) {
     return new BeanSpec(bean, false);
   }
