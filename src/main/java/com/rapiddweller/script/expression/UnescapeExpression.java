@@ -22,17 +22,11 @@ import com.rapiddweller.script.Expression;
 /**
  * {@link Expression} proxy which unescapes the output of its source.<br/><br/>
  * Created: 11.04.2011 14:12:16
- *
  * @author Volker Bergmann
  * @since 0.5.8
  */
 public class UnescapeExpression extends ExpressionProxy<String> {
 
-  /**
-   * Instantiates a new Unescape expression.
-   *
-   * @param source the source
-   */
   public UnescapeExpression(Expression<String> source) {
     super(source);
   }

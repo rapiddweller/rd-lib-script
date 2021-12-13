@@ -22,22 +22,13 @@ import com.rapiddweller.script.Expression;
 /**
  * Resolves a class by its class name.<br/><br/>
  * Created: 07.10.2010 11:41:59
- *
  * @author Volker Bergmann
  * @since 0.5.4
  */
 public class ForNameExpression implements Expression<Class<?>> {
 
-  /**
-   * The Class name.
-   */
   protected final Expression<String> className;
 
-  /**
-   * Instantiates a new For name expression.
-   *
-   * @param className the class name
-   */
   public ForNameExpression(Expression<String> className) {
     this.className = className;
   }

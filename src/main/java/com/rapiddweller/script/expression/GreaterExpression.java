@@ -22,18 +22,11 @@ import com.rapiddweller.script.math.ArithmeticEngine;
 /**
  * Boolean {@link Expression} that evaluates if the first term is greater than the second.<br/><br/>
  * Created: 24.11.2010 14:23:40
- *
  * @author Volker Bergmann
  * @since 0.5.8
  */
 public class GreaterExpression extends BinaryExpression<Boolean> {
 
-  /**
-   * Instantiates a new Greater expression.
-   *
-   * @param term1 the term 1
-   * @param term2 the term 2
-   */
   public GreaterExpression(Expression<?> term1, Expression<?> term2) {
     super(">", term1, term2);
   }

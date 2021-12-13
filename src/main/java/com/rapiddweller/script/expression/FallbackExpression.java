@@ -21,18 +21,12 @@ import com.rapiddweller.script.Expression;
 /**
  * Expression which evaluates a list of expressions and returns the first result which is not null.<br/><br/>
  * Created: 16.06.2010 07:39:20
- *
  * @param <E> the type parameter
  * @author Volker Bergmann
  * @since 0.5.3
  */
 public class FallbackExpression<E> extends CompositeExpression<E, E> {
 
-  /**
-   * Instantiates a new Fallback expression.
-   *
-   * @param terms the terms
-   */
   @SafeVarargs
   public FallbackExpression(Expression<E>... terms) {
     super(terms);

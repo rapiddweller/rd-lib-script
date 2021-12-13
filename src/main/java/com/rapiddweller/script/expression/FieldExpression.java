@@ -20,10 +20,8 @@ import com.rapiddweller.common.accessor.FeatureAccessor;
 import com.rapiddweller.script.Expression;
 
 /**
- * Evaluates an attribute of an object or class.<br/>
- * <br/>
+ * Evaluates an attribute of an object or class.<br/><br/>
  * Created at 08.10.2009 10:20:10
- *
  * @author Volker Bergmann
  * @since 0.6.0
  */
@@ -32,12 +30,6 @@ public class FieldExpression extends DynamicExpression<Object> {
   private final Expression<?> targetEx;
   private final String featureName;
 
-  /**
-   * Instantiates a new Field expression.
-   *
-   * @param targetEx    the target ex
-   * @param featureName the feature name
-   */
   public FieldExpression(Expression<?> targetEx, String featureName) {
     this.targetEx = targetEx;
     this.featureName = featureName;

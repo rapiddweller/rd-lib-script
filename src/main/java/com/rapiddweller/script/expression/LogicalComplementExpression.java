@@ -22,27 +22,15 @@ import com.rapiddweller.script.Expression;
 /**
  * {@link Expression} that evaluates to the logical complement of another expression's result.<br/><br/>
  * Created: 24.11.2010 14:14:21
- *
  * @author Volker Bergmann
  * @since 0.5.8
  */
 public class LogicalComplementExpression extends UnaryExpression<Boolean> {
 
-  /**
-   * Instantiates a new Logical complement expression.
-   *
-   * @param term the term
-   */
   public LogicalComplementExpression(Expression<?> term) {
     this("!", term);
   }
 
-  /**
-   * Instantiates a new Logical complement expression.
-   *
-   * @param symbol the symbol
-   * @param term   the term
-   */
   public LogicalComplementExpression(String symbol, Expression<?> term) {
     super(symbol, term);
   }

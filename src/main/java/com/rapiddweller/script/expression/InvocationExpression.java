@@ -20,10 +20,8 @@ import com.rapiddweller.common.Context;
 import com.rapiddweller.script.Expression;
 
 /**
- * {@link Expression} implementation that evaluates a method on a class or object.<br/>
- * <br/>
+ * {@link Expression} implementation that evaluates a method on a class or object.<br/><br/>
  * Created at 07.10.2009 22:10:06
- *
  * @author Volker Bergmann
  * @since 0.6.0
  */
@@ -33,13 +31,6 @@ public class InvocationExpression extends DynamicExpression<Object> {
   private final String methodName;
   private final Expression<?>[] argExpressions;
 
-  /**
-   * Instantiates a new Invocation expression.
-   *
-   * @param target         the target
-   * @param methodMame     the method mame
-   * @param argExpressions the arg expressions
-   */
   public InvocationExpression(Expression<?> target, String methodMame, Expression<?>[] argExpressions) {
     this.target = target;
     this.methodName = methodMame;

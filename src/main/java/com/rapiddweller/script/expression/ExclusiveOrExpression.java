@@ -23,18 +23,11 @@ import com.rapiddweller.script.Expression;
  * Boolean {@link Expression} that checks if the result of one
  * expressions is less than the result of another one.<br/><br/>
  * Created: 24.11.2010 14:23:13
- *
  * @author Volker Bergmann
  * @since 0.5.8
  */
 public class ExclusiveOrExpression extends BinaryExpression<Boolean> {
 
-  /**
-   * Instantiates a new Exclusive or expression.
-   *
-   * @param term1 the term 1
-   * @param term2 the term 2
-   */
   public ExclusiveOrExpression(Expression<?> term1, Expression<?> term2) {
     super("XOR", term1, term2);
   }

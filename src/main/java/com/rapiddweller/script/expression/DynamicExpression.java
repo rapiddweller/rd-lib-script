@@ -20,7 +20,6 @@ import com.rapiddweller.script.Expression;
 /**
  * Non-constant {@link Expression}.<br/><br/>
  * Created: 15.03.2010 12:05:32
- *
  * @param <E> the type parameter
  * @author Volker Bergmann
  * @since 0.6.0

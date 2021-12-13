@@ -23,18 +23,11 @@ import com.rapiddweller.script.math.ArithmeticEngine;
  * Numerical {@link Expression} that combines the results
  * of two other numerical expressions with a bitwise EXCLUSIVE OR.<br/><br/>
  * Created: 24.11.2010 14:22:58
- *
  * @author Volker Bergmann
  * @since 0.6.4
  */
 public class BitwiseExclusiveOrExpression extends BinaryExpression<Object> {
 
-  /**
-   * Instantiates a new Bitwise exclusive or expression.
-   *
-   * @param term1 the term 1
-   * @param term2 the term 2
-   */
   public BitwiseExclusiveOrExpression(Expression<?> term1, Expression<?> term2) {
     super("^", term1, term2);
   }

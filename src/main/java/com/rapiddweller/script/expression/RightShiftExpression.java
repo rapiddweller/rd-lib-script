@@ -22,18 +22,11 @@ import com.rapiddweller.script.math.ArithmeticEngine;
 /**
  * Numerical {@link Expression} that performs a right shift.<br/><br/>
  * Created: 24.11.2010 14:21:31
- *
  * @author Volker Bergmann
  * @since 0.6.4
  */
 public class RightShiftExpression extends BinaryExpression<Object> {
 
-  /**
-   * Instantiates a new Right shift expression.
-   *
-   * @param term1 the term 1
-   * @param term2 the term 2
-   */
   public RightShiftExpression(Expression<?> term1, Expression<?> term2) {
     super(">>", term1, term2);
   }

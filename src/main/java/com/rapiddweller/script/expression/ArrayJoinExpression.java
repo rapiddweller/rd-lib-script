@@ -23,7 +23,6 @@ import com.rapiddweller.script.Expression;
  * {@link Expression} implementation which assembles other expression that evaluate to arrays
  * and joins their results to a single array.<br/><br/>
  * Created: 11.09.2010 07:57:38
- *
  * @param <E> the type parameter
  * @author Volker Bergmann
  * @since 0.5.4
@@ -32,12 +31,6 @@ public class ArrayJoinExpression<E> extends CompositeExpression<E[], E[]> {
 
   private Class<E> componentType;
 
-  /**
-   * Instantiates a new Array join expression.
-   *
-   * @param componentType the component type
-   * @param terms         the terms
-   */
   @SafeVarargs
   public ArrayJoinExpression(Class<E> componentType, Expression<E[]>... terms) {
     super(terms);

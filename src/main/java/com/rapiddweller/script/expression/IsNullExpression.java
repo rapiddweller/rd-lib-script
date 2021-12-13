@@ -22,17 +22,11 @@ import com.rapiddweller.script.Expression;
  * Expression that returns <code>true</code>, if a source expression returns <code>null</code>,
  * else <code>false</code>.<br/><br/>
  * Created: 08.10.2010 23:04:01
- *
  * @author Volker Bergmann
  * @since 0.5.4
  */
 public class IsNullExpression extends UnaryExpression<Boolean> {
 
-  /**
-   * Instantiates a new Is null expression.
-   *
-   * @param term the term
-   */
   public IsNullExpression(Expression<?> term) {
     super("", term);
   }

@@ -23,18 +23,11 @@ import com.rapiddweller.script.Expression;
  * Boolean {@link Expression} that combines the result
  * of two other boolean expressions with a logical AND.<br/><br/>
  * Created: 24.11.2010 14:04:38
- *
  * @author Volker Bergmann
  * @since 0.5.8
  */
 public class ConditionalAndExpression extends CompositeExpression<Object, Boolean> {
 
-  /**
-   * Instantiates a new Conditional and expression.
-   *
-   * @param symbol the symbol
-   * @param terms  the terms
-   */
   @SafeVarargs
   public ConditionalAndExpression(String symbol, Expression<Object>... terms) {
     super(symbol, terms);

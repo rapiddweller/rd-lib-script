@@ -23,7 +23,6 @@ import com.rapiddweller.script.Expression;
  * Wrapper for an {@link Expression} that converts its result to a {@link String}
  * using the {@link ToStringConverter}.<br/><br/>
  * Created: 27.10.2009 13:35:29
- *
  * @author Volker Bergmann
  * @since 0.5.0
  */

@@ -23,10 +23,8 @@ import com.rapiddweller.script.Expression;
 import java.util.Comparator;
 
 /**
- * {@link Expression} implementation that calculates the minimum of several values.<br/>
- * <br/>
+ * {@link Expression} implementation that calculates the minimum of several values.<br/><br/>
  * Created at 27.07.2009 09:06:36
- *
  * @param <E> the type parameter
  * @author Volker Bergmann
  * @since 0.5.0
@@ -35,22 +33,11 @@ public class MinExpression<E> extends CompositeExpression<E, E> {
 
   private final Comparator<E> comparator;
 
-  /**
-   * Instantiates a new Min expression.
-   *
-   * @param terms the terms
-   */
   @SuppressWarnings({"unchecked", "rawtypes"})
   public MinExpression(Expression<E>... terms) {
     this(new ComparableComparator(), terms);
   }
 
-  /**
-   * Instantiates a new Min expression.
-   *
-   * @param comparator the comparator
-   * @param terms      the terms
-   */
   @SafeVarargs
   public MinExpression(Comparator<E> comparator, Expression<E>... terms) {
     super("", terms);

@@ -21,18 +21,12 @@ import com.rapiddweller.common.Context;
 /**
  * Instantiates a class by default constructor.<br/><br/>
  * Created: 25.10.2009 08:32:58
- *
  * @param <E> the type parameter
  * @author Volker Bergmann
  * @since 0.6.0
  */
 public class DefaultConstruction<E> extends Construction<E> {
 
-  /**
-   * Instantiates a new Default construction.
-   *
-   * @param className the class name
-   */
   public DefaultConstruction(String className) {
     super(className);
   }

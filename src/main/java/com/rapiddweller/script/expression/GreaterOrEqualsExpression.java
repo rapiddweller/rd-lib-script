@@ -23,18 +23,11 @@ import com.rapiddweller.script.math.ArithmeticEngine;
  * Boolean {@link Expression} that evaluates
  * if term1 is greater than or equal to term2.<br/><br/>
  * Created: 24.11.2010 14:23:56
- *
  * @author Volker Bergmann
  * @since 0.5.8
  */
 public class GreaterOrEqualsExpression extends BinaryExpression<Boolean> {
 
-  /**
-   * Instantiates a new Greater or equals expression.
-   *
-   * @param term1 the term 1
-   * @param term2 the term 2
-   */
   public GreaterOrEqualsExpression(Expression<?> term1, Expression<?> term2) {
     super(">=", term1, term2);
   }

@@ -19,10 +19,8 @@ import com.rapiddweller.common.Context;
 import com.rapiddweller.common.accessor.FeatureAccessor;
 
 /**
- * Expression implementation that evaluates a feature value of an object.<br/>
- * <br/>
+ * Expression implementation that evaluates a feature value of an object.<br/><br/>
  * Created at 23.07.2009 14:59:41
- *
  * @param <E> the type parameter
  * @author Volker Bergmann
  * @since 0.5.0
@@ -31,11 +29,6 @@ public class FeatureAccessExpression<E> extends DynamicExpression<E> {
 
   private final String featureName;
 
-  /**
-   * Instantiates a new Feature access expression.
-   *
-   * @param featureName the feature name
-   */
   public FeatureAccessExpression(String featureName) {
     this.featureName = featureName;
   }

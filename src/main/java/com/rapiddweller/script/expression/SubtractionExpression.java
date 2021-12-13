@@ -22,25 +22,15 @@ import com.rapiddweller.script.math.ArithmeticEngine;
 /**
  * Numerical {@link Expression} that performs a subtraction.<br/><br/>
  * Created: 24.11.2010 14:04:08
- *
  * @author Volker Bergmann
  * @since 0.5.8
  */
 public class SubtractionExpression extends CompositeExpression<Object, Object> {
 
-  /**
-   * Instantiates a new Subtraction expression.
-   */
   public SubtractionExpression() {
     super("-");
   }
 
-  /**
-   * Instantiates a new Subtraction expression.
-   *
-   * @param symbol the symbol
-   * @param terms  the terms
-   */
   @SuppressWarnings({"unchecked", "rawtypes"})
   public SubtractionExpression(String symbol, Expression... terms) {
     super(symbol, terms);

@@ -22,18 +22,11 @@ import com.rapiddweller.script.math.ArithmeticEngine;
 /**
  * Combines two values with a bitwise AND operation.<br/><br/>
  * Created: 24.11.2010 14:22:12
- *
  * @author Volker Bergmann
  * @since 0.6.4
  */
 public class BitwiseAndExpression extends BinaryExpression<Object> {
 
-  /**
-   * Instantiates a new Bitwise and expression.
-   *
-   * @param term1 the term 1
-   * @param term2 the term 2
-   */
   public BitwiseAndExpression(Expression<?> term1, Expression<?> term2) {
     super("&", term1, term2);
   }

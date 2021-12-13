@@ -21,18 +21,11 @@ import com.rapiddweller.script.Expression;
 /**
  * String {@link Expression} that concatenates the output of other String Expressions.<br/><br/>
  * Created: 07.06.2011 22:03:08
- *
  * @author Volker Bergmann
  * @since 0.5.8
  */
 public class ConcatExpression extends CompositeExpression<Object, String> {
 
-  /**
-   * Instantiates a new Concat expression.
-   *
-   * @param symbol the symbol
-   * @param terms  the terms
-   */
   @SuppressWarnings({"rawtypes", "unchecked"})
   public ConcatExpression(String symbol, Expression... terms) {
     super(symbol, terms);

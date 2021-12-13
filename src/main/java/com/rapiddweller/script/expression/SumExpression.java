@@ -23,35 +23,20 @@ import com.rapiddweller.script.math.ArithmeticEngine;
 /**
  * Calculates the sum of two or more expressions.<br/><br/>
  * Created: 07.10.2010 11:24:34
- *
  * @author Volker Bergmann
  * @since 0.5.8
  */
 public class SumExpression extends CompositeExpression<Object, Object> {
 
-  /**
-   * Instantiates a new Sum expression.
-   */
   public SumExpression() {
     this("+");
   }
 
-  /**
-   * Instantiates a new Sum expression.
-   *
-   * @param terms the terms
-   */
   @SuppressWarnings({"rawtypes"})
   public SumExpression(Expression... terms) {
     this("+", terms);
   }
 
-  /**
-   * Instantiates a new Sum expression.
-   *
-   * @param symbol the symbol
-   * @param terms  the terms
-   */
   @SuppressWarnings({"unchecked", "rawtypes"})
   public SumExpression(String symbol, Expression... terms) {
     super(symbol, terms);

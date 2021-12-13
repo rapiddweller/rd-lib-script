@@ -22,18 +22,11 @@ import com.rapiddweller.script.math.ArithmeticEngine;
 /**
  * Boolean {@link Expression} that checks if the results of two other expressions are less or equal.<br/><br/>
  * Created: 24.11.2010 14:23:26
- *
  * @author Volker Bergmann
  * @since 0.5.8
  */
 public class LessOrEqualsExpression extends BinaryExpression<Boolean> {
 
-  /**
-   * Instantiates a new Less or equals expression.
-   *
-   * @param term1 the term 1
-   * @param term2 the term 2
-   */
   public LessOrEqualsExpression(Expression<?> term1, Expression<?> term2) {
     super("<=", term1, term2);
   }

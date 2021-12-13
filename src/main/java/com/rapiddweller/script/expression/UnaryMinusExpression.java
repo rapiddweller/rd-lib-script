@@ -22,28 +22,16 @@ import com.rapiddweller.script.math.ArithmeticEngine;
 /**
  * {@link Expression} which calculates the unary minus operation.<br/><br/>
  * Created: 08.06.2011 09:37:40
- *
  * @param <E> the type parameter
  * @author Volker Bergmann
  * @since 0.5.8
  */
 public class UnaryMinusExpression<E> extends UnaryExpression<E> {
 
-  /**
-   * Instantiates a new Unary minus expression.
-   *
-   * @param term the term
-   */
   public UnaryMinusExpression(Expression<?> term) {
     this("-", term);
   }
 
-  /**
-   * Instantiates a new Unary minus expression.
-   *
-   * @param symbol the symbol
-   * @param term   the term
-   */
   public UnaryMinusExpression(String symbol, Expression<?> term) {
     super(symbol, term);
   }

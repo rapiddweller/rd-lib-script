@@ -22,35 +22,20 @@ import com.rapiddweller.script.math.ArithmeticEngine;
 /**
  * Numerical {@link Expression} that multiplies the results of two other numerical expressions.<br/><br/>
  * Created: 24.11.2010 14:06:41
- *
  * @author Volker Bergmann
  * @since 0.5.8
  */
 public class MultiplicationExpression extends CompositeExpression<Object, Object> {
 
-  /**
-   * Instantiates a new Multiplication expression.
-   */
   public MultiplicationExpression() {
     super("*");
   }
 
-  /**
-   * Instantiates a new Multiplication expression.
-   *
-   * @param terms the terms
-   */
   @SuppressWarnings({"rawtypes"})
   public MultiplicationExpression(Expression... terms) {
     this("*", terms);
   }
 
-  /**
-   * Instantiates a new Multiplication expression.
-   *
-   * @param symbol the symbol
-   * @param terms  the terms
-   */
   @SuppressWarnings({"rawtypes", "unchecked"})
   public MultiplicationExpression(String symbol, Expression... terms) {
     super(symbol, terms);

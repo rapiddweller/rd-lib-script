@@ -24,10 +24,8 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 /**
- * Provides information how types can be combined in arithmetic operations.<br/>
- * <br/>
+ * Provides information how types can be combined in arithmetic operations.<br/><br/>
  * Created at 06.10.2009 09:49:53
- *
  * @author Volker Bergmann
  * @since 0.6.0
  */
@@ -50,13 +48,6 @@ public class TypeManager {
       String.class
   );
 
-  /**
-   * Combined type class.
-   *
-   * @param type1 the type 1
-   * @param type2 the type 2
-   * @return the class
-   */
   public static Class<?> combinedType(Class<?> type1, Class<?> type2) {
     return (comparator.compare(type1, type2) > 0 ? type1 : type2);
   }

@@ -24,9 +24,6 @@ package com.rapiddweller.script;
  */
 public class ScriptTestUtil {
 
-  /**
-   * The constant pubvar.
-   */
   public static String pubvar = "pubVarContent";
 
   /**

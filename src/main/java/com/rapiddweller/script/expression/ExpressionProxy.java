@@ -21,18 +21,12 @@ import com.rapiddweller.script.Expression;
 /**
  * Parent class for all expression classes that act as proxy of another class.<br/><br/>
  * Created: 21.10.2009 14:43:08
- *
  * @param <E> the type parameter
  * @author Volker Bergmann
  * @since 0.5.0
  */
 public class ExpressionProxy<E> extends ExpressionAdapter<E, E> {
 
-  /**
-   * Instantiates a new Expression proxy.
-   *
-   * @param source the source
-   */
   public ExpressionProxy(Expression<E> source) {
     super(source);
   }

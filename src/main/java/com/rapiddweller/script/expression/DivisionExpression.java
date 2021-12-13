@@ -22,35 +22,20 @@ import com.rapiddweller.script.math.ArithmeticEngine;
 /**
  * {@link Expression} that performs a division.<br/><br/>
  * Created: 24.11.2010 14:09:31
- *
  * @author Volker Bergmann
  * @since 0.5.8
  */
 public class DivisionExpression extends CompositeExpression<Object, Object> {
 
-  /**
-   * Instantiates a new Division expression.
-   */
   public DivisionExpression() {
     this("/");
   }
 
-  /**
-   * Instantiates a new Division expression.
-   *
-   * @param terms the terms
-   */
   @SuppressWarnings({"rawtypes"})
   public DivisionExpression(Expression... terms) {
     this("/", terms);
   }
 
-  /**
-   * Instantiates a new Division expression.
-   *
-   * @param symbol the symbol
-   * @param terms  the terms
-   */
   @SuppressWarnings({"unchecked", "rawtypes"})
   public DivisionExpression(String symbol, Expression... terms) {
     super(symbol, terms);

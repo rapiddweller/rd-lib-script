@@ -23,7 +23,6 @@ import com.rapiddweller.script.Expression;
  * {@link Expression} adapter that uses a {@link Converter} for converting
  * the result of a given expression (e.g. to a different type).<br/><br/>
  * Created: 11.09.2010 06:59:38
- *
  * @param <S> the type parameter
  * @param <T> the type parameter
  * @author Volker Bergmann
@@ -31,17 +30,8 @@ import com.rapiddweller.script.Expression;
  */
 public class ConvertingExpression<S, T> extends ExpressionAdapter<S, T> {
 
-  /**
-   * The Converter.
-   */
   protected final Converter<S, T> converter;
 
-  /**
-   * Instantiates a new Converting expression.
-   *
-   * @param source    the source
-   * @param converter the converter
-   */
   public ConvertingExpression(Expression<S> source, Converter<S, T> converter) {
     super(source);
     this.converter = converter;

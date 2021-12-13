@@ -22,10 +22,8 @@ import com.rapiddweller.script.Expression;
 /**
  * {@link Expression} implementation that evaluates a boolean (condition) expression
  * and, depending if the result was true or false, evaluates the first or second expression delegate.
- * The semantic is like the Java expression <code>(condition ? alt1 : alt2)</code>.<br/>
- * <br/>
+ * The semantic is like the Java expression <code>(condition ? alt1 : alt2)</code>.<br/><br/>
  * Created at 06.10.2009 16:04:15
- *
  * @param <E> the type parameter
  * @author Volker Bergmann
  * @since 0.6.0
@@ -36,13 +34,6 @@ public class ConditionalExpression<E> extends DynamicExpression<E> {
   private final Expression<? extends E> alt1;
   private final Expression<? extends E> alt2;
 
-  /**
-   * Instantiates a new Conditional expression.
-   *
-   * @param condition the condition
-   * @param alt1      the alt 1
-   * @param alt2      the alt 2
-   */
   public ConditionalExpression(Expression<Boolean> condition,
                                Expression<? extends E> alt1, Expression<? extends E> alt2) {
     this.condition = condition;

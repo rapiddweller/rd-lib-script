@@ -22,29 +22,15 @@ import com.rapiddweller.script.math.ArithmeticEngine;
 /**
  * Boolean {@link Expression} that checks for inequality.<br/><br/>
  * Created: 24.11.2010 14:02:10
- *
  * @author Volker Bergmann
  * @since 0.5.8
  */
 public class NotEqualsExpression extends BinaryExpression<Boolean> {
 
-  /**
-   * Instantiates a new Not equals expression.
-   *
-   * @param term1 the term 1
-   * @param term2 the term 2
-   */
   public NotEqualsExpression(Expression<?> term1, Expression<?> term2) {
     this("!=", term1, term2);
   }
 
-  /**
-   * Instantiates a new Not equals expression.
-   *
-   * @param symbol the symbol
-   * @param term1  the term 1
-   * @param term2  the term 2
-   */
   public NotEqualsExpression(String symbol, Expression<?> term1, Expression<?> term2) {
     super(symbol, term1, term2);
   }

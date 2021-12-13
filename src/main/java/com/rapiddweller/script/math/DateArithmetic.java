@@ -22,8 +22,7 @@ import com.rapiddweller.common.exception.ExceptionFactory;
 import java.util.Date;
 
 /**
- * {@link TypeArithmetic} implementation for the {@link Date} class.<br/>
- * <br/>
+ * {@link TypeArithmetic} implementation for the {@link Date} class.<br/><br/>
  * Created at 06.10.2009 10:31:14
  *
  * @author Volker Bergmann
@@ -31,9 +30,6 @@ import java.util.Date;
  */
 public class DateArithmetic extends TypeArithmetic<Date> {
 
-  /**
-   * Instantiates a new Date arithmetic.
-   */
   public DateArithmetic() {
     super(Date.class);
   }

@@ -18,32 +18,18 @@ package com.rapiddweller.script.expression;
 import com.rapiddweller.script.Expression;
 
 /**
- * Abstract {@link Expression} that serves as parent class for expressions that evaluate a single term.<br/>
- * <br/>
+ * Abstract {@link Expression} that serves as parent class for expressions that evaluate a single term.<br/><br/>
  * Created at 06.10.2009 14:26:04
- *
  * @param <E> the type parameter
  * @author Volker Bergmann
  * @since 0.5.0
  */
 public abstract class UnaryExpression<E> implements WrapperExpression<E> {
 
-  /**
-   * The Symbol.
-   */
   protected final String symbol;
-  /**
-   * The Term.
-   */
   protected final Expression<?> term;
 
-  /**
-   * Instantiates a new Unary expression.
-   *
-   * @param symbol the symbol
-   * @param term   the term
-   */
-  public UnaryExpression(String symbol, Expression<?> term) {
+  protected UnaryExpression(String symbol, Expression<?> term) {
     this.symbol = symbol;
     this.term = term;
   }

@@ -22,17 +22,11 @@ import com.rapiddweller.script.math.ArithmeticEngine;
 /**
  * {@link Expression} that evaluates to the bitwise complement of another expression's result.<br/><br/>
  * Created: 24.11.2010 14:15:16
- *
  * @author Volker Bergmann
  * @since 0.6.4
  */
 public class BitwiseComplementExpression extends UnaryExpression<Object> {
 
-  /**
-   * Instantiates a new Bitwise complement expression.
-   *
-   * @param term the term
-   */
   public BitwiseComplementExpression(Expression<?> term) {
     super("~", term);
   }

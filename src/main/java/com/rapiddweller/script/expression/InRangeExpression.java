@@ -22,19 +22,11 @@ import com.rapiddweller.script.math.ArithmeticEngine;
 /**
  * Boolean {@link Expression} that tells if a value lies within a given range.<br/><br/>
  * Created: 07.06.2011 22:07:56
- *
  * @author Volker Bergmann
  * @since 0.5.8
  */
 public class InRangeExpression extends CompositeExpression<Object, Boolean> {
 
-  /**
-   * Instantiates a new In range expression.
-   *
-   * @param value the value
-   * @param min   the min
-   * @param max   the max
-   */
   @SuppressWarnings({"rawtypes", "unchecked"})
   public InRangeExpression(Expression value, Expression min, Expression max) {
     super(value, min, max);

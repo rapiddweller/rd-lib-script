@@ -18,46 +18,22 @@ package com.rapiddweller.script.expression;
 import com.rapiddweller.script.Expression;
 
 /**
- * Abstract parent class for expression that evaluate two terms.<br/>
- * <br/>
+ * Abstract parent class for expression that evaluate two terms.<br/><br/>
  * Created at 06.10.2009 14:26:04
- *
  * @param <E> the type parameter
  * @author Volker Bergmann
  * @since 0.5.0
  */
 public abstract class BinaryExpression<E> implements WrapperExpression<E> {
 
-  /**
-   * The Symbol.
-   */
   protected String symbol;
-  /**
-   * The Term 1.
-   */
   protected final Expression<?> term1;
-  /**
-   * The Term 2.
-   */
   protected final Expression<?> term2;
 
-  /**
-   * Instantiates a new Binary expression.
-   *
-   * @param term1 the term 1
-   * @param term2 the term 2
-   */
   public BinaryExpression(Expression<?> term1, Expression<?> term2) {
     this(null, term1, term2);
   }
 
-  /**
-   * Instantiates a new Binary expression.
-   *
-   * @param symbol the symbol
-   * @param term1  the term 1
-   * @param term2  the term 2
-   */
   public BinaryExpression(String symbol, Expression<?> term1, Expression<?> term2) {
     this.symbol = symbol;
     this.term1 = term1;

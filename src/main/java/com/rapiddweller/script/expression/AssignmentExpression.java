@@ -23,7 +23,6 @@ import com.rapiddweller.script.QNExpression;
 /**
  * Evaluates an assignment expression like <code>x.y = f.d + 3</code>.<br/><br/>
  * Created: 23.02.2010 10:55:56
- *
  * @author Volker Bergmann
  * @since 0.6.0
  */
@@ -32,12 +31,6 @@ public class AssignmentExpression extends DynamicExpression<Object> {
   private final String[] lhs;
   private final Expression<?> rhs;
 
-  /**
-   * Instantiates a new Assignment expression.
-   *
-   * @param lhs the lhs
-   * @param rhs the rhs
-   */
   public AssignmentExpression(String[] lhs, Expression<?> rhs) {
     this.lhs = lhs;
     this.rhs = rhs;

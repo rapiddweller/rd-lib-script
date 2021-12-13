@@ -23,18 +23,13 @@ import java.sql.Time;
 import java.util.Date;
 
 /**
- * {@link TypeArithmetic} implementation for Time objects.<br/>
- * <br/>
+ * {@link TypeArithmetic} implementation for Time objects.<br/><br/>
  * Created at 06.10.2009 10:31:14
- *
  * @author Volker Bergmann
  * @since 0.6.0
  */
 public class TimeArithmetic extends TypeArithmetic<Time> {
 
-  /**
-   * Instantiates a new Time arithmetic.
-   */
   public TimeArithmetic() {
     super(Time.class);
   }

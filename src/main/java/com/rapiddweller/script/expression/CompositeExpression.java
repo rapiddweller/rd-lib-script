@@ -20,52 +20,28 @@ import com.rapiddweller.common.ArrayUtil;
 import com.rapiddweller.script.Expression;
 
 /**
- * Expression that evaluates the results of other Expressions.<br/>
- * <br/>
+ * Expression that evaluates the results of other Expressions.<br/><br/>
  * Created: 18.06.2007 17:02:17
- *
  * @param <S> the type parameter
  * @param <R> the type parameter
  * @author Volker Bergmann
  */
 public abstract class CompositeExpression<S, R> implements WrapperExpression<R> {
 
-  /**
-   * The Symbol.
-   */
   protected final String symbol;
-  /**
-   * The Terms.
-   */
   protected Expression<S>[] terms;
 
-  /**
-   * Instantiates a new Composite expression.
-   *
-   * @param terms the terms
-   */
   @SafeVarargs
   protected CompositeExpression(Expression<S>... terms) {
     this(null, terms);
   }
 
-  /**
-   * Instantiates a new Composite expression.
-   *
-   * @param symbol the symbol
-   * @param terms  the terms
-   */
   @SafeVarargs
   protected CompositeExpression(String symbol, Expression<S>... terms) {
     this.symbol = symbol;
     this.terms = terms;
   }
 
-  /**
-   * Get terms expression [ ].
-   *
-   * @return the expression [ ]
-   */
   public Expression<S>[] getTerms() {
     return terms;
   }
@@ -75,11 +51,6 @@ public abstract class CompositeExpression<S, R> implements WrapperExpression<R> 
     return getTerms();
   }
 
-  /**
-   * Add term.
-   *
-   * @param term the term
-   */
   public void addTerm(Expression<S> term) {
     this.terms = ArrayUtil.append(term, this.terms);
   }

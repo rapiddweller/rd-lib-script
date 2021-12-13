@@ -22,29 +22,15 @@ import com.rapiddweller.script.math.ArithmeticEngine;
 /**
  * Numerical {@link Expression} that performs a modulo operation.<br/><br/>
  * Created: 24.11.2010 14:16:09
- *
  * @author Volker Bergmann
  * @since 0.5.8
  */
 public class ModuloExpression extends BinaryExpression<Object> {
 
-  /**
-   * Instantiates a new Modulo expression.
-   *
-   * @param term1 the term 1
-   * @param term2 the term 2
-   */
   public ModuloExpression(Expression<?> term1, Expression<?> term2) {
     this("%", term1, term2);
   }
 
-  /**
-   * Instantiates a new Modulo expression.
-   *
-   * @param symbol the symbol
-   * @param term1  the term 1
-   * @param term2  the term 2
-   */
   public ModuloExpression(String symbol, Expression<?> term1, Expression<?> term2) {
     super(symbol, term1, term2);
   }

@@ -26,7 +26,6 @@ import java.util.Comparator;
  * Calculates the maximum value of several arguments.
  * <code>null</code> values are ignored <br/><br/>
  * Created: 19.10.2009 01:31:42
- *
  * @param <E> the type parameter
  * @author Volker Bergmann
  * @since 0.5.0
@@ -35,22 +34,11 @@ public class MaxExpression<E> extends CompositeExpression<E, E> {
 
   private final Comparator<E> comparator;
 
-  /**
-   * Instantiates a new Max expression.
-   *
-   * @param terms the terms
-   */
   @SuppressWarnings({"unchecked", "rawtypes"})
   public MaxExpression(Expression<E>... terms) {
     this(new ComparableComparator(), terms);
   }
 
-  /**
-   * Instantiates a new Max expression.
-   *
-   * @param comparator the comparator
-   * @param terms      the terms
-   */
   @SafeVarargs
   public MaxExpression(Comparator<E> comparator, Expression<E>... terms) {
     super("", terms);
