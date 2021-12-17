@@ -51,7 +51,7 @@ public class QNExpression extends DynamicExpression<Object> {
       return resolveNamePart(qnParts, qnParts.length, context);
     } catch (ObjectNotFoundException e) {
       throw ExceptionFactory.getInstance().objectNotFound(
-          "Unable to resolve " + ArrayFormat.format(".", qnParts));
+          "Unable to resolve '" + ArrayFormat.format(".", qnParts) + "'");
     }
   }
 
