@@ -15,7 +15,7 @@
 
 package com.rapiddweller.script.expression;
 
-import com.rapiddweller.script.Expression;
+import com.rapiddweller.common.Expression;
 
 /**
  * Abstract parent class for expression that evaluate two terms.<br/><br/>

@@ -17,7 +17,7 @@ package com.rapiddweller.script.expression;
 
 import com.rapiddweller.common.Context;
 import com.rapiddweller.common.Converter;
-import com.rapiddweller.script.Expression;
+import com.rapiddweller.common.Expression;
 
 /**
  * {@link Expression} adapter that uses a {@link Converter} for converting

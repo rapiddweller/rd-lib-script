@@ -19,6 +19,7 @@ import com.rapiddweller.common.ArrayFormat;
 import com.rapiddweller.common.ArrayUtil;
 import com.rapiddweller.common.ConfigurationError;
 import com.rapiddweller.common.Context;
+import com.rapiddweller.common.Expression;
 import com.rapiddweller.common.ObjectNotFoundException;
 import com.rapiddweller.common.accessor.FeatureAccessor;
 import com.rapiddweller.common.bean.DefaultClassProvider;

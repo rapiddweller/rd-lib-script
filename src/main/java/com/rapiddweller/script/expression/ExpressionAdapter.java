@@ -15,7 +15,7 @@
 
 package com.rapiddweller.script.expression;
 
-import com.rapiddweller.script.Expression;
+import com.rapiddweller.common.Expression;
 
 /**
  * Adapter that makes use of a 'source' expression of one type

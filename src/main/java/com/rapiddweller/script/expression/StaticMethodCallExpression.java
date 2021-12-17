@@ -17,7 +17,7 @@ package com.rapiddweller.script.expression;
 
 import com.rapiddweller.common.BeanUtil;
 import com.rapiddweller.common.Context;
-import com.rapiddweller.script.Expression;
+import com.rapiddweller.common.Expression;
 
 /**
  * {@link Expression} implementation that performs a static method call.<br/><br/>

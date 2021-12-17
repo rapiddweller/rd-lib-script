@@ -17,7 +17,7 @@ package com.rapiddweller.script.expression;
 
 import com.rapiddweller.common.Assert;
 import com.rapiddweller.common.Context;
-import com.rapiddweller.script.Expression;
+import com.rapiddweller.common.Expression;
 import com.rapiddweller.script.math.ArithmeticEngine;
 
 /**

@@ -20,7 +20,7 @@ import com.rapiddweller.common.Context;
 import com.rapiddweller.common.context.ContextAware;
 import com.rapiddweller.common.mutator.AnyMutator;
 import com.rapiddweller.script.Assignment;
-import com.rapiddweller.script.Expression;
+import com.rapiddweller.common.Expression;
 
 /**
  * {@link Expression} implementation that instantiates a JavaBean by default constructor and

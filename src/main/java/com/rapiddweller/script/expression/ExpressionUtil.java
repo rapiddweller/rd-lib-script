@@ -16,7 +16,7 @@
 package com.rapiddweller.script.expression;
 
 import com.rapiddweller.common.Context;
-import com.rapiddweller.script.Expression;
+import com.rapiddweller.common.Expression;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -17,7 +17,7 @@ package com.rapiddweller.script.expression;
 
 import com.rapiddweller.common.Context;
 import com.rapiddweller.common.converter.ToStringConverter;
-import com.rapiddweller.script.Expression;
+import com.rapiddweller.common.Expression;
 
 /**
  * Wrapper for an {@link Expression} that converts its result to a {@link String}

@@ -17,7 +17,7 @@ package com.rapiddweller.script.expression;
 
 import com.rapiddweller.common.Context;
 import com.rapiddweller.common.StringUtil;
-import com.rapiddweller.script.Expression;
+import com.rapiddweller.common.Expression;
 
 /**
  * {@link Expression} proxy which unescapes the output of its source.<br/><br/>

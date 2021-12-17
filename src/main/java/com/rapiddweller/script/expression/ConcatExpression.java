@@ -16,7 +16,7 @@
 package com.rapiddweller.script.expression;
 
 import com.rapiddweller.common.Context;
-import com.rapiddweller.script.Expression;
+import com.rapiddweller.common.Expression;
 
 /**
  * String {@link Expression} that concatenates the output of other String Expressions.<br/><br/>

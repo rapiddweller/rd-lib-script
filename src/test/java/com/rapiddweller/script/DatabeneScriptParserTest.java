@@ -18,6 +18,7 @@ package com.rapiddweller.script;
 import com.rapiddweller.common.BeanUtil;
 import com.rapiddweller.common.CollectionUtil;
 import com.rapiddweller.common.Context;
+import com.rapiddweller.common.Expression;
 import com.rapiddweller.common.ObjectNotFoundException;
 import com.rapiddweller.common.exception.SyntaxError;
 import com.rapiddweller.common.TimeUtil;

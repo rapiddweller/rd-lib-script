@@ -18,6 +18,7 @@ package com.rapiddweller.script;
 import com.rapiddweller.common.ArrayFormat;
 import com.rapiddweller.common.Assert;
 import com.rapiddweller.common.Context;
+import com.rapiddweller.common.Expression;
 import com.rapiddweller.common.ParseUtil;
 import com.rapiddweller.common.StringUtil;
 import com.rapiddweller.common.exception.ExceptionFactory;

@@ -17,7 +17,7 @@ package com.rapiddweller.script.expression;
 
 import com.rapiddweller.common.ArrayUtil;
 import com.rapiddweller.common.Context;
-import com.rapiddweller.script.Expression;
+import com.rapiddweller.common.Expression;
 
 /**
  * {@link Expression} implementation which assembles other expression that evaluate to arrays

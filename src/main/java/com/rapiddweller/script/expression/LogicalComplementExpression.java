@@ -17,7 +17,7 @@ package com.rapiddweller.script.expression;
 
 import com.rapiddweller.common.Context;
 import com.rapiddweller.common.converter.AnyConverter;
-import com.rapiddweller.script.Expression;
+import com.rapiddweller.common.Expression;
 
 /**
  * {@link Expression} that evaluates to the logical complement of another expression's result.<br/><br/>

@@ -17,7 +17,7 @@ package com.rapiddweller.script.expression;
 
 import com.rapiddweller.common.Context;
 import com.rapiddweller.common.bean.DefaultClassProvider;
-import com.rapiddweller.script.Expression;
+import com.rapiddweller.common.Expression;
 
 /**
  * Resolves a class by its class name.<br/><br/>

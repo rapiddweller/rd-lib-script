@@ -16,7 +16,7 @@
 package com.rapiddweller.script.expression;
 
 import com.rapiddweller.common.Context;
-import com.rapiddweller.script.Expression;
+import com.rapiddweller.common.Expression;
 
 /**
  * Expression that returns <code>true</code>, if a source expression returns <code>null</code>,

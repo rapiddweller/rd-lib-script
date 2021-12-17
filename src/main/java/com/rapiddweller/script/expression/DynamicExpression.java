@@ -15,7 +15,7 @@
 
 package com.rapiddweller.script.expression;
 
-import com.rapiddweller.script.Expression;
+import com.rapiddweller.common.Expression;
 
 /**
  * Non-constant {@link Expression}.<br/><br/>

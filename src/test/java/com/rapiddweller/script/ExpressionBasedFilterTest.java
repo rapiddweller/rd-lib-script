@@ -16,6 +16,7 @@
 package com.rapiddweller.script;
 
 import com.rapiddweller.common.Context;
+import com.rapiddweller.common.Expression;
 import com.rapiddweller.common.context.DefaultContext;
 import org.junit.Test;
 

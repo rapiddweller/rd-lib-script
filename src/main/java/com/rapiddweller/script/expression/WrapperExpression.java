@@ -15,7 +15,7 @@
 
 package com.rapiddweller.script.expression;
 
-import com.rapiddweller.script.Expression;
+import com.rapiddweller.common.Expression;
 
 /**
  * New common interface for scanning through {@link Expression}s that wrap other expressions.<br/><br/>

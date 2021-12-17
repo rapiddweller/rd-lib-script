@@ -16,7 +16,7 @@
 package com.rapiddweller.script.expression;
 
 import com.rapiddweller.common.Context;
-import com.rapiddweller.script.Expression;
+import com.rapiddweller.common.Expression;
 
 /**
  * Expression which evaluates a list of expressions and returns the first result which is not null.<br/><br/>

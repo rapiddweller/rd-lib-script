@@ -16,7 +16,7 @@
 package com.rapiddweller.script.expression;
 
 import com.rapiddweller.script.DefaultScriptContext;
-import com.rapiddweller.script.Expression;
+import com.rapiddweller.common.Expression;
 import com.rapiddweller.script.QNInvocationExpression;
 import com.rapiddweller.script.ScriptContext;
 import org.junit.Before;

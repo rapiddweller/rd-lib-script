@@ -15,6 +15,8 @@
 
 package com.rapiddweller.script;
 
+import com.rapiddweller.common.Expression;
+
 /**
  * Represents an assignment of an expression (result) to a target name.<br/><br/>
  * Created at 08.10.2009 19:06:08

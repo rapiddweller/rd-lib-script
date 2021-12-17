@@ -19,7 +19,7 @@ import com.rapiddweller.common.BeanUtil;
 import com.rapiddweller.common.Context;
 import com.rapiddweller.common.converter.AnyConverter;
 import com.rapiddweller.common.exception.ExceptionFactory;
-import com.rapiddweller.script.Expression;
+import com.rapiddweller.common.Expression;
 
 import java.util.List;
 import java.util.Map;
