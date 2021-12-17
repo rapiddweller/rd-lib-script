@@ -19,32 +19,21 @@ import com.rapiddweller.common.Weighted;
 
 /**
  * Represents a single sample value for a generator.
- * The sample value may have an additional weight information.<br/>
- * <br/>
+ * The sample value may have an additional weight information.<br/><br/>
  * Created: 07.06.2006 19:05:13
- *
  * @param <E> the type parameter
  * @author Volker Bergmann
  * @since 0.1
  */
 public class WeightedSample<E> implements Weighted {
 
-  /**
-   * The value of the sample
-   */
+  /** The value of the sample */
   private E value;
 
-  /**
-   * The optional weight of the sample
-   */
+  /** The optional weight of the sample */
   private double weight;
 
-  /**
-   * Initializes the Sample to the specified value and weight
-   *
-   * @param value  the value
-   * @param weight the weight
-   */
+  /** Initializes the Sample to the specified value and weight */
   public WeightedSample(E value, double weight) {
     this.weight = weight;
     this.value = value;
@@ -52,51 +41,28 @@ public class WeightedSample<E> implements Weighted {
 
   // properties ------------------------------------------------------------------------------------------------------
 
-  /**
-   * Returns the value property
-   *
-   * @return the value
-   * @see #weight #weight#weight#weight
-   */
+  /** Returns the value property. */
   public E getValue() {
     return value;
   }
 
-  /**
-   * Sets the weight property
-   *
-   * @param value the value
-   * @see #weight #weight#weight#weight
-   */
+  /** Sets the weight property. */
   public void setValue(E value) {
     this.value = value;
   }
 
-  /**
-   * Returns the weight property value
-   *
-   * @see #weight
-   */
+  /** Returns the weight property value. */
   @Override
   public double getWeight() {
     return weight;
   }
 
-  /**
-   * Sets the weight property value
-   *
-   * @param weight the weight
-   * @see #weight #weight#weight#weight
-   */
+  /** Sets the weight property value. */
   public void setWeight(double weight) {
     this.weight = weight;
   }
 
-  /**
-   * Add weight.
-   *
-   * @param weightDelta the weight delta
-   */
+  /** Increases the internal weight value by the weightDelta. */
   public void addWeight(double weightDelta) {
     this.weight += weightDelta;
   }

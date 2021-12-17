@@ -22,7 +22,6 @@ import java.util.Comparator;
 /**
  * {@link Comparator} which compares {@link WeightedSample} objects by their 'weight' property value.<br/><br/>
  * Created: 11.11.2011 17:01:10
- *
  * @param <E> the type parameter
  * @author Volker Bergmann
  * @since 0.7.3

@@ -18,10 +18,8 @@ package com.rapiddweller.script;
 import com.rapiddweller.common.NullSafeComparator;
 
 /**
- * Represents the transition of one state to another.<br/>
- * <br/>
+ * Represents the transition of one state to another.<br/><br/>
  * Created at 17.07.2009 08:05:07
- *
  * @author Volker Bergmann
  * @since 0.6.0
  */
@@ -30,31 +28,15 @@ public class Transition {
   private final Object from;
   private final Object to;
 
-  /**
-   * Instantiates a new Transition.
-   *
-   * @param from the from
-   * @param to   the to
-   */
   public Transition(Object from, Object to) {
     this.from = from;
     this.to = to;
   }
 
-  /**
-   * Gets from.
-   *
-   * @return the from
-   */
   public Object getFrom() {
     return from;
   }
 
-  /**
-   * Gets to.
-   *
-   * @return the to
-   */
   public Object getTo() {
     return to;
   }

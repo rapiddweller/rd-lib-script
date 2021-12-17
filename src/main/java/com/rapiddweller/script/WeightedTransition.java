@@ -18,7 +18,6 @@ package com.rapiddweller.script;
 /**
  * Transition class that adds a weight property.<br/><br/>
  * Created: 24.10.2009 08:20:21
- *
  * @author Volker Bergmann
  * @since 0.6.0
  */
@@ -26,23 +25,11 @@ public class WeightedTransition extends Transition {
 
   private final double weight;
 
-  /**
-   * Instantiates a new Weighted transition.
-   *
-   * @param from   the from
-   * @param to     the to
-   * @param weight the weight
-   */
   public WeightedTransition(Object from, Object to, double weight) {
     super(from, to);
     this.weight = weight;
   }
 
-  /**
-   * Gets weight.
-   *
-   * @return the weight
-   */
   public double getWeight() {
     return weight;
   }

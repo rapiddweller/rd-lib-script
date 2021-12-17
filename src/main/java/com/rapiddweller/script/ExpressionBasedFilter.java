@@ -23,24 +23,14 @@ import com.rapiddweller.common.context.ContextHolder;
 /**
  * {@link Filter} implementation based on a boolean filter {@link Expression}.<br/><br/>
  * Created: 08.03.2011 12:00:26
- *
  * @param <E> the type parameter
  * @author Volker Bergmann
  * @since 0.5.8
  */
 public class ExpressionBasedFilter<E> extends ContextHolder implements Filter<E> {
 
-  /**
-   * The Expression.
-   */
   protected final Expression<Boolean> expression;
 
-  /**
-   * Instantiates a new Expression based filter.
-   *
-   * @param expression the expression
-   * @param context    the context
-   */
   public ExpressionBasedFilter(Expression<Boolean> expression, Context context) {
     super(context);
     this.expression = expression;
