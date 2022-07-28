@@ -23,7 +23,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 /**
- * {@link TypeArithmetic} implementation for the {@link Date} type.<br/><br/>
+ * {@link TypeArithmetic} implementation for the {@link Timestamp} type.<br/><br/>
  * Created at 06.10.2009 10:31:14
  * @author Volker Bergmann
  * @since 0.6.0

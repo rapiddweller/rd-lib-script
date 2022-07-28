@@ -38,7 +38,7 @@ public class TimestampArithmeticTest {
   private static final Timestamp TS_SUM = TimeUtil.timestamp(2009, 9, 14, 7, 7, 7, 999999999);
   private static final Timestamp TS_OFFSET2 = TimeUtil.timestamp(1970, 0, 1, 0, 0, 0, 999999999);
   private static final Timestamp TS_SUM2 = TimeUtil.timestamp(2009, 9, 14, 1, 2, 4, 123456788);
-  private static final long ONE_OUR_MILLIS = 3600L * 1000;
+  private static final long ONE_HOUR_MILLIS = 3600L * 1000;
 
   final TimestampArithmetic arithmetic = new TimestampArithmetic();
 
@@ -57,7 +57,7 @@ public class TimestampArithmeticTest {
 
   @Test
   public void testAdd_Millis() {
-    assertEquals(TimeUtil.add(TS_BASE, Calendar.HOUR, 1), arithmetic.add(TS_BASE, ONE_OUR_MILLIS));
+    assertEquals(TimeUtil.add(TS_BASE, Calendar.HOUR, 1), arithmetic.add(TS_BASE, ONE_HOUR_MILLIS));
   }
 
   @Test(expected = IllegalArgumentError.class)
@@ -77,7 +77,7 @@ public class TimestampArithmeticTest {
 
   @Test
   public void testSubtract_Millis() {
-    assertEquals(TimeUtil.add(TS_BASE, Calendar.HOUR, -1), arithmetic.subtract(TS_BASE, ONE_OUR_MILLIS));
+    assertEquals(TimeUtil.add(TS_BASE, Calendar.HOUR, -1), arithmetic.subtract(TS_BASE, ONE_HOUR_MILLIS));
   }
 
   @Test(expected = IllegalArgumentError.class)
