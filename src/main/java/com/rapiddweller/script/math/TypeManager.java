@@ -21,6 +21,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.time.ZonedDateTime;
 import java.util.Date;
 
 /**
@@ -45,11 +46,17 @@ public class TypeManager {
       Time.class,
       Date.class,
       Timestamp.class,
+      ZonedDateTime.class,
       String.class
   );
 
   public static Class<?> combinedType(Class<?> type1, Class<?> type2) {
     return (comparator.compare(type1, type2) > 0 ? type1 : type2);
+  }
+
+  /** private constructor to prevent instantiation of this class */
+  private TypeManager() {
+    // private constructor to prevent instantiation of this class
   }
 
 }

@@ -49,7 +49,8 @@ public class ArithmeticEngine {
     addTypeArithmetics(
         new DateArithmetic(),
         new TimeArithmetic(),
-        new TimestampArithmetic());
+        new TimestampArithmetic(),
+        new ZonedDateTimeArithmetic());
   }
 
   // singleton stuff -------------------------------------------------------------------------------------------------

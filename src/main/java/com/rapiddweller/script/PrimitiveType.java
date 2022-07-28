@@ -21,6 +21,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.time.ZonedDateTime;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
@@ -56,6 +57,7 @@ public class PrimitiveType {
   public static final PrimitiveType STRING = new PrimitiveType("string", String.class);
   public static final PrimitiveType DATE = new PrimitiveType("date", Date.class);
   public static final PrimitiveType TIME = new PrimitiveType("time", Time.class);
+  public static final PrimitiveType ZONED_DATE_TIME = new PrimitiveType("zoneddatetime", ZonedDateTime.class);
   public static final PrimitiveType TIMESTAMP = new PrimitiveType("timestamp", Timestamp.class);
   public static final PrimitiveType OBJECT = new PrimitiveType("object", Object.class);
   public static final PrimitiveType BINARY = new PrimitiveType("binary", byte[].class);
