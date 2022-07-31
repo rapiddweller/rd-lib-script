@@ -784,7 +784,9 @@ public class DatabeneScriptParser {
   }
 
   private static void logParseResult(String input, CommonTree result) {
-    logger.debug("parsed {} to {}", input, result.toStringTree());
+    if (logger.isDebugEnabled()) {
+      logger.debug("parsed {} to {}", input, result.toStringTree());
+    }
   }
 
   // CommonTree helpers ----------------------------------------------------------------------------------------------
